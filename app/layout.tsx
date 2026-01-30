@@ -31,7 +31,7 @@ export default function RootLayout({
       <header>
         <nav>
           <ul>
-            <li><a href="/about">About Me</a></li>
+            <li><a href="/about">Work in Progress...</a></li>
             <li><a href=""></a></li>
             <li><a href=""></a></li>
             <li><a href=""></a></li>
