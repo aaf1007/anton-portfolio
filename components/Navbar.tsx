@@ -10,12 +10,13 @@ export default function Navbar() {
     <nav className="w-full fixed top-0 bg-[#F2F0EF]/60 z-50 border-b border-gray-300">
       <div className="flex justify-between items-center px-6 py-4 md:px-10">
         {/* Logo */}
-        <div className="text-xl">
-          <Link href="/" className="hover:font-bold">Anton Florendo</Link>
+        <div className="text-xl font-semibold">
+            <Link href="/" className="md:hidden">Anton</Link>
+            <Link href="/" className="hidden md:inline hover:font-bold">Anton Florendo</Link>
         </div>
 
         {/* Desktop Nav - hidden on mobile, visible on md+ */}
-        <ul className="hidden md:flex text-xl gap-7">
+        <ul className="hidden md:flex text-base gap-7">
           <li><Link href="/" className="hover:text-[#404080] hover:font-semibold">Home</Link></li>
           <li><Link href="/projects" className="hover:text-[#404080] hover:font-semibold">Projects</Link></li>
           <li><Link href="/life" className="hover:text-[#404080] hover:font-semibold">Life</Link></li>
@@ -36,7 +37,7 @@ export default function Navbar() {
 
       {/* Mobile Menu - only visible when open */}
       {isOpen && (
-        <ul className="md:hidden flex flex-col items-center gap-4 py-4 text-xl bg-[#F2F0EF]/60 ">
+        <ul className="md:hidden flex flex-col items-center gap-4 py-4 text-lg bg-[#F2F0EF]/60 ">
           <li><Link href="/" onClick={() => setIsOpen(false)} className="hover:text-[#404080] hover:font-semibold underline underline-offset-5 decoration-1">Home</Link></li>
           <li><Link href="/projects" onClick={() => setIsOpen(false)} className="hover:text-[#404080] hover:font-semibold underline underline-offset-5 decoration-1">Projects</Link></li>
           <li><Link href="/life" onClick={() => setIsOpen(false)} className="hover:text-[#404080] hover:font-semibold underline underline-offset-5 decoration-1">Life</Link></li>
