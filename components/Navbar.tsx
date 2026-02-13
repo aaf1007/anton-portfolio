@@ -17,10 +17,10 @@ export default function Navbar() {
 
         {/* Desktop Nav - hidden on mobile, visible on md+ */}
         <ul className="hidden md:flex text-base gap-7">
-          <li><Link href="/" className="hover:text-[#404080] hover:font-semibold">Home</Link></li>
-          <li><Link href="/projects" className="hover:text-[#404080] hover:font-semibold">Projects</Link></li>
-          <li><Link href="/life" className="hover:text-[#404080] hover:font-semibold">Life</Link></li>
-          <li><Link href="/contact" className="hover:text-[#404080] hover:font-semibold">Contact</Link></li>
+          <li><Link href="#home" className="hover:text-[#404080] hover:font-semibold">Home</Link></li>
+          <li><Link href="#projects" className="hover:text-[#404080] hover:font-semibold">Projects</Link></li>
+          <li><Link href="/coming" className="hover:text-[#404080] hover:font-semibold">Life</Link></li>
+          <li><Link href="/coming" className="hover:text-[#404080] hover:font-semibold">Contact</Link></li>
         </ul>
 
         {/* Hamburger Button - visible on mobile, hidden on md+ */}

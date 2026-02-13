@@ -2,7 +2,7 @@
 export default function Hero() {
     return (
         <div>
-            <div className="h-[80vh] flex flex-col md:grid md:grid-cols-[1fr_auto_auto_1fr] md:grid-rows-[1fr_auto_1fr] justify-center items-center w-full gap-6 md:gap-12 px-4 md:px-0">
+            <div className="h-dvh flex flex-col md:grid md:grid-cols-[1fr_auto_auto_1fr] md:grid-rows-[1fr_auto_1fr] justify-center items-center w-full gap-6 md:gap-12 px-4 md:px-0" id="home">
                 <div className="flex flex-col gap-0 items-center md:col-start-2 md:row-start-2">
                     <h1 className="text-[clamp(1.8rem,8vw,5rem)] md:whitespace-nowrap text-center">Anton Florendo</h1>
                     <ul className="flex gap-3 text-xl flex-wrap justify-center">
