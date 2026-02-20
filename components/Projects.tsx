@@ -1,4 +1,8 @@
+"use client";
+
+import { div, text } from "motion/react-client";
 import ProjectCard, { type ProjectCardProps } from "./ProjectsCards";
+import { useState } from "react";
 
 const B = ({ children }: { children: React.ReactNode }) => (
   <span className="font-semibold">{children}</span>
@@ -63,16 +67,29 @@ const projects: ProjectCardProps[] = [
 ];
 
 export default function Projects() {
+  const [filter, setFilter] = useState("all");
+  const filteredProjects = projects.filter((project) => {
+    switch(filter) {
+      case "all":
+        return true;
+      case "web":
+        return project.stack.includes("Web");
+      case "machine learning":
+        return project.stack.includes("Machine Learning");
+    }
+  });
   return (
-    <div className="flex justify-center px-6 md:px-10" id="projects">
-      <section className="w-full max-w-5xl">
-        <h1 className="landing-section-header pb-4">Projects</h1>
-        <div className="flex flex-col gap-12">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
-      </section>
+    <div className="pr-6 pl-6">
+      <ul className="flex gap-4 text-[0.9rem]">
+        <li onClick={() => {setFilter("all")}} className={` hover:text-gray-900 ${filter === "all" ? "font-bold text-black" : "text-gray-500"}`} id="all">All</li>
+        <li onClick={() => {setFilter("web")}} className={` hover:text-gray-900 ${filter === "web" ? "font-bold text-black" : "text-gray-500"}`} id="web">Web</li>
+        <li onClick={() => {setFilter("machine learning")}} className={` hover:text-gray-900 ${filter === "machine learning" ? "font-bold text-black" : "text-gray-500"}`} id="machine-learning"  >Machine Learning</li>
+      </ul>
+      <div className="md:grid md:grid-cols-2 gap-6">
+        {filteredProjects.map((project) => (
+          <ProjectCard key={project.title} {...project}/>
+        ))}
+      </div>
     </div>
   );
 }

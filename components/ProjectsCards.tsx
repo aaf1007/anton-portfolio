@@ -27,9 +27,10 @@ export default function ProjectCard({
   github,
 }: ProjectCardProps) {
   return (
-    <article className="w-full flex flex-col gap-4">
+    <article className="w-full flex flex-col gap-2 mb-10 md:mb-0">
+      <img src={image} alt={title} className="w-full h-[400px] object-cover" />
       <header className="flex items-center gap-4">
-        <h2 className="text-[clamp(1.2rem,2vw,1.5rem)] font-medium">{title}</h2>
+        <h2 className="text-[1.2rem] font-medium">{title}</h2>
         {link && (
           <ExternalLink href={link}>
             <RiExternalLinkLine className="size-5" />
@@ -41,9 +42,6 @@ export default function ProjectCard({
           </ExternalLink>
         )}
       </header>
-
-      <img src={image} alt={title} className="w-full rounded-md" />
-
       <div className="text-[clamp(0.8rem,2vw,1rem)]">{description}</div>
 
       <ul className="flex flex-wrap gap-2">
