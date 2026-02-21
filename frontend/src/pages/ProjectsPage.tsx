@@ -26,7 +26,7 @@ const projects = [
           </li>
         </ul>
       ),
-      image: "careerConnect.gif",
+      image: "sfucareer.png",
       stack: ["React", "Next.js", "Tailwind CSS", "Javascript", "Gemini AI", "MongoDB", "Redis", "Google OAuth"],
       link: "https://sfu-careerconnect.vercel.app",
       github: "https://github.com/aaf1007/sfu-careerconnect",
