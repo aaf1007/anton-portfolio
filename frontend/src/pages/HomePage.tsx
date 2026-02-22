@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Footer from "@/components/Footer"
+import Footer from "@/components/Footer";
+import profileImage from "@/assets/P6140340.png";
 
 const coursework = ["Intro to Artificial Intelligence", "Intro to Software Engineering", "Linear Algebra", "Business Statistics"];
 
@@ -47,7 +48,7 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                    <img src="./src/assets/P6140340.png" alt="" className="w-40 md:w-56 h-auto self-center md:self-auto shrink-0" />
+                    <img src={profileImage} alt="" className="w-40 md:w-56 h-auto self-center md:self-auto shrink-0" />
                 </div>
                 <div>
                     <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Interested In</p>
