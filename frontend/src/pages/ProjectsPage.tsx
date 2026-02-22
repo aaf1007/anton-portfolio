@@ -61,8 +61,8 @@ const projects = [
 export default function ProjectsPage() {
     return (
         <div>
-            <p className="text-[1.8rem] text-accent font-semibold mb-8">Projects</p>
-            <div className="flex flex-col gap-8">
+            <p className="text-[1.4rem] md:text-[1.8rem] text-accent font-semibold mb-6 md:mb-8">Projects</p>
+            <div className="flex flex-col gap-6 md:gap-8">
                 {projects.map((project) => (
                     <ProjectCard key={project.title} {...project} />
                 ))}

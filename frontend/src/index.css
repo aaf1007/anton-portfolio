@@ -5,6 +5,13 @@
   --foreground: #171717;
   --accent: #5a422c;
   --accent-light: #8f6b6b;
+  /* Theme palette */
+  --primary: #5d4037;
+  --primary-dark: #3e2a24;
+  --background-eggshell: #fcfaf6;
+  --tan-pastel: #f5e6d3;
+  --tan-muted: #eaddca;
+  --peach-soft: #f9f0e8;
 }
 
 @theme inline {
@@ -12,6 +19,14 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
+  --color-foreground: var(--foreground);
+  /* Theme */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-background-eggshell: var(--background-eggshell);
+  --color-tan-pastel: var(--tan-pastel);
+  --color-tan-muted: var(--tan-muted);
+  --color-peach-soft: var(--peach-soft);
   --font-sans: "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
 }
@@ -24,7 +39,21 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--background-eggshell);
   color: var(--foreground);
-  font-family: "Inter", "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: "JetBrains Mono", "Inter", "General Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 1rem;
+  background-color: #5d4037;
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: blink 1.5s step-end infinite;
+}
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
 }
