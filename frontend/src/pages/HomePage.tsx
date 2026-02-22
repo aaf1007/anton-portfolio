@@ -39,7 +39,7 @@ export default function HomePage() {
                                     <span className="text-primary/70 font-bold">anton@portfolio:$</span> whoami
                                 </p>
                                 <p>
-                                    I'm a Data Science student at SFU who enjoys building full-stack web apps and recently got into AI/ML. Some of my hobbies include playing tennis and basketball and spend way too much time at the gym.
+                                    I'm a Data Science student at SFU who enjoys building full-stack web apps and recently got into AI/ML. Some of my hobbies include playing tennis, basketball and spending way too much time at the gym. I also love to listen to music and recently got into reading.
                                 </p>
                                 <div className="mt-4 flex items-center">
                                     <span className="text-primary/70 font-bold mr-2">anton@portfolio:$</span>
