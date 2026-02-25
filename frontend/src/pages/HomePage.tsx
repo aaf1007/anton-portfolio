@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "@/components/Footer";
 import profileImage from "@/assets/P6140340.png";
+import StackIcon from "tech-stack-icons";
 
 const coursework = ["Intro to Artificial Intelligence", "Intro to Software Engineering", "Linear Algebra", "Business Statistics"];
 
@@ -36,10 +37,10 @@ export default function HomePage() {
                             </div>
                             <div className="font-mono leading-relaxed text-sm md:text-base">
                                 <p className="mb-4">
-                                    <span className="text-primary/70 font-bold">anton@portfolio:$</span> whoami
+                                    <span className="text-primary/70 font-bold">anton@portfolio:$</span> aboutme
                                 </p>
                                 <p>
-                                    I'm a Data Science student at SFU who enjoys building full-stack web apps and recently got into AI/ML. Some of my hobbies include playing tennis, basketball and spending way too much time at the gym. I also love to listen to music and recently got into reading.
+                                    I'm a Data Science student at SFU who enjoys building full-stack web apps and recently got into AI/ML. Some of my hobbies include playing tennis, basketball and spending way too much time at the gym. I also love to listen to music watching movies on my free time.
                                 </p>
                                 <div className="mt-4 flex items-center">
                                     <span className="text-primary/70 font-bold mr-2">anton@portfolio:$</span>
@@ -52,24 +53,38 @@ export default function HomePage() {
                 </div>
                 <div>
                     <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Interested In</p>
-                    <p className="text-sm md:text-base">AI/ML and Distributed System. I am always excited to explore new ideas and learn modern technologies and frameworks. I am working on projects that combine impact and technical challenges.</p>
+                    <p className="text-sm md:text-base">Full-Stack Development, AI/ML, and Distributed System. I am working on projects that combine impact and technical challenges.</p>
                 </div>
-                <div>
-                    <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Current Coursework</p>
-                    <ul className="list-disc m-0 pl-5 text-sm md:text-base">
-                        {coursework.map(cur => (
-                            <li key={cur}>{cur}</li>
-                        ))}
-                    </ul>
+                <div className="flex md:w-[80%] justify-between flex-col md:flex-row gap-5">
+                    <div>
+                        <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Current Coursework</p>
+                        <ul className="list-disc m-0 pl-5 text-sm md:text-base">
+                            {coursework.map(cur => (
+                                <li key={cur}>{cur}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Hobbies</p>
+                        <ul className="list-disc m-0 pl-5 text-sm md:text-base">
+                            <li>gyming</li>
+                            <li>cooking</li>
+                            <li>eating</li>
+                            <li>coding</li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Hobbies</p>
-                    <ul className="list-disc m-0 pl-5 text-sm md:text-base">
-                        <li>gyming</li>
-                        <li>cooking</li>
-                        <li>eating</li>
-                        <li>coding</li>
-                    </ul>
+                <div className="w-full">
+                    <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Tech Stack</p>
+                    <div className="w-full flex gap-2 pl-1 flex-wrap"> 
+                        <StackIcon name="typescript" className="w-[3rem]" />
+                        <StackIcon name="java" className="w-[3rem]" />
+                        <StackIcon name="python" className="w-[3rem]" />
+                        <StackIcon name="react" className="w-[3rem]" />
+                        <StackIcon name="nextjs" className="w-[3rem]" />
+                        <StackIcon name="spring" className="w-[3rem]" />
+                        <StackIcon name="tailwindcss" className="w-[3rem]" />
+                    </div>
                 </div>
             </div>
         <Footer/>

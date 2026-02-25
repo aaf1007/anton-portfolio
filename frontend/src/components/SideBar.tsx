@@ -22,15 +22,15 @@ export default function SideBar({ onNavigate }: SideBarProps) {
                 <li className={`hover:text-accent-light ${current === "projects" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("projects")}>
                     <Link to="/projects">projects</Link>
                 </li>
-                <li className={`hover:text-accent-light ${current === "experience" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("experience")}>
+                {/* <li className={`hover:text-accent-light ${current === "experience" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("experience")}>
                     <Link to="/projects">experience</Link>
-                </li>
+                </li> */}
                 <li className={`hover:text-accent-light ${current === "contact" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("contact")}>
                     <Link to="/#contact">contact</Link>
                 </li>
-                <li className={`hover:text-accent-light ${current === "chat" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("chat")}>
+                {/* <li className={`hover:text-accent-light ${current === "chat" ? "font-bold text-accent-light" : ""}`} onClick={() => handleNav("chat")}>
                     <Link to="/contact">chat</Link>
-                </li>
+                </li> */}
             </ul>
         </div>
     );

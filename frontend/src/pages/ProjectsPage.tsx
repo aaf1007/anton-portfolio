@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import ProjectCard from "@/components/ProjectCard";
 const projects = [
     {
@@ -10,7 +11,7 @@ const projects = [
             postings and ranking them against a user&apos;s SFU coursework and
             resume via a <strong>multi-phase prompt pipeline</strong>.
           </li>
-          <li>
+          {/* <li>
             Architected a <strong>serverless REST API</strong> with <strong>Next.js App Router</strong>{" "}
             and <strong>MongoDB + Mongoose</strong>, implementing a <strong>Redis</strong> caching
             layer with 30-min TTL for sessions and 24-hour TTL for job listings.
@@ -23,7 +24,7 @@ const projects = [
           <li>
             Implemented <strong>Google OAuth</strong> authentication and cookie-based session
             management for personalized recommendations.
-          </li>
+          </li> */}
         </ul>
       ),
       image: "sfucareer.png",
@@ -40,7 +41,7 @@ const projects = [
             the <strong>Spotify Web API</strong> to surface top artists, tracks, and
             listening history across configurable time ranges.
           </li>
-          <li>
+          {/* <li>
             Implemented <strong>OAuth 2.0 PKCE authentication</strong> with automatic{" "}
             <strong>token refresh</strong> and browser-local persistence.
           </li>
@@ -48,7 +49,7 @@ const projects = [
             Built a <strong>playlist export pipeline</strong> batching up to 100 Spotify
             track URIs per <strong>RESTful API</strong> call for end-to-end{" "}
             <strong>playlist creation</strong>.
-          </li>
+          </li> */}
         </ul>
       ),
       image: "/statify.png",
@@ -60,9 +61,9 @@ const projects = [
 
 export default function ProjectsPage() {
     return (
-        <div>
-            <p className="text-[1.4rem] md:text-[1.8rem] text-accent font-semibold mb-6 md:mb-8">Projects</p>
-            <div className="flex flex-col gap-6 md:gap-8">
+        <div className="h-full mb-10">
+            <p className="text-[1.5rem] md:text-[2rem] text-primary/70 font-semibold mb-4 md:mb-6">Projects</p>
+            <div className="flex flex-col gap-6 md:grid md:grid-cols-2">
                 {projects.map((project) => (
                     <ProjectCard key={project.title} {...project} />
                 ))}
