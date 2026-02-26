@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+
 import ProjectCard from "@/components/ProjectCard";
 const projects = [
     {
