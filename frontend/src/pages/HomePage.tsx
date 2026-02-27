@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "@/components/Footer";
-import profileImage from "@/assets/P6140340.png";
 import StackIcon from "tech-stack-icons";
 
 const coursework = ["Intro to Artificial Intelligence", "Intro to Software Engineering", "Linear Algebra", "Business Statistics"];
