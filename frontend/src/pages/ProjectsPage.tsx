@@ -1,4 +1,3 @@
-
 import ProjectCard from "@/components/ProjectCard";
 const projects = [
     {

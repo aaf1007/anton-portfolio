@@ -49,11 +49,12 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                    <img src={profileImage} alt="" className="w-40 md:w-56 h-auto self-center md:self-auto shrink-0" />
+                    {/* <img src={profileImage} alt="" className="w-40 md:w-56 h-auto self-center md:self-auto shrink-0" /> */}
                 </div>
                 <div>
-                    <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Interested In</p>
-                    <p className="text-sm md:text-base">Full-Stack Development, AI/ML, and Distributed System. I am working on projects that combine impact and technical challenges.</p>
+                    <p className="font-medium text-[1.2rem] md:text-[1.4rem] text-primary/70">Currently Focused On</p>
+                    <p className="text-sm md:text-base">
+                    Building full-stack applications, exploring AI/ML, and diving deep into distributed systems. I care about building things that solve real problems — not just shipping code.</p>
                 </div>
                 <div className="flex md:w-[80%] justify-between flex-col md:flex-row gap-5">
                     <div>
