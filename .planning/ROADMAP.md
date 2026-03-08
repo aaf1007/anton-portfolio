@@ -6,7 +6,7 @@ A single-phase delivery that adds full dark mode support to the existing portfol
 
 ## Phases
 
-- [ ] **Phase 1: Dark Mode** - Full dark mode feature — toggle, persistence, FOUC prevention, dark palette, and bug fix
+- [x] **Phase 1: Dark Mode** - Full dark mode feature — toggle, persistence, FOUC prevention, dark palette, and bug fix
 
 ## Phase Details
 
@@ -18,9 +18,9 @@ A single-phase delivery that adds full dark mode support to the existing portfol
 
 Plans:
 - [x] 01-01-PLAN.md — CSS/HTML foundation: FOUC script, dark palette vars, @custom-variant, transitions, scrollbar, focus ring, cursor blink fix
-- [ ] 01-02-PLAN.md — Theme infrastructure: ThemeContext.tsx (ThemeProvider + useTheme hook) and App.tsx wrapping
-- [ ] 01-03-PLAN.md — Toggle component: ThemeToggle.tsx with AnimatePresence animation, wired into SideBar and mobile header
-- [ ] 01-04-PLAN.md — Human verification checkpoint: end-to-end browser testing of all 12 requirements
+- [x] 01-02-PLAN.md — Theme infrastructure: ThemeContext.tsx (ThemeProvider + useTheme hook) and App.tsx wrapping
+- [x] 01-03-PLAN.md — Toggle component: ThemeToggle.tsx with AnimatePresence animation, wired into SideBar and mobile header
+- [x] 01-04-PLAN.md — Human verification checkpoint: end-to-end browser testing of all 12 requirements
 
 **Success Criteria** (what must be TRUE):
   1. User can click a sun/moon icon in the sidebar (desktop) and mobile header to switch between light and dark mode
@@ -33,4 +33,4 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dark Mode | 3/4 | In Progress|  |
+| 1. Dark Mode | 4/4 | Complete | 2026-03-08 |
