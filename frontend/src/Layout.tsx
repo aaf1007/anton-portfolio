@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "motion/react";
 import SideBar from "./components/SideBar";
+import ThemeToggle from "./components/ThemeToggle";
 import PageTree from "./components/PageTree";
 
 /**
@@ -29,9 +30,12 @@ export default function Layout() {
       {/* Mobile header: visible only on small screens */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-3 bg-background-eggshell/95 backdrop-blur border-b border-primary/10">
         <Link to="/#home" className="font-extrabold text-[1.2rem] text-primary hover:text-accent-light">anton florendo</Link>
-        <button type="button" aria-label="Open menu" onClick={() => setMobileMenuOpen(true)} className="p-2 text-primary hover:text-accent-light">
-          <HiMenu className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <button type="button" aria-label="Open menu" onClick={() => setMobileMenuOpen(true)} className="p-2 text-primary hover:text-accent-light">
+            <HiMenu className="w-6 h-6" />
+          </button>
+        </div>
       </header>
 
       {/* Mobile sidebar overlay */}

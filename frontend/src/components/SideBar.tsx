@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 type SideBarProps = { onNavigate?: () => void };
 
@@ -32,6 +33,9 @@ export default function SideBar({ onNavigate }: SideBarProps) {
                     <Link to="/contact">chat</Link>
                 </li> */}
             </ul>
+            <div className="mt-auto pt-4">
+                <ThemeToggle />
+            </div>
         </div>
     );
 }
