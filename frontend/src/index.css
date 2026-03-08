@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: rgb(250, 248, 248);
@@ -14,12 +15,24 @@
   --peach-soft: #f9f0e8;
 }
 
+html.dark {
+  --background: rgb(28, 25, 23);
+  --foreground: #e5e5e5;
+  --accent: #c4a882;
+  --accent-light: #d4a9a9;
+  --primary: #c9a88a;
+  --primary-dark: #a67c5b;
+  --background-eggshell: #292524;
+  --tan-pastel: #3d342a;
+  --tan-muted: #44392e;
+  --peach-soft: #302a25;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
-  --color-foreground: var(--foreground);
   /* Theme */
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
@@ -38,6 +51,10 @@ html {
   line-height: 1.7;
 }
 
+*, *::before, *::after {
+  transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
 body {
   background: var(--background-eggshell);
   color: var(--foreground);
@@ -48,7 +65,7 @@ body {
   display: inline-block;
   width: 8px;
   height: 1rem;
-  background-color: #5d4037;
+  background-color: var(--primary);
   vertical-align: middle;
   margin-left: 2px;
   animation: blink 1.5s step-end infinite;
@@ -56,4 +73,21 @@ body {
 @keyframes blink {
   from, to { opacity: 1; }
   50% { opacity: 0; }
+}
+
+html.dark {
+  scrollbar-color: #44392e #1c1917; /* Firefox */
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #1c1917;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: #44392e;
+  border-radius: 4px;
+}
+
+html.dark *:focus-visible {
+  outline-color: var(--accent-light);
 }
