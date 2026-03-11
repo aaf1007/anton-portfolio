@@ -16,16 +16,16 @@
 }
 
 html.dark {
-  --background: rgb(28, 25, 23);
-  --foreground: #e5e5e5;
-  --accent: #c4a882;
-  --accent-light: #d4a9a9;
-  --primary: #c9a88a;
-  --primary-dark: #a67c5b;
-  --background-eggshell: #292524;
-  --tan-pastel: #3d342a;
-  --tan-muted: #44392e;
-  --peach-soft: #302a25;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --accent: #a1a1aa;
+  --accent-light: #d4d4d8;
+  --primary: #f4f4f5;
+  --primary-dark: #d4d4d8;
+  --background-eggshell: #0f0f12;
+  --tan-pastel: #18181b;
+  --tan-muted: #3f3f46;
+  --peach-soft: #1c1c1f;
 }
 
 @theme inline {
@@ -76,15 +76,15 @@ body {
 }
 
 html.dark {
-  scrollbar-color: #44392e #1c1917; /* Firefox */
+  scrollbar-color: #3f3f46 #0f0f12; /* Firefox */
 }
 
 html.dark ::-webkit-scrollbar-track {
-  background: #1c1917;
+  background: #0f0f12;
 }
 
 html.dark ::-webkit-scrollbar-thumb {
-  background-color: #44392e;
+  background-color: #3f3f46;
   border-radius: 4px;
 }
 
