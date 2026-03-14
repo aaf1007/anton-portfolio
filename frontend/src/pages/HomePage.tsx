@@ -22,6 +22,8 @@ const stack = [
   "tailwindcss",
 ];
 
+const learning = ["springboot", "express", "machine learning"];
+
 export default function HomePage() {
   const { hash } = useLocation();
 
@@ -57,14 +59,18 @@ export default function HomePage() {
       </section>
 
       {/* Currently Focused On */}
-      <section>
+      <section className="flex flex-col gap-2">
         <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
-          currently focused on
+          currently...
         </p>
         <p className="text-foreground/75 leading-relaxed">
           Building full-stack applications, exploring AI/ML, and diving into
           distributed systems. I care about building things that solve real
           problems.
+        </p>
+        <p className="text-foreground/75">
+          <span className="font-medium">Learning </span>
+          {learning.join(", ")}
         </p>
       </section>
 
