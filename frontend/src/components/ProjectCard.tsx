@@ -3,10 +3,11 @@ import type { ReactNode } from "react";
 type ProjectCardProps = {
   title: string;
   description: ReactNode;
-  image?: string;
+  image?: string | ReactNode;
   stack: string[];
   link?: string;
   github?: string;
+  inProgress: boolean;
 };
 
 
@@ -17,18 +18,27 @@ export default function ProjectCard({
   stack,
   link,
   github,
+  inProgress
 }: ProjectCardProps) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-semibold text-foreground">{title}</p>
+      <div className="flex justify-between items-end">
+        <p className="font-semibold text-foreground">{title}</p>
+        <p className="text-foreground/70 text-[0.95rem]">{inProgress && "In Progress"}</p>
+      </div>
 
       {image && (
         <a href={link || github} target="_blank" rel="noreferrer">
-          <img
+          {typeof image === "string" ? (
+            <img
             src={image}
             alt={title}
             className="w-full h-auto rounded object-cover opacity-95 hover:opacity-100 transition-opacity"
           />
+          ) : (
+            image
+          )
+        }
         </a>
       )}
 
