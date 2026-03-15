@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
+import { TechStack } from "@/components/TechStack";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import StackIcon from "tech-stack-icons";
 
 const coursework = [
   "Intro to Artificial Intelligence",
@@ -12,15 +12,6 @@ const coursework = [
 
 const hobbies = ["gym", "cooking", "eating", "coding"];
 
-const stack = [
-  "typescript",
-  "java",
-  "python",
-  "react",
-  "nextjs",
-  "spring",
-  "tailwindcss",
-];
 
 const learning = ["springboot", "express", "machine learning"];
 
@@ -99,14 +90,17 @@ export default function HomePage() {
       </section>
 
       {/* Tech Stack */}
-      <section>
-        <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-3">
+      <section className="w-full">
+        <p className="text-xs font-medium uppercase text-pretty tracking-widest text-primary/50">
           tech stack
         </p>
-        <div className="flex gap-3 flex-wrap">
+        {/* <div className="flex gap-3 flex-wrap">
           {stack.map((name) => (
             <StackIcon key={name} name={name} className="w-9 h-9" />
           ))}
+        </div> */}
+        <div className="w-full">
+          <TechStack />
         </div>
       </section>
 

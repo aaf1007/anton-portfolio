@@ -4,7 +4,7 @@ import ThemeToggle from "./components/ThemeToggle";
 
 export default function Layout() {
   return (
-    <div className="max-w-[750px] mx-auto px-4 py-20 min-h-screen">
+    <div className="max-w-[750px] mx-auto px-4 py-10 md:py-20 min-h-screen">
       <header className="flex items-center justify-between mb-14">
         {/* Page links — left side */}
         <nav className="flex items-center gap-5 text-sm text-foreground/70">
