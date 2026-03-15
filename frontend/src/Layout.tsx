@@ -18,6 +18,7 @@ export default function Layout() {
             life
           </Link>
         </nav>
+        
 
         {/* Social icons + theme toggle — right side */}
         <div className="flex items-center gap-3 text-foreground/60">
