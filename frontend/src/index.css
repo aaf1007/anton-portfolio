@@ -120,7 +120,7 @@ html {
 body {
   background: var(--background-eggshell);
   color: var(--foreground);
-  font-family: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: "Inter", "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 html.dark {

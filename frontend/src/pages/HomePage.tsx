@@ -35,7 +35,7 @@ export default function HomePage() {
   }, [hash]);
 
   return (
-    <div id="home" className="flex flex-col gap-12 pb-20">
+    <div id="home" className="max-w-[750px] mx-auto flex flex-col gap-12 pb-20">
       {/* Intro */}
       <section>
         <h1 className="text-2xl font-semibold mb-3 text-foreground">
