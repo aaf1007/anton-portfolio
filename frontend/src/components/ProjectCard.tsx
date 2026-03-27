@@ -10,7 +10,6 @@ type ProjectCardProps = {
   inProgress: boolean;
 };
 
-
 export default function ProjectCard({
   title,
   description,
@@ -18,27 +17,28 @@ export default function ProjectCard({
   stack,
   link,
   github,
-  inProgress
+  inProgress,
 }: ProjectCardProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-end">
         <p className="font-semibold text-foreground">{title}</p>
-        <p className="text-foreground/70 text-[0.95rem]">{inProgress && "In Progress"}</p>
+        <p className="text-foreground/70 text-[0.95rem]">
+          {inProgress && "In Progress"}
+        </p>
       </div>
 
       {image && (
         <a href={link || github} target="_blank" rel="noreferrer">
           {typeof image === "string" ? (
             <img
-            src={image}
-            alt={title}
-            className="w-full h-auto rounded object-cover opacity-95 hover:opacity-100 transition-opacity"
-          />
+              src={image}
+              alt={title}
+              className="w-full h-auto rounded object-cover opacity-95 hover:opacity-100 transition-opacity "
+            />
           ) : (
             image
-          )
-        }
+          )}
         </a>
       )}
 

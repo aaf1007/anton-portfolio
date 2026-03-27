@@ -8,32 +8,43 @@ const projects = [
         <li>
           Architected a <strong>full-stack music analytics dashboard</strong>{" "}
           integrating the <strong>Spotify Web API</strong> to surface top
-          artists, tracks, and listening history across configurable time ranges.
+          artists, tracks, and listening history across configurable time
+          ranges.
         </li>
       </ul>
     ),
     image: "/statify.png",
     stack: ["React", "Next.js", "Tailwind CSS", "Javascript", "Spotify API"],
     github: "https://github.com/aaf1007/statify",
-    inProgress: false
+    inProgress: false,
   },
   {
     title: "SFU CareerConnect",
     description: (
       <ul className="list-disc pl-5 space-y-1">
         <li>
-          Built an <strong>AI-powered internship matching platform</strong> using{" "}
-          <strong>Gemini AI</strong> and the <strong>LinkedIn Jobs API</strong>,
-          scraping live postings and ranking them against a user's SFU coursework
-          and resume via a <strong>multi-phase prompt pipeline</strong>.
+          Built an <strong>AI-powered internship matching platform</strong>{" "}
+          using <strong>Gemini AI</strong> and the{" "}
+          <strong>LinkedIn Jobs API</strong>, scraping live postings and ranking
+          them against a user's SFU coursework and resume via a{" "}
+          <strong>multi-phase prompt pipeline</strong>.
         </li>
       </ul>
     ),
     image: "sfucareer.png",
-    stack: ["React", "Next.js", "Tailwind CSS", "Javascript", "Gemini AI", "MongoDB", "Redis", "Google OAuth"],
+    stack: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Javascript",
+      "Gemini AI",
+      "MongoDB",
+      "Redis",
+      "Google OAuth",
+    ],
     link: "https://sfu-careerconnect.vercel.app",
     github: "https://github.com/aaf1007/sfu-careerconnect",
-    inProgress: false
+    inProgress: false,
   },
   {
     title: "PantryPal",
@@ -49,18 +60,37 @@ const projects = [
     ),
     image: (
       <video
-          src="https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        src="https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
     ),
     stack: ["React", "SpringBoot", "TypeScript", "Java"],
     link: "https://pantry-pal-umber.vercel.app",
     github: "https://github.com/aaf1007/PantryPal",
-    inProgress: true
-  }
+    inProgress: true,
+  },
+  {
+    title: "SFU MyProfessor",
+    description: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>
+          A <strong>Chrome extension</strong> that injects
+          <strong>Rate My Professor</strong> ratings — average score,
+          difficulty, and would-take-again percentage — directly into the{" "}
+          <strong>SFU MySchedule</strong> course schedule using a
+          <strong>Manifest V3</strong> content script and background service
+          worker.
+        </li>
+      </ul>
+    ),
+    image: <img src="my-professor.png" alt="" />,
+    stack: ["Javascript", "TypeScript", "Tailwindcss"],
+    github: "https://github.com/aaf1007/SFU-MyProfessor",
+    inProgress: true,
+  },
 ];
 
 export default function ProjectsPage() {
