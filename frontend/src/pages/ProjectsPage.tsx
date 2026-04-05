@@ -91,6 +91,53 @@ const projects = [
     github: "https://github.com/aaf1007/SFU-MyProfessor",
     inProgress: true,
   },
+  {                                          
+    title: "VerifAI",
+    description: (                                                                    
+      <ul className="list-disc pl-5 space-y-1">
+        <li>                                                                          
+          A <strong>Chrome extension</strong> and <strong>FastAPI backend</strong>                                               that lets users highlight any text on the web, right-click, and receive
+          an instant <strong>AI-powered fact-check</strong> with verdict,             
+          confidence score, and cited sources.                                        
+        </li>                                                                         
+        <li>                                                                          
+          Claims are extracted via <strong>Groq</strong> and verified using{" "}
+          <strong>Gemini Search Grounding</strong>, with results streamed back to     
+          an interactive <strong>React popup</strong> featuring a history tab and     
+          contextual chatbot.                                                         
+        </li>                                                                         
+      </ul>                                                                           
+    ),                                                                                
+    image: <img src="verifai.png" alt="" />,         
+    stack: ["TypeScript", "React", "Python", "FastAPI", "WXT", "Tailwind CSS", "Groq",       
+  "Gemini"],
+    github: "https://github.com/aaf1007/verifai",                                     
+    inProgress: true,                                                                 
+  },
+  {
+    title: "BSCode",
+    description: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>
+          A <strong>web-based code editor</strong> built with{" "}
+          <strong>Next.js</strong> and <strong>Monaco Editor</strong> — the
+          same engine that powers VS Code — featuring an integrated{" "}
+          <strong>AI chat</strong> panel powered by{" "}
+          <strong>Google Gemini</strong>, a built-in{" "}
+          <strong>Brain Rot video</strong> tab, and{" "}
+          <strong>Subway Surfers</strong> to keep you focused while you code.
+        </li>
+        <li>
+          Won at{" "}
+          <strong>SFU Surge SillyHacks 2026</strong>.
+        </li>
+      </ul>
+    ),
+    image: <img src="bscode.png" alt="" />,
+    stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
+    github: "https://github.com/ant1007/bscode",
+    inProgress: false,
+  },
 ];
 
 export default function ProjectsPage() {
