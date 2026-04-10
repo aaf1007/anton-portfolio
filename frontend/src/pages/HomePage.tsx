@@ -11,7 +11,7 @@ const coursework = [
   "Business Statistics",
 ];
 
-const hobbies = ["gym", "cooking", "eating", "coding"];
+const hobbies = ["gym", "cooking", "eating", "coding", "tennis", "basketball"];
 
 
 const learning = ["springboot", "express", "machine learning"];
