@@ -5,8 +5,8 @@ import ThemeToggle from "./components/ThemeToggle";
 export default function Layout() {
   return (
     <div className="px-4 py-10 md:py-20 min-h-screen">
-      <header className="max-w-[750px] mx-auto flex items-center justify-between mb-14">
-        <nav className="flex items-center gap-5 text-sm text-foreground/70">
+      <header className="max-w-[740px] mx-auto flex items-center justify-between mb-14">
+        <nav className="flex items-center gap-5 text-md text-foreground/70">
           <Link to="/" className="hover:text-foreground transition-colors">
             home
           </Link>
