@@ -19,34 +19,6 @@ const projects = [
     inProgress: false,
   },
   {
-    title: "SFU CareerConnect",
-    description: (
-      <ul className="list-disc pl-5 space-y-1">
-        <li>
-          Built an <strong>AI-powered internship matching platform</strong>{" "}
-          using <strong>Gemini AI</strong> and the{" "}
-          <strong>LinkedIn Jobs API</strong>, scraping live postings and ranking
-          them against a user's SFU coursework and resume via a{" "}
-          <strong>multi-phase prompt pipeline</strong>.
-        </li>
-      </ul>
-    ),
-    image: "sfucareer.png",
-    stack: [
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "Javascript",
-      "Gemini AI",
-      "MongoDB",
-      "Redis",
-      "Google OAuth",
-    ],
-    link: "https://sfu-careerconnect.vercel.app",
-    github: "https://github.com/aaf1007/sfu-careerconnect",
-    inProgress: false,
-  },
-  {
     title: "PantryPal",
     description: (
       <ul className="list-disc pl-5 space-y-1">
@@ -86,33 +58,38 @@ const projects = [
         </li>
       </ul>
     ),
-    image: <img src="my-professor.png" alt="" />,
+    image: <img src="sfu-my-prof.png" alt="" />,
     stack: ["Javascript", "TypeScript", "Tailwindcss"],
     github: "https://github.com/aaf1007/SFU-MyProfessor",
     inProgress: true,
   },
-  {                                          
-    title: "VerifAI",
-    description: (                                                                    
+  {
+    title: "SFU CareerConnect",
+    description: (
       <ul className="list-disc pl-5 space-y-1">
-        <li>                                                                          
-          A <strong>Chrome extension</strong> and <strong>FastAPI backend</strong>                                               that lets users highlight any text on the web, right-click, and receive
-          an instant <strong>AI-powered fact-check</strong> with verdict,             
-          confidence score, and cited sources.                                        
-        </li>                                                                         
-        <li>                                                                          
-          Claims are extracted via <strong>Groq</strong> and verified using{" "}
-          <strong>Gemini Search Grounding</strong>, with results streamed back to     
-          an interactive <strong>React popup</strong> featuring a history tab and     
-          contextual chatbot.                                                         
-        </li>                                                                         
-      </ul>                                                                           
-    ),                                                                                
-    image: <img src="verifai.png" alt="" />,         
-    stack: ["TypeScript", "React", "Python", "FastAPI", "WXT", "Tailwind CSS", "Groq",       
-  "Gemini"],
-    github: "https://github.com/aaf1007/verifai",                                     
-    inProgress: true,                                                                 
+        <li>
+          Built an <strong>AI-powered internship matching platform</strong>{" "}
+          using <strong>Gemini AI</strong> and the{" "}
+          <strong>LinkedIn Jobs API</strong>, scraping live postings and ranking
+          them against a user's SFU coursework and resume via a{" "}
+          <strong>multi-phase prompt pipeline</strong>.
+        </li>
+      </ul>
+    ),
+    image: "sfucareer.png",
+    stack: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Javascript",
+      "Gemini AI",
+      "MongoDB",
+      "Redis",
+      "Google OAuth",
+    ],
+    link: "https://sfu-careerconnect.vercel.app",
+    github: "https://github.com/aaf1007/sfu-careerconnect",
+    inProgress: false,
   },
   {
     title: "BSCode",
@@ -137,6 +114,28 @@ const projects = [
     stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
     github: "https://github.com/ant1007/bscode",
     inProgress: false,
+  },
+  {
+    title: "VerifAI",
+    description: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>
+          A <strong>Chrome extension</strong> and <strong>FastAPI backend</strong> that lets users highlight any text on the web, right-click, and receive
+          an instant <strong>AI-powered fact-check</strong> with verdict,
+          confidence score, and cited sources.
+        </li>
+        <li>
+          Claims are extracted via <strong>Groq</strong> and verified using{" "}
+          <strong>Gemini Search Grounding</strong>, with results streamed back to
+          an interactive <strong>browser sidepanel</strong> featuring a history tab and
+          contextual chatbot.
+        </li>
+      </ul>
+    ),
+    image: <img src="verifai-new.png" alt="" />,
+    stack: ["TypeScript", "React", "Python", "FastAPI", "WXT", "Tailwind CSS", "Groq", "Gemini"],
+    github: "https://github.com/aaf1007/verifai",
+    inProgress: true,
   },
 ];
 
