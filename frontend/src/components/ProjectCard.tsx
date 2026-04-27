@@ -7,6 +7,7 @@ type ProjectCardProps = {
   stack: string[];
   link?: string;
   github?: string;
+  prod?: string;
   inProgress: boolean;
 };
 
@@ -17,6 +18,7 @@ export default function ProjectCard({
   stack,
   link,
   github,
+  prod,
   inProgress,
 }: ProjectCardProps) {
   return (
@@ -65,7 +67,7 @@ export default function ProjectCard({
             rel="noreferrer"
             className="hover:text-primary transition-colors"
           >
-            link ↗
+            view demo ↗
           </a>
         )}
         {github && (
@@ -76,6 +78,16 @@ export default function ProjectCard({
             className="hover:text-primary transition-colors"
           >
             github ↗
+          </a>
+        )}
+        {prod && (
+          <a
+            href={prod}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-primary transition-colors"
+          >
+            view product ↗
           </a>
         )}
       </div>

@@ -60,6 +60,7 @@ const projects = [
     ),
     image: <img src="sfu-my-prof.png" alt="" />,
     stack: ["Javascript", "TypeScript", "Tailwindcss"],
+    prod: "https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb",
     github: "https://github.com/aaf1007/SFU-MyProfessor",
     inProgress: true,
   },
@@ -112,7 +113,8 @@ const projects = [
     ),
     image: <img src="bscode.png" alt="" />,
     stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
-    github: "https://github.com/ant1007/bscode",
+    github: "https://github.com/ChakornK/bscode",
+    link: "https://bscode-alpha.vercel.app/",
     inProgress: false,
   },
   {
@@ -136,6 +138,32 @@ const projects = [
     stack: ["TypeScript", "React", "Python", "FastAPI", "WXT", "Tailwind CSS", "Groq", "Gemini"],
     github: "https://github.com/aaf1007/verifai",
     inProgress: true,
+  },
+  {
+    title: "Comparative Diagnostic System for Breast Cancer Classification",
+    description: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>
+          As part of <strong>CMPT 310</strong>, built and compared multiple{" "}
+          <strong>machine learning classifiers</strong> to diagnose breast tumors
+          as benign or malignant on the <strong>UCI Breast Cancer Wisconsin</strong>{" "}
+          dataset (569 samples, 30 features), prioritizing <strong>recall</strong>{" "}
+          to minimize missed malignant diagnoses.
+        </li>
+        <li>
+          Implemented <strong>Logistic Regression from scratch</strong> with
+          gradient descent and <strong>L2 regularization</strong>, plus tuned{" "}
+          <strong>KNN</strong> and <strong>Decision Tree</strong> models — using{" "}
+          <strong>5-fold stratified K-fold</strong> grid search and{" "}
+          <strong>F2-score threshold tuning</strong> to reach <strong>~96%</strong>{" "}
+          accuracy.
+        </li>
+      </ul>
+    ),
+    image: <img src="cmpt310.jpg" alt="" />,
+    stack: ["Python", "scikit-learn", "NumPy", "pandas", "Matplotlib", "Jupyter"],
+    github: "https://github.com/kunaljoshi2/Tumor-Classifier",
+    inProgress: false,
   },
 ];
 
