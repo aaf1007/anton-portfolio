@@ -1,0 +1,121 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [ref=e7] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [ref=e8] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e9]:
+      - link "GitHub" [ref=e10] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e11]
+      - link "LinkedIn" [ref=e13] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e14]
+      - button "Switch to dark mode" [ref=e16]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - img "SFU MySchedule with professor ratings injected next to each course" [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: A Chrome extension that injects Rate My Professor scores directly into SFU's course schedule — so you stop tab-switching during enrollment week.
+          - paragraph [ref=e28]: SFU MyProfessor reads the professor names rendered on go.sfu.ca/myschedule and overlays each row with the average rating, difficulty, and would-take-again percentage from RMP. No copy-paste, no second tab — just a number where you need it.
+          - paragraph [ref=e29]: "The whole thing is small on purpose: one Manifest V3 content script, one background service worker, one tiny problem solved well."
+          - paragraph [ref=e30]:
+            - text: Install from the
+            - link "Chrome Web Store →" [ref=e31] [cursor=pointer]:
+              - /url: https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb
+        - complementary [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Timeline
+            - generic [ref=e35]: Oct 2025 – ongoing
+          - generic [ref=e36]:
+            - generic [ref=e37]: Role
+            - generic [ref=e38]: Solo — extension + scraping
+          - generic [ref=e39]:
+            - generic [ref=e40]: Stack
+            - generic [ref=e41]: TypeScript, MV3, Tailwind
+          - generic [ref=e42]:
+            - generic [ref=e43]: Status
+            - generic [ref=e44]: Live on Chrome Web Store
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: THE USER JOURNEY
+          - heading "Why does enrollment feel like a research project?" [level=2] [ref=e48]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: ✦
+            - generic [ref=e52]:
+              - heading "Three tabs, one decision" [level=4] [ref=e53]
+              - paragraph [ref=e54]: Picking a section meant juggling SFU MySchedule, Rate My Professor, and a spreadsheet — typing each professor's name into a search bar, copying the number back. Multiply by five courses and the friction starts to make people pick by time slot instead of teaching quality.
+          - generic [ref=e55]:
+            - generic [ref=e56]: ✦
+            - generic [ref=e57]:
+              - heading "The data exists; it's just in the wrong place" [level=4] [ref=e58]
+              - paragraph [ref=e59]: RMP already has the answer. SFU MySchedule already shows the question. The whole problem is they don't talk to each other — and a content script is the cheapest possible bridge.
+      - generic [ref=e60]:
+        - generic [ref=e62]: FIRST ATTEMPT
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - heading "Naive name lookup" [level=3] [ref=e65]
+            - paragraph [ref=e67]: The first prototype scraped the professor name and hit RMP's search endpoint directly from the content script. It worked for "Toby Donaldson" and broke for "T. Donaldson," "Donaldson, Toby," and anyone with a middle initial.
+          - generic [ref=e68]:
+            - heading "What I missed" [level=3] [ref=e69]
+            - paragraph [ref=e71]: Real-world name normalization is messier than expected. Rate My Professor is a public-facing search, not an API — fuzziness was the actual product, not a bug to fix in one shot.
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]: WHAT MADE IT WORK
+          - heading "Bridge the two pages, don't replace them" [level=2] [ref=e75]
+        - generic [ref=e76]:
+          - img "Course schedule rows with injected RMP ratings" [ref=e78]
+          - generic [ref=e79]:
+            - 'heading "MV3 content script with name normalization — Feature #1" [level=3] [ref=e80]'
+            - paragraph [ref=e81]: The content script reads each row in MySchedule, strips honorifics and trailing initials, and queries RMP's search through the background service worker. Multiple name variants are tried in priority order, with the first confident match cached locally.
+        - paragraph [ref=e82]: Speed matters more than ranking — students scan, not read.
+        - generic [ref=e83]:
+          - img "Inline rating badges on each course row" [ref=e85]
+          - generic [ref=e86]:
+            - 'heading "Inline badges, not popups — Feature #2" [level=3] [ref=e87]'
+            - paragraph [ref=e88]: Ratings render as small Tailwind-styled badges next to the professor name — average score, difficulty, and would-take-again — colored by threshold so good and bad sections are visually obvious at a glance. No hover, no click, no flow break.
+        - paragraph [ref=e89]: And to keep it polite to RMP's servers —
+        - generic [ref=e90]:
+          - img "Background service worker handling cached lookups" [ref=e92]
+          - generic [ref=e93]:
+            - 'heading "Background worker + per-name cache — Feature #3" [level=3] [ref=e94]'
+            - paragraph [ref=e95]: The service worker dedupes lookups across tabs, caches results per normalized name, and respects sensible request rates. Reloading a schedule doesn't re-query RMP — and a quiet extension is a long-lived extension.
+      - generic [ref=e96]:
+        - generic [ref=e98]: REFLECTIONS
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Small extensions are good design exercises" [level=3] [ref=e101]
+            - paragraph [ref=e102]: There's no room to hide behind features. The whole product is one interaction — name in, rating out — and every decision (badge placement, color thresholds, cache TTL) is visible to the user. That constraint forces clearer thinking than a bigger app would.
+          - generic [ref=e103]:
+            - heading "Scraping is a UX problem" [level=3] [ref=e104]
+            - paragraph [ref=e105]: The technical work was easy; the UX work was making sure the extension never broke MySchedule's existing flow. A content script that throws errors into the page is worse than no extension at all.
+      - generic [ref=e106]:
+        - generic [ref=e108]: NEXT STEPS
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Comment summaries" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Run RMP's free-text reviews through a small LLM to surface a one-line summary per professor — so students get tone, not just a number.
+          - generic [ref=e113]:
+            - heading "Section comparison view" [level=3] [ref=e114]
+            - paragraph [ref=e115]: A small panel that lets you select two sections of the same course and compare professor ratings side-by-side, instead of eyeballing badges.
+          - generic [ref=e116]:
+            - heading "Cross-school support" [level=3] [ref=e117]
+            - paragraph [ref=e118]: The MySchedule selectors are SFU-specific, but the RMP layer is generic. UBC and UVic versions are mostly a templating exercise.
+          - generic [ref=e119]:
+            - heading "Opt-in telemetry" [level=3] [ref=e120]
+            - paragraph [ref=e121]: Optional anonymized counts on which courses get the most extension-driven lookups — useful for prioritizing future enrollment-week features.
+      - generic [ref=e122]:
+        - generic [ref=e124]: IMPACT
+        - list [ref=e125]:
+          - listitem [ref=e126]: Cuts a multi-tab enrollment workflow into a single page.
+          - listitem [ref=e127]: Reaches SFU students directly via the Chrome Web Store.
+          - listitem [ref=e128]: Demonstrates the smallest viable Manifest V3 + service worker pattern.
+          - listitem [ref=e129]: Sets a template that generalizes to other universities with minimal change.
+      - link "← back to projects" [ref=e131] [cursor=pointer]:
+        - /url: /projects

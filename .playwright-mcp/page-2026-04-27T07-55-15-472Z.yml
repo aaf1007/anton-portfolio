@@ -1,0 +1,133 @@
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - link "Home |" [ref=e8] [cursor=pointer]:
+          - /url: /
+      - listitem [ref=e9]:
+        - link "About |" [ref=e10] [cursor=pointer]:
+          - /url: /about
+      - listitem [ref=e11]:
+        - link "Projects |" [ref=e12] [cursor=pointer]:
+          - /url: /projects
+      - listitem [ref=e13]:
+        - link "Portfolio" [ref=e14] [cursor=pointer]:
+          - /url: /portfolio
+    - img "Starmap graph view" [ref=e19]
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: A personal relationship map that helps you remember what matters, stay intentional, and be a better friend.
+          - paragraph [ref=e25]: "starmap is a relationship management tool. Instead of treating your network as a flat contact list, it models your social world as a living graph: people, clusters, and connections."
+          - paragraph [ref=e26]: "The goal is simple: remember the little things, follow through on plans, and maintain relationships with more consistency and intention over time."
+          - paragraph [ref=e27]:
+            - text: Curious? Go try starmap live at
+            - link "starmap.lol" [ref=e28] [cursor=pointer]:
+              - /url: https://starmap.lol
+            - text: →
+        - complementary [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Timeline
+            - generic [ref=e32]: March 2026–ongoing
+          - generic [ref=e33]:
+            - generic [ref=e34]: Role
+            - generic [ref=e35]: everything!
+          - generic [ref=e36]:
+            - generic [ref=e37]: Recognition
+            - generic [ref=e38]: 40 users so far :)
+      - generic [ref=e39]:
+        - heading "MY USER JOURNEY" [level=2] [ref=e40]
+        - heading "Why does it feel like I have no time?" [level=3] [ref=e41]
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - img "Many people illustration" [ref=e44]
+            - generic [ref=e45]:
+              - heading "Time tracking" [level=4] [ref=e46]
+              - paragraph [ref=e47]: It was the busiest summer of my life between my job, courses, and time with friends and family. I was tracking my time 24/7 with TogglTracker, and I was spending about 8% with friends - about 16% of my waking hours.
+          - generic [ref=e48]:
+            - img "Person with question marks illustration" [ref=e49]
+            - generic [ref=e50]:
+              - heading "Being picky" [level=4] [ref=e51]
+              - paragraph [ref=e52]: It seemed like the answer was becoming choosier with who I chose to spend my time with. But how without data, how would I know who was real and fake?
+      - generic [ref=e53]:
+        - heading "FIRST SOLUTION" [level=2] [ref=e54]
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - heading "NOTION DOC" [level=3] [ref=e57]
+            - paragraph [ref=e58]: I wrote out the names of all 60+ "friends" I had along with journal entries on our friendship, how they made me feel, and things I should remember about them. I would update this whenever I saw them or something significant happened in our relationship.
+          - generic [ref=e59]:
+            - heading "PROBLEMS" [level=3] [ref=e60]
+            - paragraph [ref=e61]: It was such a long document and it wasn't well organized.
+      - generic [ref=e62]:
+        - heading "WHY STARMAP EXISTS" [level=2] [ref=e63]
+        - heading "What if I made an app for that?" [level=3] [ref=e64]
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - img "Matthew profile node" [ref=e68]
+          - generic [ref=e69]:
+            - 'heading "Profiles — Feature #1" [level=3] [ref=e70]'
+            - paragraph [ref=e71]: After creating the nodes feature, I had accomplished what my Notion doc previously did. I could hold my information entries in a clean, organized way, and view my friends as nodes across a map.
+            - img "Animated constellation of relationship nodes" [ref=e73]
+        - paragraph [ref=e90]: That took a long time, so I added AI to speed it up
+        - generic [ref=e91]:
+          - img "Import with AI modal UI" [ref=e93]
+          - generic [ref=e94]:
+            - 'heading "Import with AI — Feature #2" [level=3] [ref=e95]'
+            - paragraph [ref=e96]: I made a little Gemini wrapper to let me paste in my whole doc and have it fill out information automatically.
+        - paragraph [ref=e97]: What if I could visualize how people in my life know each other?
+        - generic [ref=e98]:
+          - img "Add connection UI showing node linking" [ref=e100]
+          - generic [ref=e101]:
+            - 'heading "Constellations, Connections, and Locations — Feature #3" [level=3] [ref=e102]'
+            - paragraph [ref=e103]: By shift-clicking two nodes, you can add a connection type between them. Constellations help you organize the communities or categories you know people from. Location helps you keep your friends organized as people move around.
+      - generic [ref=e105]:
+        - generic [ref=e106]: Design Showcase
+        - generic [ref=e107]:
+          - tablist "Choose a screen to preview" [ref=e108]:
+            - tab "landing" [selected] [ref=e109] [cursor=pointer]
+            - tab "dashboard" [ref=e110] [cursor=pointer]
+          - tabpanel "landing" [ref=e112]:
+            - img "starmap landing page with relationship-focused onboarding"
+      - generic [ref=e113]:
+        - generic [ref=e114]: Reflections
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - heading "Reframing is a design skill" [level=3] [ref=e117]
+            - paragraph [ref=e118]: The most valuable thing I've done on starmap isn't any individual feature — it's getting clearer on what the product is actually for. Relationship tools are easy to overbuild. Every iteration where I removed something taught me more than the ones where I added.
+          - generic [ref=e119]:
+            - heading "Emailing users for feedback" [level=3] [ref=e120]
+            - paragraph [ref=e121]: I reached out directly to early users by email to understand how they were actually using the graph. The responses shaped the roadmap more than any analytics could — people weren't using features I'd spent the most time on, and were asking for things I hadn't considered.
+      - generic [ref=e122]:
+        - generic [ref=e123]: Next Steps
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - heading "Notion integration" [level=3] [ref=e126]
+            - paragraph [ref=e127]: Most people who care about relationship context already live in Notion. A two-way sync would let users pull existing notes into starmap profiles and push updates back — so it fits into an existing workflow rather than asking people to build a new one from scratch.
+          - generic [ref=e128]:
+            - heading "Shift-click to connect nodes" [level=3] [ref=e129]
+            - paragraph [ref=e130]: "Right now creating a connection requires opening a modal. The faster interaction would be: hold Shift, click two nodes, and they connect — with a lightweight inline label prompt. This makes the graph feel more direct and spatial, like drawing on a canvas rather than filling out a form."
+          - generic [ref=e131]:
+            - heading "Location as a dropdown" [level=3] [ref=e132]
+            - paragraph [ref=e133]: Location is currently a free-text field, which means the same city gets entered twelve different ways. Switching to a dropdown that saves and suggests previous entries would make filtering by location reliable — and open up a “who's nearby” view that currently isn't possible.
+          - generic [ref=e134]:
+            - heading "Deeper user research" [level=3] [ref=e135]
+            - paragraph [ref=e136]: The next round of emails to users will be more structured — specific questions about which features they actually return to, what's missing before they'd recommend it, and whether the graph view or list view is doing more work for them day-to-day.
+      - generic [ref=e137]:
+        - generic [ref=e138]: Impact
+        - list [ref=e139]:
+          - listitem [ref=e140]: Transforms long-form relationship journaling into a structured product workflow
+          - listitem [ref=e141]: Makes social memory searchable and visual through graph + list dual modes
+          - listitem [ref=e142]: Supports intentional follow-through with person-level notes and connection context
+          - listitem [ref=e143]: Creates a foundation for future relationship insights, reminders, and habit loops
+      - link "See next case study →" [ref=e145] [cursor=pointer]:
+        - /url: /spruce
+  - contentinfo [ref=e146]:
+    - link [ref=e147] [cursor=pointer]:
+      - /url: https://socrati.ca/webring/laurenyip.com/prev
+      - img [ref=e148]
+    - link [ref=e150] [cursor=pointer]:
+      - /url: https://socratica.info/webring/
+      - img [ref=e151]
+    - link [ref=e153] [cursor=pointer]:
+      - /url: https://socrati.ca/webring/laurenyip.com/next
+      - img [ref=e154]

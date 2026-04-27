@@ -1,0 +1,121 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [ref=e7] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [ref=e8] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e9]:
+      - link "GitHub" [ref=e10] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e11]
+      - link "LinkedIn" [ref=e13] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e14]
+      - button "Switch to dark mode" [ref=e16]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - img "Comparative diagnostic system for breast cancer classification" [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: A comparative diagnostic system that classifies breast tumors as benign or malignant — built to minimize missed malignant diagnoses, not just maximize accuracy.
+          - paragraph [ref=e28]: For our CMPT 310 final project, we built and compared three machine learning classifiers on the UCI Breast Cancer Wisconsin dataset (569 samples, 30 features). The goal wasn't a leaderboard score — it was building the right system for a domain where false negatives are catastrophic and false positives are recoverable.
+          - paragraph [ref=e29]: "That framing — recall over accuracy — drove every decision: model choice, threshold tuning, and how we evaluated the final pipeline."
+          - paragraph [ref=e30]:
+            - text: Code on
+            - link "GitHub →" [ref=e31] [cursor=pointer]:
+              - /url: https://github.com/kunaljoshi2/Tumor-Classifier
+        - complementary [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Timeline
+            - generic [ref=e35]: CMPT 310 — Fall 2025
+          - generic [ref=e36]:
+            - generic [ref=e37]: Role
+            - generic [ref=e38]: Team of 2 — modeling + analysis
+          - generic [ref=e39]:
+            - generic [ref=e40]: Stack
+            - generic [ref=e41]: Python, scikit-learn, NumPy, pandas
+          - generic [ref=e42]:
+            - generic [ref=e43]: Result
+            - generic [ref=e44]: ~96% accuracy, recall-tuned
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: THE PROBLEM
+          - heading "Why accuracy is the wrong metric here" [level=2] [ref=e48]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: ✦
+            - generic [ref=e52]:
+              - heading "False negatives kill" [level=4] [ref=e53]
+              - paragraph [ref=e54]: A model that misses a malignant tumor sends a sick person home with a clean bill of health. A model that flags a benign tumor sends a healthy person to a follow-up biopsy. These are not symmetric errors — and any metric that treats them as such is the wrong metric.
+          - generic [ref=e55]:
+            - generic [ref=e56]: ✦
+            - generic [ref=e57]:
+              - heading "Imbalance hides the failure mode" [level=4] [ref=e58]
+              - paragraph [ref=e59]: The dataset is roughly 63% benign / 37% malignant. A model that predicts 'benign' for everything still scores 63% accuracy — and looks fine on a confusion matrix glanced at quickly. We needed evaluation that would surface that failure, not paper over it.
+      - generic [ref=e60]:
+        - generic [ref=e62]: FIRST PASS
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - heading "Default scikit-learn" [level=3] [ref=e65]
+            - paragraph [ref=e67]: We started with out-of-the-box logistic regression, KNN, and a decision tree on raw features. Accuracy hit 94% on the first try, which was suspicious — and recall on the malignant class was lower than the headline number suggested.
+          - generic [ref=e68]:
+            - heading "What was missing" [level=3] [ref=e69]
+            - paragraph [ref=e71]: No feature scaling (KNN was secretly broken), no cross-validation (single-split scores were noisy), and no recall-aware thresholding (every model was using 0.5 by default). The "easy 94%" was leaving real malignant cases on the table.
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]: THE SYSTEM WE BUILT
+          - heading "Three models, one recall-first pipeline" [level=2] [ref=e75]
+        - generic [ref=e76]:
+          - img "Logistic regression decision boundary visualization" [ref=e78]
+          - generic [ref=e79]:
+            - 'heading "Logistic regression from scratch — Feature #1" [level=3] [ref=e80]'
+            - paragraph [ref=e81]: "Rather than using sklearn's implementation, we wrote logistic regression from scratch — gradient descent, L2 regularization, and a configurable learning rate. Building it ourselves made the bias/variance trade-offs visible: we could see exactly how regularization strength shifted the decision boundary."
+        - paragraph [ref=e82]: One model was a baseline. Three made the trade-offs visible.
+        - generic [ref=e83]:
+          - img "Cross-validation results across model families" [ref=e85]
+          - generic [ref=e86]:
+            - 'heading "KNN + Decision Tree, tuned — Feature #2" [level=3] [ref=e87]'
+            - paragraph [ref=e88]: We added a tuned KNN classifier and a decision tree, both selected via 5-fold stratified K-fold grid search over hyperparameters. Stratification kept the class balance consistent across folds — important when the minority class is the one that matters most.
+        - paragraph [ref=e89]: Then the actual win — making the system care about the right error.
+        - generic [ref=e90]:
+          - img "F2 score across decision thresholds" [ref=e92]
+          - generic [ref=e93]:
+            - 'heading "F2-score threshold tuning — Feature #3" [level=3] [ref=e94]'
+            - paragraph [ref=e95]: Instead of using each model's default 0.5 cutoff, we swept the decision threshold and selected the value that maximized the F2 score — which weights recall twice as heavily as precision. This pushed recall on malignant cases up without collapsing precision into uselessness.
+      - generic [ref=e96]:
+        - generic [ref=e98]: REFLECTIONS
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "The metric is the model" [level=3] [ref=e101]
+            - paragraph [ref=e102]: Choosing F2 over accuracy or F1 wasn't a tweak — it was the actual design decision. Once we picked the right loss to optimize against, most of the modeling choices fell out of it. Picking the metric first, then the model, is the lesson I'm taking forward.
+          - generic [ref=e103]:
+            - heading "Building from scratch teaches what libraries hide" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Reimplementing logistic regression took an extra weekend and was never going to beat sklearn's version. But debugging our own gradient descent — watching it diverge with the wrong learning rate, stabilize with L2 — taught more than any tutorial would.
+      - generic [ref=e106]:
+        - generic [ref=e108]: WHAT'S NEXT
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Calibrated probabilities" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Right now the threshold is tuned, but the underlying probabilities aren't calibrated. Platt scaling or isotonic regression would let the model say "70% likely malignant" and have that mean something — useful if it ever fed into a downstream decision system.
+          - generic [ref=e113]:
+            - heading "Ensemble vote" [level=3] [ref=e114]
+            - paragraph [ref=e115]: All three classifiers agree on the easy cases and disagree on the hard ones. A simple majority-vote ensemble — or stacking with a meta-learner — would likely squeeze out the last few missed malignant cases.
+          - generic [ref=e116]:
+            - heading "Feature interpretability" [level=3] [ref=e117]
+            - paragraph [ref=e118]: Add SHAP values to surface which of the 30 features drove each prediction. In a clinical context, "this is malignant" is much less useful than "this is malignant because of feature X."
+          - generic [ref=e119]:
+            - heading "External validation" [level=3] [ref=e120]
+            - paragraph [ref=e121]: UCI's dataset is small and clean. Re-running the pipeline against a larger, noisier dataset (e.g. TCGA) would test whether the threshold-tuning gains hold up under distribution shift.
+      - generic [ref=e122]:
+        - generic [ref=e124]: IMPACT
+        - list [ref=e125]:
+          - listitem [ref=e126]: Reached ~96% accuracy with recall on malignant class prioritized via F2-score threshold tuning.
+          - listitem [ref=e127]: Compared three model families (logistic regression, KNN, decision tree) under a single evaluation framework.
+          - listitem [ref=e128]: Implemented logistic regression from scratch with gradient descent and L2 regularization.
+          - listitem [ref=e129]: Made the case that domain context — not just model choice — should drive evaluation.
+      - link "← back to projects" [ref=e131] [cursor=pointer]:
+        - /url: /projects

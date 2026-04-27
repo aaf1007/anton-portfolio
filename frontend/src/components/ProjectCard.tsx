@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type ProjectCardProps = {
   title: string;
@@ -8,6 +9,7 @@ type ProjectCardProps = {
   link?: string;
   github?: string;
   prod?: string;
+  caseStudy?: string;
   inProgress: boolean;
 };
 
@@ -19,6 +21,7 @@ export default function ProjectCard({
   link,
   github,
   prod,
+  caseStudy,
   inProgress,
 }: ProjectCardProps) {
   return (
@@ -89,6 +92,14 @@ export default function ProjectCard({
           >
             view product ↗
           </a>
+        )}
+        {caseStudy && (
+          <Link
+            to={caseStudy}
+            className="hover:text-primary transition-colors"
+          >
+            learn more →
+          </Link>
         )}
       </div>
     </div>
