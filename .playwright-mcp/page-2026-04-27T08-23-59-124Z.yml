@@ -1,0 +1,121 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [ref=e7] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [ref=e8] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e9]:
+      - link "GitHub" [ref=e10] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e11]
+      - link "LinkedIn" [ref=e13] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e14]
+      - button "Switch to dark mode" [ref=e16]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - img "SFU CareerConnect dashboard showing ranked internship matches" [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: An AI-powered internship matcher that ranks live job postings against your actual SFU coursework and resume — so you stop applying to roles you'll never hear back from.
+          - paragraph [ref=e28]: CareerConnect scrapes LinkedIn job postings in real time, then runs them through a multi-phase Gemini prompt pipeline that scores each one against the courses you've taken and the projects on your resume. The output is a ranked list with the why baked in.
+          - paragraph [ref=e29]: "The bet: most students aren't underqualified — they're poorly targeted. A better filter is more useful than a longer feed."
+          - paragraph [ref=e30]:
+            - text: Try it
+            - link "live →" [ref=e31] [cursor=pointer]:
+              - /url: https://sfu-careerconnect.vercel.app
+        - complementary [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Timeline
+            - generic [ref=e35]: Sep 2025 – Jan 2026
+          - generic [ref=e36]:
+            - generic [ref=e37]: Role
+            - generic [ref=e38]: Solo — full stack + AI
+          - generic [ref=e39]:
+            - generic [ref=e40]: Stack
+            - generic [ref=e41]: Next.js, Gemini, MongoDB, Redis
+          - generic [ref=e42]:
+            - generic [ref=e43]: Status
+            - generic [ref=e44]: Shipped
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: THE USER JOURNEY
+          - heading "Why does every internship feel like a long shot?" [level=2] [ref=e48]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: ✦
+            - generic [ref=e52]:
+              - heading "The 200-application year" [level=4] [ref=e53]
+              - paragraph [ref=e54]: Friends were sending out hundreds of applications and getting single-digit responses. The signal-to-noise ratio on LinkedIn job filters is low — keyword matches don't know that CMPT 225 means data structures, or that 'built a full-stack app' covers a real chunk of the requirements.
+          - generic [ref=e55]:
+            - generic [ref=e56]: ✦
+            - generic [ref=e57]:
+              - heading "Coursework is invisible to recruiters" [level=4] [ref=e58]
+              - paragraph [ref=e59]: The thing students actually have — a transcript and a few projects — is the thing recruiters can't easily parse. We needed a tool that closed that gap on the student's side, before the application even went out.
+      - generic [ref=e60]:
+        - generic [ref=e62]: FIRST SOLUTION
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - heading "Single-shot ranking" [level=3] [ref=e65]
+            - paragraph [ref=e67]: The first version stuffed the resume, course list, and 50 job postings into one Gemini call and asked for a ranked list. It worked for 5 jobs and fell apart at scale — context windows choked, scores drifted, explanations got generic.
+          - generic [ref=e68]:
+            - heading "Why it broke" [level=3] [ref=e69]
+            - paragraph [ref=e71]: Models reason worse when asked to do too much in one pass. Ranking 50 items against a multi-dimensional rubric needs structure, not just a bigger prompt.
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]: WHY CAREERCONNECT EXISTS
+          - heading "What if matching was a pipeline, not a prompt?" [level=2] [ref=e75]
+        - generic [ref=e76]:
+          - img "Live job postings ingested into the database" [ref=e78]
+          - generic [ref=e79]:
+            - 'heading "Live LinkedIn scraping — Feature #1" [level=3] [ref=e80]'
+            - paragraph [ref=e81]: A scheduled scraper pulls fresh postings filtered to SFU-relevant roles, normalizes the title/skills/description, and writes them to MongoDB. Redis caches the parsed structure so the AI layer never re-parses the same posting twice.
+        - paragraph [ref=e82]: Once the data was clean, the matching could get smart.
+        - generic [ref=e83]:
+          - img "Multi-phase ranking pipeline diagram" [ref=e85]
+          - generic [ref=e86]:
+            - 'heading "Multi-phase prompt pipeline — Feature #2" [level=3] [ref=e87]'
+            - paragraph [ref=e88]: "Each job runs through three Gemini passes: (1) extract a structured requirement spec, (2) score it against the student's transcript and resume on five dimensions, (3) generate a one-paragraph rationale. Splitting the work made the scores stable and the explanations specific."
+        - paragraph [ref=e89]: And to make it personal —
+        - generic [ref=e90]:
+          - img "Profile setup screen with course catalog selector" [ref=e92]
+          - generic [ref=e93]:
+            - 'heading "Google OAuth + saved profiles — Feature #3" [level=3] [ref=e94]'
+            - paragraph [ref=e95]: Students sign in with their SFU Google account, paste their resume once, and select their courses from a real SFU course catalog. The matcher remembers their profile, so every refresh is a personalized re-rank — not a from-scratch survey.
+      - generic [ref=e96]:
+        - generic [ref=e98]: REFLECTIONS
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Pipelines beat prompts" [level=3] [ref=e101]
+            - paragraph [ref=e102]: The instinct with LLMs is to make the prompt smarter. The bigger unlock was making the prompt simpler and chaining several together. Each pass had one job, and the system got more reliable as a result.
+          - generic [ref=e103]:
+            - heading "Trust comes from rationale, not score" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Users didn't trust a "92% match" number. They trusted "you took CMPT 470 and they want React + REST experience." Showing the reasoning was worth more than tightening the score.
+      - generic [ref=e106]:
+        - generic [ref=e108]: NEXT STEPS
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Resume-aware cover letters" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Generate a starter cover letter per job that references both the posting and the user's strongest matching project — turning the ranking into an action, not just a feed.
+          - generic [ref=e113]:
+            - heading "Application tracker" [level=3] [ref=e114]
+            - paragraph [ref=e115]: Let users mark "applied / interviewing / rejected" on each ranked job, then learn from the outcomes — boosting the kinds of postings that historically convert for them.
+          - generic [ref=e116]:
+            - heading "Beyond SFU" [level=3] [ref=e117]
+            - paragraph [ref=e118]: The course catalog is the only SFU-specific piece. Generalizing it to UBC, UVic, and UW is mostly a data problem — same pipeline, different inputs.
+          - generic [ref=e119]:
+            - heading "Recruiter-side preview" [level=3] [ref=e120]
+            - paragraph [ref=e121]: Show recruiters which course outcomes a candidate's transcript covers, in their language. The bet on the student side could extend to the hiring side.
+      - generic [ref=e122]:
+        - generic [ref=e124]: IMPACT
+        - list [ref=e125]:
+          - listitem [ref=e126]: Compresses a 50-tab job hunt into a single ranked feed.
+          - listitem [ref=e127]: Makes coursework legible as a hiring signal, not just a transcript.
+          - listitem [ref=e128]: Demonstrates a multi-phase prompt pipeline that scales past single-shot LLM calls.
+          - listitem [ref=e129]: Provides a reusable architecture for ranking + reasoning over scraped data.
+      - link "← back to projects" [ref=e131] [cursor=pointer]:
+        - /url: /projects

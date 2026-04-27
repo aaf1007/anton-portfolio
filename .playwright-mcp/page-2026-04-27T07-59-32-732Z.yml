@@ -1,0 +1,121 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [ref=e7] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [ref=e8] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e9]:
+      - link "GitHub" [ref=e10] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e11]
+      - link "LinkedIn" [ref=e13] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e14]
+      - button "Switch to dark mode" [ref=e16]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - img "VerifAI sidepanel showing a fact-check verdict with cited sources" [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: A right-click fact-checker for the open web — highlight any claim, get a verdict, confidence score, and cited sources in seconds.
+          - paragraph [ref=e28]: VerifAI is a Chrome extension and FastAPI backend that turns the messy chore of "is this actually true?" into a single contextual action. Claims are extracted with Groq, verified with Gemini Search Grounding, and streamed back to a sidepanel with a history tab and follow-up chatbot.
+          - paragraph [ref=e29]: "The goal: collapse the gap between reading something suspicious and knowing whether to trust it — without leaving the page."
+          - paragraph [ref=e30]:
+            - text: Curious?
+            - link "See it on GitHub →" [ref=e31] [cursor=pointer]:
+              - /url: https://github.com/aaf1007/verifai
+        - complementary [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Timeline
+            - generic [ref=e35]: Feb 2026 – ongoing
+          - generic [ref=e36]:
+            - generic [ref=e37]: Role
+            - generic [ref=e38]: Solo — full stack
+          - generic [ref=e39]:
+            - generic [ref=e40]: Stack
+            - generic [ref=e41]: React, WXT, FastAPI, Groq, Gemini
+          - generic [ref=e42]:
+            - generic [ref=e43]: Status
+            - generic [ref=e44]: In progress
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: THE USER JOURNEY
+          - heading "Why does fact-checking feel like a chore?" [level=2] [ref=e48]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: ✦
+            - generic [ref=e52]:
+              - heading "Context-switching tax" [level=4] [ref=e53]
+              - paragraph [ref=e54]: Every time I saw a dubious claim — a stat in a tweet, a confident sentence in a blog post — verifying it meant opening three tabs, copying text, and skimming sources. By the time I had an answer, I'd usually lost the thread of what I was reading.
+          - generic [ref=e55]:
+            - generic [ref=e56]: ✦
+            - generic [ref=e57]:
+              - heading "Trust without traceability" [level=4] [ref=e58]
+              - paragraph [ref=e59]: Generic chatbots could answer 'is this true?' but rarely cited where the answer came from. A verdict without a source is just a vibe — and that's worse than no verdict at all.
+      - generic [ref=e60]:
+        - generic [ref=e62]: FIRST SOLUTION
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - heading "A bookmarklet" [level=3] [ref=e65]
+            - paragraph [ref=e67]: I started with a one-line bookmarklet that POSTed selected text to a local FastAPI endpoint. It worked, but it broke on most sites with strict CSPs, and the response had nowhere to live — it just dumped JSON into an alert box.
+          - generic [ref=e68]:
+            - heading "Problems" [level=3] [ref=e69]
+            - paragraph [ref=e71]: No persistent UI, no history, no follow-up questions. The verification happened in a vacuum and disappeared the moment I clicked away.
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]: WHY VERIFAI EXISTS
+          - heading "What if the verdict lived next to the page?" [level=2] [ref=e75]
+        - generic [ref=e76]:
+          - img "VerifAI sidepanel rendering a streamed verdict" [ref=e78]
+          - generic [ref=e79]:
+            - 'heading "Right-click, verify — Feature #1" [level=3] [ref=e80]'
+            - paragraph [ref=e81]: A Manifest V3 content script adds a 'Verify with VerifAI' option to the native context menu. Selected text is sent to the backend, claims are extracted by Groq, and the result streams back into a browser sidepanel — no tab switching, no copy-paste.
+        - paragraph [ref=e82]: The verdict alone wasn't enough — I needed to see the receipts.
+        - generic [ref=e83]:
+          - img "Citations and confidence score panel" [ref=e85]
+          - generic [ref=e86]:
+            - 'heading "Grounded sources, not vibes — Feature #2" [level=3] [ref=e87]'
+            - paragraph [ref=e88]: Verification runs through Gemini Search Grounding, which returns the live URLs the model used to reach its conclusion. Each verdict comes with a confidence score and clickable citations — so 'true' or 'false' is auditable instead of opaque.
+        - paragraph [ref=e89]: One verdict was useful. A conversation around it was better.
+        - generic [ref=e90]:
+          - img "History tab and contextual chatbot" [ref=e92]
+          - generic [ref=e93]:
+            - 'heading "History + contextual chatbot — Feature #3" [level=3] [ref=e94]'
+            - paragraph [ref=e95]: Every verification is saved to a history tab, and each result opens into a follow-up chat scoped to the original claim and its sources. You can ask 'where did this number come from?' or 'what's the counter-argument?' without re-pasting context.
+      - generic [ref=e96]:
+        - generic [ref=e98]: REFLECTIONS
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Streaming changes the feel of trust" [level=3] [ref=e101]
+            - paragraph [ref=e102]: Showing tokens as they arrive — instead of a 6-second spinner — made the verdict feel investigated rather than declared. The mechanics didn't change; the perception of rigor did.
+          - generic [ref=e103]:
+            - heading "Browser extensions are a UX constraint, not a checkbox" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Manifest V3, sidepanel APIs, and CSP rules forced design decisions I'd otherwise have hand-waved. Working inside those constraints ended up sharpening the product, not limiting it.
+      - generic [ref=e106]:
+        - generic [ref=e108]: NEXT STEPS
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Per-domain trust scores" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Aggregate verdict outcomes by source domain so users can see, over time, which sites tend to hold up under verification and which don't.
+          - generic [ref=e113]:
+            - heading "Inline annotations" [level=3] [ref=e114]
+            - paragraph [ref=e115]: Instead of a sidepanel, render verdict badges directly inline next to claims on the page — making fact-status ambient rather than on-demand.
+          - generic [ref=e116]:
+            - heading "Shared verdict links" [level=3] [ref=e117]
+            - paragraph [ref=e118]: A permalink for every verification so users can share 'here's the check I ran' instead of re-litigating in DMs.
+          - generic [ref=e119]:
+            - heading "Self-hosted backend" [level=3] [ref=e120]
+            - paragraph [ref=e121]: Package the FastAPI service as a one-command Docker setup so privacy-sensitive users can run verification on their own keys and infrastructure.
+      - generic [ref=e122]:
+        - generic [ref=e124]: IMPACT
+        - list [ref=e125]:
+          - listitem [ref=e126]: Compresses a multi-tab verification flow into one right-click.
+          - listitem [ref=e127]: Makes AI verdicts auditable through grounded, clickable sources.
+          - listitem [ref=e128]: Turns one-off fact-checks into a searchable personal history.
+          - listitem [ref=e129]: Provides a reusable pattern for browser-native LLM tooling.
+      - link "← back to projects" [ref=e131] [cursor=pointer]:
+        - /url: /projects

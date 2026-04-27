@@ -62,6 +62,7 @@ const projects = [
     stack: ["Javascript", "TypeScript", "Tailwindcss"],
     prod: "https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb",
     github: "https://github.com/aaf1007/SFU-MyProfessor",
+    caseStudy: "/projects/myprofessor",
     inProgress: true,
   },
   {
@@ -90,6 +91,7 @@ const projects = [
     ],
     link: "https://sfu-careerconnect.vercel.app",
     github: "https://github.com/aaf1007/sfu-careerconnect",
+    caseStudy: "/projects/careerconnect",
     inProgress: false,
   },
   {
@@ -115,6 +117,7 @@ const projects = [
     stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
     github: "https://github.com/ChakornK/bscode",
     link: "https://bscode-alpha.vercel.app/",
+    caseStudy: "/projects/bscode",
     inProgress: false,
   },
   {
@@ -137,6 +140,7 @@ const projects = [
     image: <img src="verifai-new.png" alt="" />,
     stack: ["TypeScript", "React", "Python", "FastAPI", "WXT", "Tailwind CSS", "Groq", "Gemini"],
     github: "https://github.com/aaf1007/verifai",
+    caseStudy: "/projects/verifai",
     inProgress: true,
   },
   {
@@ -163,6 +167,7 @@ const projects = [
     image: <img src="cmpt310.jpg" alt="" />,
     stack: ["Python", "scikit-learn", "NumPy", "pandas", "Matplotlib", "Jupyter"],
     github: "https://github.com/kunaljoshi2/Tumor-Classifier",
+    caseStudy: "/projects/tumor-classifier",
     inProgress: false,
   },
 ];
