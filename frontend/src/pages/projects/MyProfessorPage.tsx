@@ -22,7 +22,7 @@ export default function MyProfessorPage() {
 
       <Intro
         meta={[
-          { label: "Timeline", value: "Oct 2025 – ongoing" },
+          { label: "Timeline", value: "March 2026 – ongoing" },
           { label: "Role", value: "Solo — extension + scraping" },
           { label: "Stack", value: "TypeScript, MV3, Tailwind" },
           { label: "Status", value: "Live on Chrome Web Store" },

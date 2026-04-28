@@ -22,7 +22,7 @@ export default function VerifAIPage() {
 
       <Intro
         meta={[
-          { label: "Timeline", value: "Feb 2026 – ongoing" },
+          { label: "Timeline", value: "March 2026 – ongoing" },
           { label: "Role", value: "Solo — full stack" },
           { label: "Stack", value: "React, WXT, FastAPI, Groq, Gemini" },
           { label: "Status", value: "In progress" },

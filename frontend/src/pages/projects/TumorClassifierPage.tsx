@@ -22,8 +22,8 @@ export default function TumorClassifierPage() {
 
       <Intro
         meta={[
-          { label: "Timeline", value: "CMPT 310 — Fall 2025" },
-          { label: "Role", value: "Team of 2 — modeling + analysis" },
+          { label: "Timeline", value: "CMPT 310 — Spring 2026" },
+          { label: "Role", value: "Team of 4 — modeling + analysis" },
           { label: "Stack", value: "Python, scikit-learn, NumPy, pandas" },
           { label: "Result", value: "~96% accuracy, recall-tuned" },
         ]}

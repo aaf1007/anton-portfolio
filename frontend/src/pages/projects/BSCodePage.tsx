@@ -1,15 +1,15 @@
 import {
-  BackLink,
-  Beat,
-  Bridge,
-  Card,
-  Feature,
-  Hero,
-  ImpactList,
-  Intro,
-  Lede,
-  Reflection,
-  Section,
+    BackLink,
+    Beat,
+    Bridge,
+    Card,
+    Feature,
+    Hero,
+    ImpactList,
+    Intro,
+    Lede,
+    Reflection,
+    Section,
 } from "@/components/case-study/CaseStudy";
 
 export default function BSCodePage() {
@@ -22,7 +22,7 @@ export default function BSCodePage() {
 
       <Intro
         meta={[
-          { label: "Timeline", value: "March 2026 — 36 hours" },
+          { label: "Timeline", value: "April 1 2026 — 12 hours" },
           { label: "Role", value: "Team of 4 — frontend + AI" },
           { label: "Stack", value: "Next.js, Monaco, Gemini, Tailwind" },
           { label: "Recognition", value: "🏆 Won SFU Surge SillyHacks 2026" },
