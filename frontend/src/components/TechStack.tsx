@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import type { IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
 import {
@@ -90,16 +91,18 @@ function TechStack() {
           </span>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {items.map(({ name, icon: Icon, color }) => (
-              <div
+              <motion.div
                 key={name}
                 className="flex items-center gap-1.5 text-sm text-foreground/80"
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
               >
                 <Icon
                   className="w-4 h-4 shrink-0"
                   style={color ? { color } : undefined}
                 />
                 <span>{name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

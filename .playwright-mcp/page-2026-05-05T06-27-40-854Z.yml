@@ -1,0 +1,21 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [ref=e8] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [active] [ref=e9] [cursor=pointer]:
+        - /url: /life
+        - text: life
+    - generic [ref=e10]:
+      - link "GitHub" [ref=e11] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e12]
+      - link "LinkedIn" [ref=e14] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e15]
+      - button "Switch to dark mode" [ref=e17]:
+        - img [ref=e19]
+  - main [ref=e22]:
+    - heading "2026" [level=1] [ref=e340]

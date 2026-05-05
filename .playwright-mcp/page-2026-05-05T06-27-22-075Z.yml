@@ -1,0 +1,252 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - link "projects" [active] [ref=e8] [cursor=pointer]:
+        - /url: /projects
+        - text: projects
+      - link "life" [ref=e9] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e10]:
+      - link "GitHub" [ref=e11] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e12]
+      - link "LinkedIn" [ref=e14] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e15]
+      - button "Switch to dark mode" [ref=e17]:
+        - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e170]:
+      - heading "projects" [level=1] [ref=e171]
+      - generic [ref=e172]:
+        - generic [ref=e173]:
+          - generic [ref=e174]:
+            - paragraph [ref=e175]: Comparative Diagnostic System for Breast Cancer Classification
+            - paragraph
+          - link [ref=e176] [cursor=pointer]:
+            - /url: https://github.com/kunaljoshi2/Tumor-Classifier
+          - list [ref=e178]:
+            - listitem [ref=e179]:
+              - text: As part of
+              - strong [ref=e180]: CMPT 310
+              - text: ", built and compared multiple"
+              - strong [ref=e181]: machine learning classifiers
+              - text: to diagnose breast tumors as benign or malignant on the
+              - strong [ref=e182]: UCI Breast Cancer Wisconsin
+              - text: dataset (569 samples, 30 features), prioritizing
+              - strong [ref=e183]: recall
+              - text: to minimize missed malignant diagnoses.
+            - listitem [ref=e184]:
+              - text: Implemented
+              - strong [ref=e185]: Logistic Regression from scratch
+              - text: with gradient descent and
+              - strong [ref=e186]: L2 regularization
+              - text: ", plus tuned"
+              - strong [ref=e187]: KNN
+              - text: and
+              - strong [ref=e188]: Decision Tree
+              - text: models — using
+              - strong [ref=e189]: 5-fold stratified K-fold
+              - text: grid search and
+              - strong [ref=e190]: F2-score threshold tuning
+              - text: to reach
+              - strong [ref=e191]: ~96%
+              - text: accuracy.
+          - generic [ref=e192]:
+            - generic [ref=e193]: Python
+            - generic [ref=e194]: scikit-learn
+            - generic [ref=e195]: NumPy
+            - generic [ref=e196]: pandas
+            - generic [ref=e197]: Matplotlib
+            - generic [ref=e198]: Jupyter
+          - generic [ref=e199]:
+            - link "github ↗" [ref=e200] [cursor=pointer]:
+              - /url: https://github.com/kunaljoshi2/Tumor-Classifier
+            - link "learn more →" [ref=e201] [cursor=pointer]:
+              - /url: /projects/tumor-classifier
+        - generic [ref=e202]:
+          - generic [ref=e203]:
+            - paragraph [ref=e204]: VerifAI
+            - paragraph [ref=e205]: In Progress
+          - link [ref=e206] [cursor=pointer]:
+            - /url: https://github.com/aaf1007/verifai
+          - list [ref=e208]:
+            - listitem [ref=e209]:
+              - text: A
+              - strong [ref=e210]: Chrome extension
+              - text: and
+              - strong [ref=e211]: FastAPI backend
+              - text: that lets users highlight any text on the web, right-click, and receive an instant
+              - strong [ref=e212]: AI-powered fact-check
+              - text: with verdict, confidence score, and cited sources.
+            - listitem [ref=e213]:
+              - text: Claims are extracted via
+              - strong [ref=e214]: Groq
+              - text: and verified using
+              - strong [ref=e215]: Gemini Search Grounding
+              - text: ", with results streamed back to an interactive"
+              - strong [ref=e216]: browser sidepanel
+              - text: featuring a history tab and contextual chatbot.
+          - generic [ref=e217]:
+            - generic [ref=e218]: TypeScript
+            - generic [ref=e219]: React
+            - generic [ref=e220]: Python
+            - generic [ref=e221]: FastAPI
+            - generic [ref=e222]: WXT
+            - generic [ref=e223]: Tailwind CSS
+            - generic [ref=e224]: Groq
+            - generic [ref=e225]: Gemini
+          - generic [ref=e226]:
+            - link "github ↗" [ref=e227] [cursor=pointer]:
+              - /url: https://github.com/aaf1007/verifai
+            - link "learn more →" [ref=e228] [cursor=pointer]:
+              - /url: /projects/verifai
+        - generic [ref=e229]:
+          - generic [ref=e230]:
+            - paragraph [ref=e231]: BSCode
+            - paragraph
+          - link [ref=e232] [cursor=pointer]:
+            - /url: https://bscode-alpha.vercel.app/
+          - list [ref=e234]:
+            - listitem [ref=e235]:
+              - text: A
+              - strong [ref=e236]: web-based code editor
+              - text: built with
+              - strong [ref=e237]: Next.js
+              - text: and
+              - strong [ref=e238]: Monaco Editor
+              - text: — the same engine that powers VS Code — featuring an integrated
+              - strong [ref=e239]: AI chat
+              - text: panel powered by
+              - strong [ref=e240]: Google Gemini
+              - text: ", a built-in"
+              - strong [ref=e241]: Brain Rot video
+              - text: tab, and
+              - strong [ref=e242]: Subway Surfers
+              - text: to keep you focused while you code.
+            - listitem [ref=e243]:
+              - text: Won at
+              - strong [ref=e244]: SFU Surge SillyHacks 2026
+              - text: .
+          - generic [ref=e245]:
+            - generic [ref=e246]: Next.js
+            - generic [ref=e247]: React
+            - generic [ref=e248]: Monaco Editor
+            - generic [ref=e249]: Tailwind CSS
+            - generic [ref=e250]: Google Gemini
+          - generic [ref=e251]:
+            - link "view demo ↗" [ref=e252] [cursor=pointer]:
+              - /url: https://bscode-alpha.vercel.app/
+            - link "github ↗" [ref=e253] [cursor=pointer]:
+              - /url: https://github.com/ChakornK/bscode
+            - link "learn more →" [ref=e254] [cursor=pointer]:
+              - /url: /projects/bscode
+        - generic [ref=e255]:
+          - generic [ref=e256]:
+            - paragraph [ref=e257]: SFU CareerConnect
+            - paragraph
+          - link "SFU CareerConnect" [ref=e258] [cursor=pointer]:
+            - /url: https://sfu-careerconnect.vercel.app
+            - img "SFU CareerConnect" [ref=e259]
+          - list [ref=e261]:
+            - listitem [ref=e262]:
+              - text: Built an
+              - strong [ref=e263]: AI-powered internship matching platform
+              - text: using
+              - strong [ref=e264]: Gemini AI
+              - text: and the
+              - strong [ref=e265]: LinkedIn Jobs API
+              - text: ", scraping live postings and ranking them against a user's SFU coursework and resume via a"
+              - strong [ref=e266]: multi-phase prompt pipeline
+              - text: .
+          - generic [ref=e267]:
+            - generic [ref=e268]: React
+            - generic [ref=e269]: Next.js
+            - generic [ref=e270]: Tailwind CSS
+            - generic [ref=e271]: Javascript
+            - generic [ref=e272]: Gemini AI
+            - generic [ref=e273]: MongoDB
+            - generic [ref=e274]: Redis
+            - generic [ref=e275]: Google OAuth
+          - generic [ref=e276]:
+            - link "view demo ↗" [ref=e277] [cursor=pointer]:
+              - /url: https://sfu-careerconnect.vercel.app
+            - link "github ↗" [ref=e278] [cursor=pointer]:
+              - /url: https://github.com/aaf1007/sfu-careerconnect
+            - link "learn more →" [ref=e279] [cursor=pointer]:
+              - /url: /projects/careerconnect
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - paragraph [ref=e282]: SFU MyProfessor
+            - paragraph [ref=e283]: In Progress
+          - link [ref=e284] [cursor=pointer]:
+            - /url: https://github.com/aaf1007/SFU-MyProfessor
+          - list [ref=e286]:
+            - listitem [ref=e287]:
+              - text: A
+              - strong [ref=e288]: Chrome extension
+              - text: that injects
+              - strong [ref=e289]: Rate My Professor
+              - text: ratings — average score, difficulty, and would-take-again percentage — directly into the
+              - strong [ref=e290]: SFU MySchedule
+              - text: course schedule using a
+              - strong [ref=e291]: Manifest V3
+              - text: content script and background service worker.
+          - generic [ref=e292]:
+            - generic [ref=e293]: Javascript
+            - generic [ref=e294]: TypeScript
+            - generic [ref=e295]: Tailwindcss
+          - generic [ref=e296]:
+            - link "github ↗" [ref=e297] [cursor=pointer]:
+              - /url: https://github.com/aaf1007/SFU-MyProfessor
+            - link "view product ↗" [ref=e298] [cursor=pointer]:
+              - /url: https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb
+            - link "learn more →" [ref=e299] [cursor=pointer]:
+              - /url: /projects/myprofessor
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - paragraph [ref=e302]: PantryPal
+            - paragraph [ref=e303]: In Progress
+          - link [ref=e304] [cursor=pointer]:
+            - /url: https://pantry-pal-umber.vercel.app
+          - list [ref=e307]:
+            - listitem [ref=e308]:
+              - text: Built an
+              - strong [ref=e309]: AI-powered recipe generation app
+              - text: that transforms available ingredients into structured meal suggestions using
+              - strong [ref=e310]: Gemini AI
+              - text: ", helping users quickly create recipes from what they already have on hand."
+          - generic [ref=e311]:
+            - generic [ref=e312]: React
+            - generic [ref=e313]: SpringBoot
+            - generic [ref=e314]: TypeScript
+            - generic [ref=e315]: Java
+          - generic [ref=e316]:
+            - link "view demo ↗" [ref=e317] [cursor=pointer]:
+              - /url: https://pantry-pal-umber.vercel.app
+            - link "github ↗" [ref=e318] [cursor=pointer]:
+              - /url: https://github.com/aaf1007/PantryPal
+        - generic [ref=e319]:
+          - generic [ref=e320]:
+            - paragraph [ref=e321]: Statify
+            - paragraph
+          - link "Statify" [ref=e322] [cursor=pointer]:
+            - /url: https://github.com/aaf1007/statify
+            - img "Statify" [ref=e323]
+          - list [ref=e325]:
+            - listitem [ref=e326]:
+              - text: Architected a
+              - strong [ref=e327]: full-stack music analytics dashboard
+              - text: integrating the
+              - strong [ref=e328]: Spotify Web API
+              - text: to surface top artists, tracks, and listening history across configurable time ranges.
+          - generic [ref=e329]:
+            - generic [ref=e330]: React
+            - generic [ref=e331]: Next.js
+            - generic [ref=e332]: Tailwind CSS
+            - generic [ref=e333]: Javascript
+            - generic [ref=e334]: Spotify API
+          - link "github ↗" [ref=e336] [cursor=pointer]:
+            - /url: https://github.com/aaf1007/statify

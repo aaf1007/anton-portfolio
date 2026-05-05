@@ -1,4 +1,6 @@
 import ProjectCard from "@/components/ProjectCard";
+import { staggerContainer } from "@/lib/motion";
+import { motion } from "motion/react";
 
 const projects = [
   {
@@ -176,11 +178,16 @@ export default function ProjectsPage() {
   return (
     <div className="max-w-[740px] mx-auto pb-20">
       <h1 className="text-2xl font-semibold mb-10 text-foreground">projects</h1>
-      <div className="flex flex-col gap-12">
+      <motion.div
+        className="flex flex-col gap-12"
+        variants={staggerContainer(0.07)}
+        initial="hidden"
+        animate="show"
+      >
         {[...projects].reverse().map((project) => (
           <ProjectCard key={project.title} {...project} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

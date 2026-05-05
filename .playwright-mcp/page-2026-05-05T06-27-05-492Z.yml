@@ -1,0 +1,154 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - link "home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: home
+      - link "projects" [ref=e8] [cursor=pointer]:
+        - /url: /projects
+      - link "life" [ref=e9] [cursor=pointer]:
+        - /url: /life
+    - generic [ref=e10]:
+      - link "GitHub" [ref=e11] [cursor=pointer]:
+        - /url: https://github.com/aaf1007
+        - img [ref=e12]
+      - link "LinkedIn" [ref=e14] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/antonflorendo/
+        - img [ref=e15]
+      - button "Switch to dark mode" [ref=e17]:
+        - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - heading "hi, i'm Anton." [level=1] [ref=e26]
+        - paragraph [ref=e27]:
+          - text: Data Science student at SFU.
+          - text: Building full-stack applications, exploring AI/ML Engineering, and AI workflows.
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: currently...
+        - paragraph [ref=e30]: Exploring AI Engineering, RAG Pipelines, and Deep Learning.
+        - paragraph [ref=e31]: Learning FastAPI, Pytorch, Claude Code
+        - generic [ref=e32]:
+          - text: Digesting
+          - list [ref=e33]:
+            - listitem [ref=e34]:
+              - link "PyTorch Fundamentals" [ref=e35] [cursor=pointer]:
+                - /url: https://www.learnpytorch.io/00_pytorch_fundamentals/
+            - listitem [ref=e36]:
+              - link "RAG Made Simple" [ref=e37] [cursor=pointer]:
+                - /url: https://www.amazon.ca/dp/B0D76734SZ?ref=ppx_yo2ov_dt_b_fed_digi_asin_title_351
+            - listitem [ref=e38]:
+              - link "The Pragmatic Programmer" [ref=e39] [cursor=pointer]:
+                - /url: https://www.amazon.ca/Pragmatic-Programmer-journey-mastery-Anniversary/dp/0135957052/ref=pd_lpo_d_sccl_1/132-1954098-3434648?pd_rd_w=TsM1m&content-id=amzn1.sym.d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_p=d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_r=JAWBGHBEZN6TJZS2N3GX&pd_rd_wg=N04GB&pd_rd_r=7838ce9c-ea90-441b-9162-4b5a2dc0666c&pd_rd_i=0135957052&psc=1
+            - listitem [ref=e40]:
+              - link "AI Engineering by Chip Huyen" [ref=e41] [cursor=pointer]:
+                - /url: https://www.amazon.ca/AI-Engineering-Building-Applications-Foundation/dp/1098166302
+            - listitem [ref=e42]:
+              - link "Stanford Lecture on AI Engineering" [ref=e43] [cursor=pointer]:
+                - /url: https://x.com/RohOnChain/status/2043014662883786812?s=20
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - paragraph [ref=e46]: coursework
+          - list [ref=e47]:
+            - listitem [ref=e48]: Intro to Artificial Intelligence
+            - listitem [ref=e49]: Intro to Software Engineering
+            - listitem [ref=e50]: Linear Algebra
+            - listitem [ref=e51]: Business Statistics
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: hobbies
+          - list [ref=e54]:
+            - listitem [ref=e55]: gym
+            - listitem [ref=e56]: cooking
+            - listitem [ref=e57]: eating
+            - listitem [ref=e58]: coding
+      - generic [ref=e59]:
+        - paragraph [ref=e60]: tech stack
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: Languages
+            - generic [ref=e64]:
+              - generic [ref=e65]:
+                - img [ref=e66]
+                - generic [ref=e68]: TypeScript
+              - generic [ref=e69]:
+                - img [ref=e70]
+                - generic [ref=e72]: Python
+              - generic [ref=e73]:
+                - img [ref=e74]
+                - generic [ref=e76]: Java
+              - generic [ref=e77]:
+                - img [ref=e78]
+                - generic [ref=e80]: SQL
+          - generic [ref=e81]:
+            - generic [ref=e82]: Frontend
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - img [ref=e85]
+                - generic [ref=e87]: React
+              - generic [ref=e88]:
+                - img [ref=e89]
+                - generic [ref=e91]: Next.js
+              - generic [ref=e92]:
+                - img [ref=e93]
+                - generic [ref=e95]: Tailwind
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - generic [ref=e99]: Vite
+          - generic [ref=e100]:
+            - generic [ref=e101]: Backend
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - img [ref=e104]
+                - generic [ref=e106]: FastAPI
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - generic [ref=e110]: Node.js
+              - generic [ref=e111]:
+                - img [ref=e112]
+                - generic [ref=e114]: Spring Boot
+              - generic [ref=e115]:
+                - img [ref=e116]
+                - generic [ref=e118]: PostgreSQL
+          - generic [ref=e119]:
+            - generic [ref=e120]: AI / ML
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - img [ref=e123]
+                - generic [ref=e125]: Scikit
+              - generic [ref=e126]:
+                - img [ref=e127]
+                - generic [ref=e129]: PyTorch
+              - generic [ref=e130]:
+                - img [ref=e131]
+                - generic [ref=e133]: LangChain
+              - generic [ref=e134]:
+                - img [ref=e135]
+                - generic [ref=e137]: Gemini
+              - generic [ref=e138]:
+                - img [ref=e139]
+                - generic [ref=e141]: Claude
+          - generic [ref=e142]:
+            - generic [ref=e143]: Tools
+            - generic [ref=e144]:
+              - generic [ref=e145]:
+                - img [ref=e146]
+                - generic [ref=e148]: Git
+              - generic [ref=e149]:
+                - img [ref=e150]
+                - generic [ref=e152]: Docker
+              - generic [ref=e153]:
+                - img [ref=e154]
+                - generic [ref=e156]: Vercel
+      - generic [ref=e158]:
+        - link "↗ aaf13@sfu.ca" [ref=e159] [cursor=pointer]:
+          - /url: mailto:aaf13@sfu.ca
+          - generic [ref=e160]: ↗
+          - generic [ref=e161]: aaf13@sfu.ca
+        - link "↗ connect on linkedin" [ref=e162] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/antonflorendo/
+          - generic [ref=e163]: ↗
+          - generic [ref=e164]: connect on linkedin
+        - link "↗ github" [ref=e165] [cursor=pointer]:
+          - /url: https://github.com/aaf1007
+          - generic [ref=e166]: ↗
+          - generic [ref=e167]: github

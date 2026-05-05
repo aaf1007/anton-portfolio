@@ -1,3 +1,5 @@
+import { useMotionVariants } from "@/lib/motion";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -24,8 +26,14 @@ export default function ProjectCard({
   caseStudy,
   inProgress,
 }: ProjectCardProps) {
+  const item = useMotionVariants();
   return (
-    <div className="flex flex-col gap-4">
+    <motion.div
+      className="flex flex-col gap-4"
+      variants={item}
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="flex justify-between items-end">
         <p className="font-semibold text-foreground">{title}</p>
         <p className="text-foreground/70 text-[0.95rem]">
@@ -102,6 +110,6 @@ export default function ProjectCard({
           </Link>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

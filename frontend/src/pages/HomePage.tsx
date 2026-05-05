@@ -1,6 +1,8 @@
 import Footer from "@/components/Footer";
 import { TechStack } from "@/components/TechStack";
 import { LinkPreview } from "@/components/ui/link-preview";
+import { staggerContainer, useMotionVariants } from "@/lib/motion";
+import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -43,6 +45,7 @@ const learning = ["FastAPI", "Pytorch", "Claude Code"];
 
 export default function HomePage() {
   const { hash } = useLocation();
+  const item = useMotionVariants();
 
   useEffect(() => {
     if (!hash) return;
@@ -61,9 +64,15 @@ export default function HomePage() {
   }, [hash]);
 
   return (
-    <div id="home" className="max-w-[740px] mx-auto flex flex-col gap-12 pb-20">
+    <motion.div
+      id="home"
+      className="max-w-[740px] mx-auto flex flex-col gap-12 pb-20"
+      variants={staggerContainer(0.08)}
+      initial="hidden"
+      animate="show"
+    >
       {/* Intro */}
-      <section>
+      <motion.section variants={item}>
         <h1 className="text-2xl font-semibold mb-3 text-foreground">
           hi, i'm Anton.
         </h1>
@@ -71,10 +80,16 @@ export default function HomePage() {
           Data Science student at SFU. <br />
           Building full-stack applications, exploring AI/ML Engineering, and AI workflows.
         </p>
-      </section>
+      </motion.section>
 
       {/* Currently Focused On */}
-      <section className="flex flex-col gap-2 text-md">
+      <motion.section
+        className="flex flex-col gap-2 text-md"
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-10%" }}
+      >
         <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
           currently...
         </p>
@@ -87,9 +102,15 @@ export default function HomePage() {
         </p>
         <div className="text-foreground/75">
           <span className="font-medium">Digesting</span>
-          <ul className="space-y-1 mt-1 ml-4 list-none">
+          <motion.ul
+            className="space-y-1 mt-1 ml-4 list-none"
+            variants={staggerContainer(0.05)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             {digesting.map(({ name, url, image }) => (
-              <li key={name}>
+              <motion.li key={name} variants={item}>
                 {image ? (
                   <LinkPreview
                     url={url}
@@ -111,14 +132,20 @@ export default function HomePage() {
                     {name}
                   </LinkPreview>
                 )}
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
-      </section>
+      </motion.section>
 
       {/* Coursework + Hobbies */}
-      <section className="flex gap-40 flex-wrap">
+      <motion.section
+        className="flex gap-40 flex-wrap"
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-10%" }}
+      >
         <div>
           <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
             coursework
@@ -139,17 +166,22 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
-      </section>
+      </motion.section>
 
       {/* Tech Stack */}
-      <section>
+      <motion.section
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-10%" }}
+      >
         <p className="text-xs font-medium uppercase tracking-widest text-primary/50">
           tech stack
         </p>
         <TechStack />
-      </section>
+      </motion.section>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 }

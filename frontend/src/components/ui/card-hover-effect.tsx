@@ -1,3 +1,4 @@
+import { staggerContainer, useMotionVariants } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
@@ -13,16 +14,24 @@ export const HoverEffect = ({
   className?: string;
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const cell = useMotionVariants();
 
   return (
-    <div className={cn("grid grid-cols-1 md:grid-cols-4", className)}>
+    <motion.div
+      className={cn("grid grid-cols-1 md:grid-cols-4", className)}
+      variants={staggerContainer(0.06)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-10%" }}
+    >
       {items.map((item, idx) => (
-        <a
+        <motion.a
           href={item?.link}
           key={idx}
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
+          variants={cell}
         >
           <AnimatePresence>
             {hoveredIndex === idx && (
@@ -42,9 +51,9 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card img={item.img} />
-        </a>
+        </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
