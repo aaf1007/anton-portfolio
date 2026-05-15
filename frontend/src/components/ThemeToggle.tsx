@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 import { useTheme } from "@/context/ThemeContext";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ className = "" }: { className?: string }) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
@@ -11,7 +11,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="relative p-2 text-primary hover:text-accent-light overflow-hidden"
+      className={`relative overflow-hidden p-2 text-primary hover:text-accent-light ${className}`}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span

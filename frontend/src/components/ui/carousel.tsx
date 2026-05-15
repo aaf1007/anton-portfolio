@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
@@ -234,4 +235,3 @@ export {
   CarouselContent,
   CarouselItem, CarouselNext, CarouselPrevious, useCarousel, type CarouselApi
 }
-

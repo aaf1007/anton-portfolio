@@ -1,47 +1,115 @@
-import Footer from "@/components/Footer";
-import { TechStack } from "@/components/TechStack";
-import { LinkPreview } from "@/components/ui/link-preview";
-import { staggerContainer, useMotionVariants } from "@/lib/motion";
+import {
+  digesting,
+  hobbies,
+  learning,
+  lifePhotos,
+  projects,
+  skills,
+} from "@/data/portfolio";
+import { EASE_OUT, staggerContainer, useMotionVariants } from "@/lib/motion";
 import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import type { ReactNode } from "react";
 
-const coursework = [
-  "Intro to Artificial Intelligence",
-  "Intro to Software Engineering",
-  "Linear Algebra",
-  "Business Statistics",
-];
+const BLUR_FADE_DELAY = 0.04;
 
-const hobbies = ["gym", "cooking", "eating", "coding"];
-
-const digesting = [
+const education = [
   {
-    name: "PyTorch Fundamentals",
-    url: "https://www.learnpytorch.io/00_pytorch_fundamentals/",
+    school: "Simon Fraser University",
+    href: "https://www.sfu.ca/",
+    degree: "Data Science",
+    logo: "/sfu-logo.svg",
+    dates: "2025 - Present",
   },
   {
-    name: "RAG Made Simple",
-    url: "https://www.amazon.ca/dp/B0D76734SZ?ref=ppx_yo2ov_dt_b_fed_digi_asin_title_351",
-    image: "https://m.media-amazon.com/images/I/71zKbtDCWyL._SL1500_.jpg"
-  },
-  {
-    name: "The Pragmatic Programmer",
-    url: "https://www.amazon.ca/Pragmatic-Programmer-journey-mastery-Anniversary/dp/0135957052/ref=pd_lpo_d_sccl_1/132-1954098-3434648?pd_rd_w=TsM1m&content-id=amzn1.sym.d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_p=d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_r=JAWBGHBEZN6TJZS2N3GX&pd_rd_wg=N04GB&pd_rd_r=7838ce9c-ea90-441b-9162-4b5a2dc0666c&pd_rd_i=0135957052&psc=1",
-    image: "https://m.media-amazon.com/images/I/71f1jieYHNL.jpg"
-  },
-  {
-    name: "AI Engineering by Chip Huyen",
-    url: "https://www.amazon.ca/AI-Engineering-Building-Applications-Foundation/dp/1098166302",
-    image: "https://learning.oreilly.com/library/cover/9781098166298/250w/"
-  },
-  {
-    name: "Stanford Lecture on AI Engineering",
-    url: "https://x.com/RohOnChain/status/2043014662883786812?s=20",
+    school: "Douglas College",
+    href: "https://www.douglascollege.ca/",
+    degree: "Computer Science",
+    logo: "/douglas-college-logo.svg",
+    dates: "2023 - 2025",
   },
 ];
 
-const learning = ["FastAPI", "Pytorch", "Claude Code"];
+function SectionHeading({ children }: { children: ReactNode }) {
+  return <h2 className="text-xl font-bold tracking-tight">{children}</h2>;
+}
+
+function Badge({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex h-7 items-center rounded-xl border border-border bg-background px-3 text-xs font-medium text-foreground shadow-sm ring-2 ring-border/20">
+      {children}
+    </span>
+  );
+}
+
+function ProjectShowcaseCard({
+  project,
+  delay,
+}: {
+  project: (typeof projects)[number];
+  delay: number;
+}) {
+  const href = project.link || project.prod || project.caseStudy || project.github || "#";
+  const isExternal = href.startsWith("http");
+
+  return (
+    <motion.article
+      variants={useMotionVariants()}
+      transition={{ delay }}
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:ring-2 hover:ring-muted"
+    >
+      <Link
+        to={isExternal ? "#" : href}
+        onClick={(event) => {
+          if (isExternal) {
+            event.preventDefault();
+            window.open(href, "_blank", "noopener,noreferrer");
+          }
+        }}
+        className="relative block h-48 overflow-hidden bg-muted"
+      >
+        {typeof project.image === "string" ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          project.image
+        )}
+        {project.inProgress && (
+          <span className="absolute right-2 top-2 rounded-lg bg-black px-2 py-1 text-[11px] font-medium text-white">
+            In Progress
+          </span>
+        )}
+      </Link>
+      <div className="flex flex-1 flex-col gap-3 p-6">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="font-semibold leading-tight">{project.title}</h3>
+            <p className="mt-1 text-xs text-muted-foreground">{project.dates}</p>
+          </div>
+          <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+        </div>
+        <p className="text-pretty text-xs leading-relaxed text-muted-foreground">
+          {project.shortDescription}
+        </p>
+        <div className="mt-auto flex flex-wrap gap-1">
+          {project.stack.slice(0, 6).map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex h-6 items-center rounded-md border border-border px-2 text-[11px] font-medium text-muted-foreground"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function HomePage() {
   const { hash } = useLocation();
@@ -49,139 +117,269 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!hash) return;
-    const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const el =
-          hash === "#contact"
-            ? document.getElementById("contact")
-            : hash === "#home"
-            ? document.getElementById("home")
-            : null;
-        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const scrollToHash = () => {
+      document.querySelector(hash)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
-    });
-    return () => cancelAnimationFrame(id);
+    };
+    const frame = requestAnimationFrame(scrollToHash);
+    const delayed = window.setTimeout(scrollToHash, 400);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(delayed);
+    };
   }, [hash]);
 
   return (
-    <motion.div
-      id="home"
-      className="max-w-[740px] mx-auto flex flex-col gap-12 pb-20"
-      variants={staggerContainer(0.08)}
+    <motion.main
+      className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col gap-14 pb-28"
+      variants={staggerContainer(0.06)}
       initial="hidden"
       animate="show"
     >
-      {/* Intro */}
-      <motion.section variants={item}>
-        <h1 className="text-2xl font-semibold mb-3 text-foreground">
-          hi, i'm Anton.
-        </h1>
-        <p className="text-foreground/75 text-md leading-relaxed">
-          Data Science student at SFU. <br />
-          Building full-stack applications, exploring AI/ML Engineering, and AI workflows.
-        </p>
-      </motion.section>
-
-      {/* Currently Focused On */}
-      <motion.section
-        className="flex flex-col gap-2 text-md"
-        variants={item}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-10%" }}
-      >
-        <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
-          currently...
-        </p>
-        <p className="text-foreground/75 leading-relaxed">
-          <span className="font-medium">Exploring </span> AI Engineering, RAG Pipelines, and Deep Learning.
-        </p>
-        <p className="text-foreground/75">
-          <span className="font-medium">Learning </span>
-          {learning.join(", ")}
-        </p>
-        <div className="text-foreground/75">
-          <span className="font-medium">Digesting</span>
-          <motion.ul
-            className="space-y-1 mt-1 ml-4 list-none"
-            variants={staggerContainer(0.05)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-10%" }}
+      <section id="home" className="scroll-mt-20">
+        <motion.div
+          className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between"
+          variants={item}
+        >
+          <div className="order-2 flex flex-col gap-2 md:order-1">
+            <motion.h1
+              className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
+              initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY }}
+            >
+              Hi, I'm Anton
+            </motion.h1>
+            <motion.p
+              className="max-w-[600px] text-pretty text-muted-foreground md:text-lg lg:text-xl"
+              initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY * 2 }}
+            >
+              Data Science student at SFU. Building full-stack applications,
+              exploring AI/ML engineering, and shaping practical AI workflows.
+            </motion.p>
+          </div>
+          <motion.div
+            className="order-1 size-24 overflow-hidden rounded-3xl border bg-muted shadow-lg ring-4 ring-muted md:order-2 md:size-32"
+            initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY }}
           >
-            {digesting.map(({ name, url, image }) => (
-              <motion.li key={name} variants={item}>
-                {image ? (
-                  <LinkPreview
-                    url={url}
-                    isStatic={true}
-                    imageSrc={image}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary-60 transition-colors hover:text-primary"
-                  >
-                    {name}
-                  </LinkPreview>
-                ) : (
-                  <LinkPreview
-                    url={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary-60 transition-colors hover:text-primary"
-                  >
-                    {name}
-                  </LinkPreview>
-                )}
-              </motion.li>
-            ))}
-          </motion.ul>
-        </div>
-      </motion.section>
+            <img
+              src="/pfp.jpeg"
+              alt="Anton Florendo"
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
+        </motion.div>
+      </section>
 
-      {/* Coursework + Hobbies */}
-      <motion.section
-        className="flex gap-40 flex-wrap"
-        variants={item}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-10%" }}
-      >
-        <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
-            coursework
-          </p>
-          <ul className="space-y-1 text-foreground/75">
-            {coursework.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-primary/50 mb-2">
-            hobbies
-          </p>
-          <ul className="space-y-1 text-foreground/75">
-            {hobbies.map((h) => (
-              <li key={h}>{h}</li>
-            ))}
-          </ul>
-        </div>
-      </motion.section>
-
-      {/* Tech Stack */}
-      <motion.section
-        variants={item}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-10%" }}
-      >
-        <p className="text-xs font-medium uppercase tracking-widest text-primary/50">
-          tech stack
+      {/*
+      <motion.section id="about" className="scroll-mt-24 space-y-4" variants={item}>
+        <SectionHeading>About</SectionHeading>
+        <p className="text-pretty leading-relaxed text-muted-foreground">
+          I'm focused on the overlap between software engineering and applied AI:
+          products that turn messy user context into useful, grounded tools. Lately
+          that has meant building browser extensions, internship matching systems,
+          recipe generation apps, and ML experiments while studying Data Science at
+          Simon Fraser University.
         </p>
-        <TechStack />
+      </motion.section>
+      */}
+
+      <motion.section id="current" className="scroll-mt-24 space-y-6" variants={item}>
+        <SectionHeading>Currently</SectionHeading>
+        <div className="divide-y divide-border border-y border-border">
+          <div className="grid gap-2 py-4 sm:grid-cols-[4rem_1fr] sm:items-center">
+            <span className="font-mono text-xs tabular-nums text-muted-foreground">
+              01
+            </span>
+            <div className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:items-center">
+              <p className="font-semibold leading-snug">Exploring</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                AI Engineering, RAG pipelines, and deep learning.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-2 py-4 sm:grid-cols-[4rem_1fr] sm:items-center">
+            <span className="font-mono text-xs tabular-nums text-muted-foreground">
+              02
+            </span>
+            <div className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:items-center">
+              <p className="font-semibold leading-snug">Learning</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {learning.join(", ")}
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-2 py-4 sm:grid-cols-[4rem_1fr] sm:items-center">
+            <span className="font-mono text-xs tabular-nums text-muted-foreground">
+              03
+            </span>
+            <div className="grid min-w-0 gap-1 sm:grid-cols-[8rem_1fr] sm:items-center">
+              <p className="font-semibold leading-snug">Digesting</p>
+              <div className="flex min-w-0 flex-wrap gap-x-3 gap-y-1">
+                {digesting.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm leading-relaxed text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </motion.section>
 
-      <Footer />
-    </motion.div>
+      <motion.section id="education" className="scroll-mt-24 space-y-6" variants={item}>
+        <SectionHeading>Education</SectionHeading>
+        <div className="flex flex-col gap-6">
+          {education.map((item) => (
+            <a
+              key={item.school}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-3"
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-1.5 shadow-sm ring-2 ring-border/30">
+                  <img
+                    src={item.logo}
+                    alt={`${item.school} logo`}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 font-semibold leading-none">
+                    {item.school}
+                    <ArrowUpRight className="size-3.5 -translate-x-1 text-muted-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {item.degree}
+                  </p>
+                </div>
+              </div>
+              <p className="shrink-0 text-right text-xs tabular-nums text-muted-foreground">
+                {item.dates}
+              </p>
+            </a>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section id="skills" className="scroll-mt-24 space-y-4" variants={item}>
+        <SectionHeading>Skills</SectionHeading>
+        <div className="flex flex-wrap gap-2">
+          {skills.map(({ name, icon: Icon, color }) => (
+            <Badge key={name}>
+              <Icon className="mr-2 size-4" style={color ? { color } : undefined} />
+              {name}
+            </Badge>
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section id="projects" className="scroll-mt-24" variants={item}>
+        <div className="flex min-h-0 flex-col gap-y-8">
+          <div className="flex flex-col items-center justify-center gap-y-4">
+            <div className="flex w-full items-center">
+              <div className="h-px flex-1 bg-linear-to-r from-transparent from-5% via-border via-95% to-transparent" />
+              <div className="z-10 rounded-xl border bg-primary px-4 py-1">
+                <span className="text-sm font-medium text-primary-foreground">
+                  My Projects
+                </span>
+              </div>
+              <div className="h-px flex-1 bg-linear-to-l from-transparent from-5% via-border via-95% to-transparent" />
+            </div>
+            <div className="flex flex-col items-center justify-center gap-y-3 text-center">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Check out my latest work
+              </h2>
+            </div>
+          </div>
+          <div className="mx-auto grid max-w-[800px] grid-cols-1 gap-3 sm:grid-cols-2">
+            {[...projects].reverse().map((project, id) => (
+              <ProjectShowcaseCard
+                key={project.title}
+                project={project}
+                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section id="life" className="scroll-mt-24 space-y-6" variants={item}>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <SectionHeading>Life</SectionHeading>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Outside the editor: {hobbies.join(", ")}.
+            </p>
+          </div>
+          <Link
+            to="/life"
+            className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            View all <ArrowUpRight className="size-3.5" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {lifePhotos.slice(0, 6).map((photo) => (
+            <img
+              key={photo}
+              src={photo}
+              alt=""
+              className="aspect-square rounded-xl border object-cover shadow-sm"
+            />
+          ))}
+        </div>
+      </motion.section>
+
+      <motion.section id="contact" className="scroll-mt-24" variants={item}>
+        <div className="relative overflow-hidden rounded-xl border px-6 py-8 text-center sm:px-10 sm:py-10">
+          <div className="absolute inset-x-0 top-0 h-1/2 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:18px_18px] opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+          <div className="relative flex flex-col items-center gap-3">
+            <span className="text-xs font-medium text-muted-foreground">
+              Contact
+            </span>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Get in touch
+            </h2>
+            <p className="mx-auto max-w-lg text-balance text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Want to build something, talk AI workflows, or compare notes on a
+              project? Reach me on{" "}
+              <a
+                href="https://www.linkedin.com/in/antonflorendo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline underline-offset-4"
+              >
+                LinkedIn
+              </a>{" "}
+              or{" "}
+              <a
+                href="https://github.com/aaf1007"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline underline-offset-4"
+              >
+                GitHub
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </motion.section>
+    </motion.main>
   );
 }
