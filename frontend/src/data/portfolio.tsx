@@ -284,9 +284,9 @@ export const projects: Project[] = [
     dates: "Jan 2026 - April 2026",
   },
   {
-    title: "Xantrex Calculator",
+    title: "Solar Calculator and Recommendation System",
     shortDescription:
-      "MPPT solar charge controller calculator that sizes controllers from panel specs, battery voltage, and location-based temperature correction.",
+      "MPPT solar charge controller calculator and recommendation system built for Xantrex Technology as a part of a client project for CMPT 276",
     description: (
       <ul className="list-disc pl-5 space-y-1">
         <li>
@@ -313,12 +313,14 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/aaf1007/xantrex-calculator",
     inProgress: false,
-    dates: "Jan 2026 - April 2026",
+    dates: "Jan 2026 - May 2026",
   },
 ];
 
 // Most recent pics add to top
 export const lifePhotos = [
+  "/pics/june-4-2026-2.jpg",
+  "/pics/june-4-2026.jpeg",
   "/pics/3B40A54A-DBEA-44C6-BB94-64CA5724EE93.png",
   "/pics/40C923ED-CE8B-45A1-87B3-BE7340F0C3DF_1_105_c.jpeg",
   "/pics/36870A61-B809-4586-8344-B1FC97061EC0_1_105_c.jpeg",

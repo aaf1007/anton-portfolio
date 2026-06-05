@@ -1,6 +1,6 @@
-import LifeCards from "@/components/LifeCards"
-import { useMotionVariants } from "@/lib/motion"
-import { motion } from "motion/react"
+import LifeCards from "@/components/LifeCards";
+import { useMotionVariants } from "@/lib/motion";
+import { motion } from "motion/react";
 
 export default function LifePage() {
     const item = useMotionVariants();
@@ -12,7 +12,7 @@ export default function LifePage() {
                 initial="hidden"
                 animate="show"
             >
-                2026
+                My Life Board
             </motion.h1>
             <LifeCards />
         </div>
