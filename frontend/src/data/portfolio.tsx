@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
 import {
@@ -20,7 +21,6 @@ import {
   SiVercel,
   SiVite,
 } from "react-icons/si";
-import type { ReactNode } from "react";
 
 export type Project = {
   title: string;
@@ -317,7 +317,12 @@ export const projects: Project[] = [
   },
 ];
 
+// Most recent pics add to top
 export const lifePhotos = [
+  "/pics/3B40A54A-DBEA-44C6-BB94-64CA5724EE93.png",
+  "/pics/40C923ED-CE8B-45A1-87B3-BE7340F0C3DF_1_105_c.jpeg",
+  "/pics/36870A61-B809-4586-8344-B1FC97061EC0_1_105_c.jpeg",
+  "/pics/5F2E464C-5C42-471F-BC5A-6D975A5489A2_1_105_c.jpeg",
   "/pics/CE6AF28C-C289-46D7-9B0F-A2ED5C044787_1_105_c.jpeg",
   "/pics/5C821F67-8063-40E8-B669-C140862B3E88_1_105_c.jpeg",
   "/pics/045253D8-EFEA-4267-8B96-18CC2C75D6C6_1_105_c.jpeg",
