@@ -16,6 +16,7 @@ import {
   SiReact,
   SiScikitlearn,
   SiSpringboot,
+  SiSwift,
   SiTailwindcss,
   SiTypescript,
   SiVercel,
@@ -25,7 +26,7 @@ import {
 export type Project = {
   title: string;
   description: ReactNode;
-  shortDescription: string;
+  shortDescription: ReactNode;
   image?: string | ReactNode;
   stack: string[];
   link?: string;
@@ -84,6 +85,7 @@ export const skills: Skill[] = [
   { name: "Python", icon: SiPython, color: "#3776AB" },
   { name: "Java", icon: FaJava, color: "#E76F00" },
   { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "Swift", icon: SiSwift, color: "#F05138" },
   { name: "Next.js", icon: SiNextdotjs },
   { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
   { name: "Vite", icon: SiVite, color: "#646CFF" },
@@ -107,7 +109,7 @@ export const projects: Project[] = [
     shortDescription:
       "Full-stack music analytics dashboard for surfacing Spotify listening patterns across configurable time ranges.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           Architected a <strong>full-stack music analytics dashboard</strong>{" "}
           integrating the <strong>Spotify Web API</strong> to surface top
@@ -127,7 +129,7 @@ export const projects: Project[] = [
     shortDescription:
       "AI-powered recipe generation app that turns available ingredients into structured meal suggestions.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           Built an <strong>AI-powered recipe generation app</strong> that
           transforms available ingredients into structured meal suggestions
@@ -143,7 +145,7 @@ export const projects: Project[] = [
         loop
         muted
         playsInline
-        className="h-full w-full object-cover"
+        className="w-full h-full object-cover"
       />
     ),
     stack: ["React", "Spring Boot", "TypeScript", "Java"],
@@ -157,7 +159,7 @@ export const projects: Project[] = [
     shortDescription:
       "Chrome extension that injects Rate My Professor context directly into SFU MySchedule.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           A <strong>Chrome extension</strong> that injects{" "}
           <strong>Rate My Professor</strong> ratings directly into the{" "}
@@ -180,7 +182,7 @@ export const projects: Project[] = [
     shortDescription:
       "AI-powered internship matching platform ranking live postings against coursework and resume context.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           Built an <strong>AI-powered internship matching platform</strong>{" "}
           using <strong>Gemini AI</strong> and the{" "}
@@ -212,7 +214,7 @@ export const projects: Project[] = [
     shortDescription:
       "Web-based code editor with Monaco, Gemini chat, and intentionally chaotic focus tools.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           A <strong>web-based code editor</strong> built with{" "}
           <strong>Next.js</strong> and <strong>Monaco Editor</strong>, featuring
@@ -237,7 +239,7 @@ export const projects: Project[] = [
     shortDescription:
       "Chrome extension and FastAPI backend for instant AI fact-checking with verdicts, confidence, and cited sources.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           A <strong>Chrome extension</strong> and <strong>FastAPI backend</strong>{" "}
           that lets users highlight any text on the web, right-click, and
@@ -267,7 +269,7 @@ export const projects: Project[] = [
     shortDescription:
       "Machine-learning classifier comparison for breast tumor diagnosis, tuned to prioritize recall.",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           As part of <strong>CMPT 310</strong>, built and compared multiple{" "}
           <strong>machine learning classifiers</strong> to diagnose breast
@@ -288,7 +290,7 @@ export const projects: Project[] = [
     shortDescription:
       "MPPT solar charge controller calculator and recommendation system built for Xantrex Technology as a part of a client project for CMPT 276",
     description: (
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="space-y-1 pl-5 list-disc">
         <li>
           Built a <strong>client project for Xantrex</strong> that recommends
           compatible <strong>MPPT solar charge controllers</strong> using solar
@@ -314,6 +316,49 @@ export const projects: Project[] = [
     github: "https://github.com/aaf1007/xantrex-calculator",
     inProgress: false,
     dates: "Jan 2026 - May 2026",
+  },
+  {
+    title: "Chewws",
+    shortDescription: (
+      <span className="flex flex-col items-start gap-2.5">
+        Native iOS, AI-powered food journal and nutrition app.
+        <span className="inline-flex items-center gap-1.5 px-2 border border-border rounded-md h-6 font-medium text-[11px] text-foreground">
+          <span className="bg-emerald-500 rounded-full size-1.5" />
+          Coming soon to the App Store
+        </span>
+      </span>
+    ),
+    description: (
+      <ul className="space-y-1 pl-5 list-disc">
+        <li>
+          Building a <strong>native iOS food and drink journal</strong> in{" "}
+          <strong>SwiftUI</strong> where logging is the reward: one photo becomes
+          an <strong>on-device background-removed cut-out</strong> and an
+          auto-generated stamp.
+        </li>
+        <li>
+          Each entry fills six surfaces &mdash; a calendar, a{" "}
+          <strong>MapKit</strong> explore map, a postmark grid, a stamps
+          passport, milestone stickers, and a polaroid wall.
+        </li>
+        <li>
+          Runs entirely offline with no accounts or server: <strong>Vision</strong>{" "}
+          for cut-outs, <strong>SwiftData</strong> and on-device files for
+          storage. Currently preparing for <strong>TestFlight</strong>.
+        </li>
+      </ul>
+    ),
+    image: "/chewws.png",
+    stack: [
+      "Swift",
+      "SwiftUI",
+      "SwiftData",
+      "Vision",
+      "MapKit",
+      "CoreLocation",
+    ],
+    inProgress: true,
+    dates: "Jul 2026 - Present",
   },
 ];
 

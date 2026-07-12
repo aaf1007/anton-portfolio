@@ -1,13 +1,13 @@
 import { useMotionVariants } from "@/lib/motion";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
 
 type ProjectCardProps = {
   title: string;
   description: ReactNode;
-  shortDescription?: string;
+  shortDescription?: ReactNode;
   image?: string | ReactNode;
   stack: string[];
   link?: string;
@@ -60,69 +60,69 @@ export default function ProjectCard({
 
   return (
     <motion.article
-      className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:ring-2 hover:ring-muted"
+      className="group flex flex-col bg-card border border-border rounded-xl hover:ring-2 hover:ring-muted h-full overflow-hidden transition-all duration-200"
       variants={item}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >
       {image && (
-        <CardLink href={primaryHref} className="relative block h-52 overflow-hidden bg-muted">
+        <CardLink href={primaryHref} className="block relative bg-muted h-52 overflow-hidden">
           {typeof image === "string" ? (
             <img
               src={image}
               alt={title}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
             />
           ) : (
             image
           )}
           {inProgress && (
-            <span className="absolute right-2 top-2 rounded-lg bg-black px-2 py-1 text-[11px] font-medium text-white">
+            <span className="top-2 right-2 absolute bg-black px-2 py-1 rounded-lg font-medium text-[11px] text-white">
               In Progress
             </span>
           )}
         </CardLink>
       )}
 
-      <div className="flex flex-1 flex-col gap-3 p-6">
-        <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-col flex-1 gap-3 p-6">
+        <div className="flex justify-between items-start gap-3">
           <div className="min-w-0">
-            <h2 className="font-semibold leading-tight text-foreground">{title}</h2>
+            <h2 className="font-semibold text-foreground leading-tight">{title}</h2>
             {dates && (
-              <p className="mt-1 text-xs text-muted-foreground">{dates}</p>
+              <p className="mt-1 text-muted-foreground text-xs">{dates}</p>
             )}
           </div>
           <CardLink
             href={primaryHref}
-            className="shrink-0 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-muted-foreground hover:text-foreground transition-colors shrink-0"
           >
             <span className="sr-only">Open {title}</span>
             <ArrowUpRight className="size-4" aria-hidden />
           </CardLink>
         </div>
 
-        <div className="text-xs leading-relaxed text-muted-foreground">
+        <div className="text-muted-foreground text-xs leading-relaxed">
           {shortDescription ? <p>{shortDescription}</p> : description}
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1 mt-auto">
           {stack.map((item) => (
             <span
               key={item}
-              className="inline-flex h-6 items-center rounded-md border border-border px-2 text-[11px] font-medium text-muted-foreground"
+              className="inline-flex items-center px-2 border border-border rounded-md h-6 font-medium text-[11px] text-muted-foreground"
             >
               {item}
             </span>
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3 pt-1 text-xs font-medium text-muted-foreground">
+        <div className="flex flex-wrap gap-3 pt-1 font-medium text-muted-foreground text-xs">
           {link && (
             <a
               href={link}
               target="_blank"
               rel="noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="hover:text-foreground transition-colors"
             >
               Website
             </a>
@@ -132,7 +132,7 @@ export default function ProjectCard({
               href={prod}
               target="_blank"
               rel="noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="hover:text-foreground transition-colors"
             >
               Product
             </a>
@@ -142,13 +142,13 @@ export default function ProjectCard({
               href={github}
               target="_blank"
               rel="noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="hover:text-foreground transition-colors"
             >
               Source
             </a>
           )}
           {caseStudy && (
-            <Link to={caseStudy} className="transition-colors hover:text-foreground">
+            <Link to={caseStudy} className="hover:text-foreground transition-colors">
               Case study
             </Link>
           )}
