@@ -95,7 +95,7 @@ function ProjectShowcaseCard({
           {project.shortDescription}
         </p>
         <div className="flex flex-wrap gap-1 mt-auto">
-          {project.stack.slice(0, 6).map((tag) => (
+          {project.stack.map((tag) => (
             <span
               key={tag}
               className="inline-flex items-center px-2 border border-border rounded-md h-6 font-medium text-[11px] text-muted-foreground"

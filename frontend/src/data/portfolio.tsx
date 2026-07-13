@@ -356,9 +356,12 @@ export const projects: Project[] = [
       "Vision",
       "MapKit",
       "CoreLocation",
+      "Python",
+      "FastAPI",
+      "OpenRouter"
     ],
     inProgress: true,
-    dates: "Jul 2026 - Present",
+    dates: "June 2026 - Present",
   },
 ];
 

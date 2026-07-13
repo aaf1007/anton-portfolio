@@ -1,6 +1,6 @@
-import { useMotionVariants } from "@/lib/motion";
+import { EASE_OUT, fadeIn } from "@/lib/motion";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -16,6 +16,7 @@ type ProjectCardProps = {
   caseStudy?: string;
   inProgress: boolean;
   dates?: string;
+  index?: number;
 };
 
 function CardLink({
@@ -54,14 +55,33 @@ export default function ProjectCard({
   caseStudy,
   inProgress,
   dates,
+  index = 0,
 }: ProjectCardProps) {
-  const item = useMotionVariants();
+  const reduceMotion = useReducedMotion();
+  // Right-hand card of each row (odd index) trails slightly for a stagger.
+  const reveal: Variants = reduceMotion
+    ? fadeIn
+    : {
+        hidden: { opacity: 0, y: 32 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.55,
+            ease: EASE_OUT,
+            delay: (index % 2) * 0.12,
+          },
+        },
+      };
   const primaryHref = link || prod || caseStudy || github || "#";
 
   return (
     <motion.article
       className="group flex flex-col bg-card border border-border rounded-xl hover:ring-2 hover:ring-muted h-full overflow-hidden transition-all duration-200"
-      variants={item}
+      variants={reveal}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >

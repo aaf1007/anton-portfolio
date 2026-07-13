@@ -1,7 +1,5 @@
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/portfolio";
-import { staggerContainer } from "@/lib/motion";
-import { motion } from "motion/react";
 
 export default function ProjectsPage() {
   return (
@@ -16,16 +14,11 @@ export default function ProjectsPage() {
           studies.
         </p>
       </div>
-      <motion.div
-        className="grid grid-cols-1 gap-3 sm:grid-cols-2"
-        variants={staggerContainer(0.07)}
-        initial="hidden"
-        animate="show"
-      >
-        {[...projects].reverse().map((project) => (
-          <ProjectCard key={project.title} {...project} />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {[...projects].reverse().map((project, index) => (
+          <ProjectCard key={project.title} index={index} {...project} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
