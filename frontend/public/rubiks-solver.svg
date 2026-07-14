@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 416" width="800" height="416" role="img" aria-label="Isometric scrambled Rubik's cube">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="416" fill="#171717" />
+  <ellipse cx="400" cy="215" rx="290" ry="200" fill="url(#glow)" />
+
+  <g stroke="#171717" stroke-width="3.5" stroke-linejoin="round">
+    <!-- top face -->
+    <polygon points="400,40 452,70 400,100 348,70" fill="#E8E8E8" />
+    <polygon points="348,70 400,100 348,130 296,100" fill="#DE8A32" />
+    <polygon points="296,100 348,130 296,160 244,130" fill="#43A24A" />
+    <polygon points="452,70 504,100 452,130 400,100" fill="#CF4A3F" />
+    <polygon points="400,100 452,130 400,160 348,130" fill="#E8E8E8" />
+    <polygon points="348,130 400,160 348,190 296,160" fill="#E8E8E8" />
+    <polygon points="504,100 556,130 504,160 452,130" fill="#E8E8E8" />
+    <polygon points="452,130 504,160 452,190 400,160" fill="#3B82F6" />
+    <polygon points="400,160 452,190 400,220 348,190" fill="#E5C453" />
+
+    <!-- front-left face -->
+    <polygon points="244,130 296,160 296,214 244,184" fill="#43A24A" />
+    <polygon points="244,184 296,214 296,268 244,238" fill="#3B82F6" />
+    <polygon points="244,238 296,268 296,322 244,292" fill="#DE8A32" />
+    <polygon points="296,160 348,190 348,244 296,214" fill="#43A24A" />
+    <polygon points="296,214 348,244 348,298 296,268" fill="#43A24A" />
+    <polygon points="296,268 348,298 348,352 296,322" fill="#E5C453" />
+    <polygon points="348,190 400,220 400,274 348,244" fill="#CF4A3F" />
+    <polygon points="348,244 400,274 400,328 348,298" fill="#E8E8E8" />
+    <polygon points="348,298 400,328 400,382 348,352" fill="#43A24A" />
+
+    <!-- front-right face -->
+    <polygon points="400,220 452,190 452,244 400,274" fill="#3B82F6" />
+    <polygon points="400,274 452,244 452,298 400,328" fill="#E5C453" />
+    <polygon points="400,328 452,298 452,352 400,382" fill="#3B82F6" />
+    <polygon points="452,190 504,160 504,214 452,244" fill="#CF4A3F" />
+    <polygon points="452,244 504,214 504,268 452,298" fill="#3B82F6" />
+    <polygon points="452,298 504,268 504,322 452,352" fill="#43A24A" />
+    <polygon points="504,160 556,130 556,184 504,214" fill="#3B82F6" />
+    <polygon points="504,214 556,184 556,238 504,268" fill="#DE8A32" />
+    <polygon points="504,268 556,238 556,292 504,322" fill="#CF4A3F" />
+  </g>
+
+  <!-- face shading for depth -->
+  <polygon points="244,130 400,220 400,382 244,292" fill="#000000" fill-opacity="0.22" />
+  <polygon points="400,220 556,130 556,292 400,382" fill="#000000" fill-opacity="0.10" />
+</svg>
