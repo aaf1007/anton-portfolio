@@ -13,6 +13,17 @@ import { Link, useLocation } from "react-router-dom";
 
 const BLUR_FADE_DELAY = 0.04;
 
+const experience = [
+  {
+    company: "SAP",
+    href: "https://www.sap.com/",
+    role: "Software Developer",
+    logo: "/sap-logo.svg",
+    location: "Vancouver, BC",
+    dates: "Sept 2026 - Present",
+  },
+];
+
 const education = [
   {
     school: "Simon Fraser University",
@@ -236,6 +247,48 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section> */}
+
+      <motion.section id="experience" className="space-y-6 scroll-mt-24" variants={item}>
+        <SectionHeading>Experience</SectionHeading>
+        <div className="flex flex-col gap-6">
+          {experience.map((item) => (
+            <a
+              key={`${item.company}-${item.role}`}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex justify-between items-center gap-3"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="flex justify-center items-center bg-white shadow-sm p-1.5 border ring-border/30 border-border rounded-xl ring-2 size-11 shrink-0">
+                  <img
+                    src={item.logo}
+                    alt={`${item.company} logo`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 font-semibold leading-none">
+                    {item.company}
+                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 size-3.5 text-muted-foreground transition-all -translate-x-1 group-hover:translate-x-0 duration-200" />
+                  </div>
+                  <p className="mt-1 text-muted-foreground text-sm">
+                    {item.role}
+                  </p>
+                </div>
+              </div>
+              <div className="text-right shrink-0">
+                <p className="tabular-nums text-muted-foreground text-xs">
+                  {item.dates}
+                </p>
+                <p className="mt-1 text-muted-foreground/70 text-xs">
+                  {item.location}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </motion.section>
 
       <motion.section id="education" className="space-y-6 scroll-mt-24" variants={item}>
         <SectionHeading>Education</SectionHeading>
