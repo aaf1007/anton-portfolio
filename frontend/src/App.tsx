@@ -11,6 +11,7 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import LifePage from "./pages/LifePage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ResumePage from "./pages/ResumePage";
 import BSCodePage from "./pages/projects/BSCodePage";
 import CareerConnectPage from "./pages/projects/CareerConnectPage";
 import MyProfessorPage from "./pages/projects/MyProfessorPage";
@@ -40,6 +41,7 @@ function App() {
             <Route path="projects/myprofessor" element={<MyProfessorPage />} />
             <Route path="projects/tumor-classifier" element={<TumorClassifierPage />} />
             <Route path="life" element={<LifePage />} />
+            <Route path="resume" element={<ResumePage />} />
             <Route path="contact" element={<Navigate to="/#contact" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

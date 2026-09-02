@@ -1,7 +1,7 @@
 import { EASE_OUT } from "@/lib/motion";
 import { AnimatePresence, motion } from "motion/react";
 import { FaGithubAlt, FaLinkedinIn } from "react-icons/fa";
-import { Home, Images, Mail, PanelsTopLeft } from "lucide-react";
+import { FileText, Home, Images, Mail, PanelsTopLeft } from "lucide-react";
 import { Link, useLocation, useOutlet } from "react-router-dom";
 import ThemeToggle from "./components/ThemeToggle";
 import type { IconType } from "react-icons";
@@ -15,6 +15,7 @@ const navItems: Array<{
   { to: "/#home", label: "Home", icon: Home },
   { to: "/#projects", label: "Projects", icon: PanelsTopLeft },
   { to: "/life", label: "Life", icon: Images },
+  { to: "/resume", label: "Resume", icon: FileText },
   { to: "/#contact", label: "Contact", icon: Mail },
 ];
 
@@ -29,7 +30,7 @@ function DockButton({
 }) {
   return (
     <motion.span
-      className={`relative flex size-10 items-center justify-center rounded-3xl border border-border bg-background text-muted-foreground backdrop-blur-3xl transition-colors hover:bg-muted hover:text-foreground ${
+      className={`relative flex size-9 sm:size-10 items-center justify-center rounded-3xl border border-border bg-background text-muted-foreground backdrop-blur-3xl transition-colors hover:bg-muted hover:text-foreground ${
         active ? "text-foreground" : ""
       }`}
       whileHover={{ y: -8, scale: 1.18 }}
@@ -74,7 +75,7 @@ export default function Layout() {
       <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30">
         <nav
           aria-label="Primary"
-          className="pointer-events-auto relative mx-auto flex h-14 w-fit items-center gap-2 rounded-full border bg-card/90 p-2 shadow-[0_0_10px_3px] shadow-primary/5 backdrop-blur-3xl"
+          className="pointer-events-auto relative mx-auto flex h-13 sm:h-14 w-fit items-center gap-1 sm:gap-2 rounded-full border bg-card/90 p-2 shadow-[0_0_10px_3px] shadow-primary/5 backdrop-blur-3xl"
         >
           {navItems.map(({ to, label, icon: Icon }) => (
             <Link key={to} to={to} aria-label={label}>
@@ -84,7 +85,7 @@ export default function Layout() {
             </Link>
           ))}
 
-          <div className="mx-1 h-8 w-px bg-border" aria-hidden />
+          <div className="mx-0 sm:mx-1 h-8 w-px bg-border" aria-hidden />
 
           <a
             href="https://github.com/aaf1007"
@@ -107,7 +108,7 @@ export default function Layout() {
             </DockButton>
           </a>
 
-          <div className="mx-1 h-8 w-px bg-border" aria-hidden />
+          <div className="mx-0 sm:mx-1 h-8 w-px bg-border" aria-hidden />
 
           <DockButton label="Theme">
             <ThemeToggle className="size-full" />

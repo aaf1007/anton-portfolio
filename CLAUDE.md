@@ -22,6 +22,7 @@ Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to 
 - `/projects` → `ProjectsPage` — project list rendered in reverse order
 - `/projects/<slug>` → per-project case-study pages in `src/pages/projects/` (verifai, bscode, careerconnect, myprofessor, tumor-classifier)
 - `/life` → `LifePage` — photo cards
+- `/resume` → `ResumePage` — resume image (`public/resume.png`) with a PDF download (`public/resume.pdf`); regenerate the image from the PDF with `pdftoppm -png -r 200 -singlefile <source>.pdf frontend/public/resume`
 - `/contact` redirects to `/#contact`; unmatched paths redirect to `/`
 
 **Theme** — Custom `ThemeContext` (`src/context/ThemeContext.tsx`) persists `light`/`dark` to `localStorage` and toggles a `.dark` class on `<html>`. Dark-mode styles are written in `src/index.css` using `@custom-variant dark (&:where(.dark, .dark *))`.
