@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-All commands run from `frontend/`:
+Run from the repo root (the root `package.json` forwards to `frontend/`) or from `frontend/` directly:
 
 ```bash
 npm run dev       # dev server at http://localhost:4000
