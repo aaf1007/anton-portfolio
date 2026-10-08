@@ -4,6 +4,7 @@ import {
   projects,
   skills
 } from "@/data/portfolio";
+import ProjectCard from "@/components/ProjectCard";
 import { EASE_OUT, staggerContainer, useMotionVariants } from "@/lib/motion";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
@@ -50,73 +51,6 @@ function Badge({ children }: { children: ReactNode }) {
     <span className="inline-flex items-center bg-background shadow-sm px-3 border ring-border/20 border-border rounded-xl ring-2 h-7 font-medium text-foreground text-xs">
       {children}
     </span>
-  );
-}
-
-function ProjectShowcaseCard({
-  project,
-  delay,
-}: {
-  project: (typeof projects)[number];
-  delay: number;
-}) {
-  const href = project.link || project.prod || project.caseStudy || project.github || "#";
-  const isExternal = href.startsWith("http");
-
-  return (
-    <motion.article
-      variants={useMotionVariants()}
-      transition={{ delay }}
-      className="group flex flex-col bg-card border border-border rounded-xl hover:ring-2 hover:ring-muted h-full overflow-hidden transition-all duration-200"
-    >
-      <Link
-        to={isExternal ? "#" : href}
-        onClick={(event) => {
-          if (isExternal) {
-            event.preventDefault();
-            window.open(href, "_blank", "noopener,noreferrer");
-          }
-        }}
-        className="block relative bg-muted h-48 overflow-hidden"
-      >
-        {typeof project.image === "string" ? (
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-          />
-        ) : (
-          project.image
-        )}
-        {project.inProgress && (
-          <span className="top-2 right-2 absolute bg-black px-2 py-1 rounded-lg font-medium text-[11px] text-white">
-            In Progress
-          </span>
-        )}
-      </Link>
-      <div className="flex flex-col flex-1 gap-3 p-6">
-        <div className="flex justify-between items-start gap-3">
-          <div className="min-w-0">
-            <h3 className="font-semibold leading-tight">{project.title}</h3>
-            <p className="mt-1 text-muted-foreground text-xs">{project.dates}</p>
-          </div>
-          <ArrowUpRight className="mt-0.5 size-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
-        </div>
-        <p className="text-muted-foreground text-xs text-pretty leading-relaxed">
-          {project.shortDescription}
-        </p>
-        <div className="flex flex-wrap gap-1 mt-auto">
-          {project.stack.map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex items-center px-2 border border-border rounded-md h-6 font-medium text-[11px] text-muted-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.article>
   );
 }
 
@@ -358,12 +292,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 mx-auto max-w-[800px]">
-            {[...projects].reverse().map((project, id) => (
-              <ProjectShowcaseCard
-                key={project.title}
-                project={project}
-                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-              />
+            {[...projects].reverse().map((project, index) => (
+              <ProjectCard key={project.title} index={index} headingLevel="h3" {...project} />
             ))}
           </div>
         </div>

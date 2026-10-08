@@ -28,6 +28,6 @@ Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to 
 
 **Path alias** — `@/` resolves to `src/` (configured in `vite.config.ts`).
 
-**Adding a project** — Add an entry to the `projects` array in `src/pages/ProjectsPage.tsx`. Projects render newest-first (array is reversed before mapping). Project images go in `frontend/public/`.
+**Adding a project** — Add an entry to the `projects` array in `src/data/portfolio.tsx`. Projects render newest-first (the array is reversed before mapping), so **append to the end** to have it render first. Project images go in `frontend/public/` and are referenced by root-relative path (e.g. `/statify.png`). Links are optional and each renders as a pill only when set: `caseStudy` (a case-study route; shown as "Read more"), `live` (deployed site or store listing), `github`. The card image links to the first of `caseStudy` → `live` → `github`. `ProjectCard` is shared by `HomePage` and `ProjectsPage`.
 
 **UI components** — shadcn/ui components live in `src/components/ui/`. Shared layout pieces (`Footer`, `ThemeToggle`, `TechStack`, `ProjectCard`, etc.) live in `src/components/`.

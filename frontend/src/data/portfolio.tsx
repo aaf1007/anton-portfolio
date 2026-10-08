@@ -7,7 +7,7 @@ import {
   SiFastapi,
   SiGit,
   SiGooglegemini,
-  SiLangchain,
+  SiLanggraph,
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
@@ -29,9 +29,8 @@ export type Project = {
   shortDescription: ReactNode;
   image?: string | ReactNode;
   stack: string[];
-  link?: string;
+  live?: string;
   github?: string;
-  prod?: string;
   caseStudy?: string;
   inProgress: boolean;
   dates: string;
@@ -95,7 +94,7 @@ export const skills: Skill[] = [
   { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
   { name: "Scikit", icon: SiScikitlearn, color: "#F7931E" },
   { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
-  { name: "LangChain", icon: SiLangchain, color: "#1C3C3C" },
+  { name: "LangGraph", icon: SiLanggraph, color: "#7FC8FF" },
   { name: "Gemini", icon: SiGooglegemini, color: "#4796E3" },
   { name: "Claude", icon: SiClaude, color: "#D97757" },
   { name: "Git", icon: SiGit, color: "#F05032" },
@@ -184,7 +183,7 @@ export const projects: Project[] = [
       "Redis",
       "Google OAuth",
     ],
-    link: "https://sfu-careerconnect.vercel.app",
+    live: "https://sfu-careerconnect.vercel.app",
     github: "https://github.com/aaf1007/sfu-careerconnect",
     caseStudy: "/projects/careerconnect",
     inProgress: false,
@@ -215,7 +214,7 @@ export const projects: Project[] = [
       />
     ),
     stack: ["React", "Spring Boot", "TypeScript", "Java"],
-    link: "https://pantry-pal-umber.vercel.app",
+    live: "https://pantry-pal-umber.vercel.app",
     github: "https://github.com/aaf1007/PantryPal",
     inProgress: false,
     dates: "Feb 2026",
@@ -271,7 +270,7 @@ export const projects: Project[] = [
     ),
     image: "/sfu-my-prof.png",
     stack: ["Javascript", "TypeScript", "Tailwind CSS"],
-    prod: "https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb",
+    live: "https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp",
     github: "https://github.com/aaf1007/SFU-MyProfessor",
     caseStudy: "/projects/myprofessor",
     inProgress: false,
@@ -348,7 +347,7 @@ export const projects: Project[] = [
     image: "/bscode.png",
     stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
     github: "https://github.com/ChakornK/bscode",
-    link: "https://bscode-alpha.vercel.app/",
+    live: "https://bscode-alpha.vercel.app/",
     caseStudy: "/projects/bscode",
     inProgress: false,
     dates: "April 2026",
@@ -430,6 +429,67 @@ export const projects: Project[] = [
     ],
     inProgress: true,
     dates: "June 2026 - Present",
+  },
+  {
+    title: "Syllabyss",
+    shortDescription: (
+      <span className="flex flex-col items-start gap-2.5">
+        Turns your own course notes into pixel-art study games &mdash; rarer
+        answers sink deeper.
+        <span className="inline-flex items-center gap-1.5 px-2 border border-border rounded-md h-6 font-medium text-[11px] text-foreground">
+          <img
+            src="/stormhacks.webp"
+            alt=""
+            className="rounded-sm size-3.5"
+          />
+          Built at StormHacks 2026
+        </span>
+      </span>
+    ),
+    description: (
+      <ul className="space-y-1 pl-5 list-disc">
+        <li>
+          Built a <strong>Next.js</strong> app that turns uploaded slides,
+          notes, and readings into study games with{" "}
+          <strong>Gemini structured output</strong>, citing the source page for
+          every answer and running a second pass to drop unsupported ones.
+        </li>
+        <li>
+          Shipped <strong>six game modes</strong> from the same notes, including
+          a Krillion-style dive where rarer answers score more and a{" "}
+          <strong>three.js</strong> first-person arena.
+        </li>
+        <li>
+          Created <strong>Sonar</strong>, a <strong>LangGraph</strong> study
+          coach backed by a <strong>Bayesian Knowledge Tracing</strong> model
+          that finds the root cause of your misses and recommends what to play
+          next.
+        </li>
+        <li>
+          Stored every guess in <strong>TimescaleDB</strong> hypertables, with
+          continuous aggregates powering the leaderboards, activity heatmap,
+          and a shared Daily Dive puzzle.
+        </li>
+      </ul>
+    ),
+    image: "/syllabyss.png",
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "three.js",
+      "LangGraph",
+      "Gemini",
+      "Claude",
+      "PostgreSQL",
+      "TimescaleDB",
+      "Clerk",
+    ],
+    live: "https://syllabyss.tech",
+    github: "https://github.com/aaf1007/Syllabyss",
+    inProgress: false,
+    dates: "Oct 2026",
   },
 ];
 

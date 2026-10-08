@@ -1,21 +1,13 @@
+import type { Project } from "@/data/portfolio";
 import { EASE_OUT, fadeIn } from "@/lib/motion";
-import { ArrowUpRight } from "lucide-react";
+import { BookOpen, Globe } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
+import { SiGithub } from "react-icons/si";
 import { Link } from "react-router-dom";
 
-type ProjectCardProps = {
-  title: string;
-  description: ReactNode;
-  shortDescription?: ReactNode;
-  image?: string | ReactNode;
-  stack: string[];
-  link?: string;
-  github?: string;
-  prod?: string;
-  caseStudy?: string;
-  inProgress: boolean;
-  dates?: string;
+type ProjectCardProps = Project & {
+  headingLevel?: "h2" | "h3";
   index?: number;
 };
 
@@ -43,18 +35,20 @@ function CardLink({
   );
 }
 
+const pillClass =
+  "inline-flex items-center gap-1.5 px-2.5 border border-border rounded-md h-7 font-medium text-[11px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors";
+
 export default function ProjectCard({
   title,
-  description,
   shortDescription,
   image,
   stack,
-  link,
+  live,
   github,
-  prod,
   caseStudy,
   inProgress,
   dates,
+  headingLevel: Heading = "h2",
   index = 0,
 }: ProjectCardProps) {
   const reduceMotion = useReducedMotion();
@@ -73,7 +67,26 @@ export default function ProjectCard({
           },
         },
       };
-  const primaryHref = link || prod || caseStudy || github || "#";
+  const imageHref = caseStudy || live || github;
+  const imageContent = image && (
+    <>
+      {typeof image === "string" ? (
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+        />
+      ) : (
+        image
+      )}
+      {inProgress && (
+        <span className="top-2 right-2 absolute bg-black px-2 py-1 rounded-lg font-medium text-[11px] text-white">
+          In Progress
+        </span>
+      )}
+    </>
+  );
+  const imageClass = "block relative bg-muted h-52 overflow-hidden";
 
   return (
     <motion.article
@@ -85,45 +98,24 @@ export default function ProjectCard({
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >
-      {image && (
-        <CardLink href={primaryHref} className="block relative bg-muted h-52 overflow-hidden">
-          {typeof image === "string" ? (
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            />
-          ) : (
-            image
-          )}
-          {inProgress && (
-            <span className="top-2 right-2 absolute bg-black px-2 py-1 rounded-lg font-medium text-[11px] text-white">
-              In Progress
-            </span>
-          )}
-        </CardLink>
-      )}
+      {image &&
+        (imageHref ? (
+          <CardLink href={imageHref} className={imageClass}>
+            {imageContent}
+          </CardLink>
+        ) : (
+          <div className={imageClass}>{imageContent}</div>
+        ))}
 
       <div className="flex flex-col flex-1 gap-3 p-6">
-        <div className="flex justify-between items-start gap-3">
-          <div className="min-w-0">
-            <h2 className="font-semibold text-foreground leading-tight">{title}</h2>
-            {dates && (
-              <p className="mt-1 text-muted-foreground text-xs">{dates}</p>
-            )}
-          </div>
-          <CardLink
-            href={primaryHref}
-            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-muted-foreground hover:text-foreground transition-colors shrink-0"
-          >
-            <span className="sr-only">Open {title}</span>
-            <ArrowUpRight className="size-4" aria-hidden />
-          </CardLink>
+        <div className="min-w-0">
+          <Heading className="font-semibold text-foreground leading-tight">{title}</Heading>
+          {dates && <p className="mt-1 text-muted-foreground text-xs">{dates}</p>}
         </div>
 
-        <div className="text-muted-foreground text-xs leading-relaxed">
-          {shortDescription ? <p>{shortDescription}</p> : description}
-        </div>
+        <p className="text-muted-foreground text-xs text-pretty leading-relaxed">
+          {shortDescription}
+        </p>
 
         <div className="flex flex-wrap gap-1 mt-auto">
           {stack.map((item) => (
@@ -136,43 +128,28 @@ export default function ProjectCard({
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3 pt-1 font-medium text-muted-foreground text-xs">
-          {link && (
-            <a
-              href={link}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-foreground transition-colors"
-            >
-              Website
-            </a>
-          )}
-          {prod && (
-            <a
-              href={prod}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-foreground transition-colors"
-            >
-              Product
-            </a>
-          )}
-          {github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-foreground transition-colors"
-            >
-              Source
-            </a>
-          )}
-          {caseStudy && (
-            <Link to={caseStudy} className="hover:text-foreground transition-colors">
-              Case study
-            </Link>
-          )}
-        </div>
+        {(caseStudy || live || github) && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {caseStudy && (
+              <Link to={caseStudy} className={pillClass}>
+                <BookOpen className="size-3.5" aria-hidden />
+                Read more
+              </Link>
+            )}
+            {live && (
+              <a href={live} target="_blank" rel="noreferrer" className={pillClass}>
+                <Globe className="size-3.5" aria-hidden />
+                Live
+              </a>
+            )}
+            {github && (
+              <a href={github} target="_blank" rel="noreferrer" className={pillClass}>
+                <SiGithub className="size-3.5" aria-hidden />
+                GitHub
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </motion.article>
   );
