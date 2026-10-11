@@ -1,187 +1,251 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/archivo/standard.css";
+@import "@fontsource/commit-mono/400.css";
+@import "@fontsource/commit-mono/700.css";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Light: warm paper and ink. */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-light: #525252;
-  --primary: oklch(0.205 0 0);
-  --primary-dark: #171717;
-  --background-eggshell: #ffffff;
-  --tan-pastel: #f5f5f5;
-  --tan-muted: #e5e5e5;
-  --peach-soft: #fafafa;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.5rem;
+  --background: #e8e6e0;
+  --foreground: #19181c;
+  --muted-foreground: #6b6870;
+  --faint: #8c8990;
+  --rule: rgb(25 24 28 / 0.14);
+  --panel: rgb(255 255 255 / 0.45);
+  --signal: #2459e8;
+  --signal-foreground: #f4f6ff;
+  /* rgb triplet the dither canvases draw with */
+  --dot: 25 24 28;
+  --dot-max: 0.2;
+
+  --card: var(--panel);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary: var(--panel);
+  --secondary-foreground: var(--foreground);
+  --muted: rgb(25 24 28 / 0.06);
+  --accent: rgb(25 24 28 / 0.06);
+  --accent-foreground: var(--foreground);
+  --destructive: #d23b2e;
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--signal);
 }
 
+/* Dark: the default. Charcoal with a violet cast. */
 html.dark {
-  --background: oklch(0.155 0 0);
-  --foreground: oklch(0.985 0 0);
-  --accent: oklch(0.29 0 0);
-  --accent-light: oklch(0.82 0 0);
-  --primary: oklch(0.94 0 0);
-  --primary-dark: oklch(0.985 0 0);
-  --background-eggshell: oklch(0.155 0 0);
-  --tan-pastel: oklch(0.25 0 0);
-  --tan-muted: oklch(1 0 0 / 16%);
-  --peach-soft: oklch(0.19 0 0);
+  --background: #18171b;
+  --foreground: #ebeae6;
+  --muted-foreground: #8e8b94;
+  --faint: #706d78;
+  --rule: rgb(235 234 230 / 0.12);
+  --panel: rgb(255 255 255 / 0.03);
+  --signal: #3a6df0;
+  --signal-foreground: #f4f6ff;
+  --dot: 235 234 230;
+  --dot-max: 0.22;
+  --muted: rgb(255 255 255 / 0.06);
+  --accent: rgb(255 255 255 / 0.06);
+  --destructive: #f0645a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-light: var(--accent-light);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-background-eggshell: var(--background-eggshell);
-  --color-tan-pastel: var(--tan-pastel);
-  --color-tan-muted: var(--tan-muted);
-  --color-peach-soft: var(--peach-soft);
-  --font-sans: 'Geist Variable', sans-serif;
-  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
   --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-panel: var(--panel);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: "Commit Mono", ui-monospace, Menlo, monospace;
+  --font-mono: "Commit Mono", ui-monospace, Menlo, monospace;
+  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-*, *::before, *::after {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Geist Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-}
-
-html.dark {
-  scrollbar-color: #404040 #111010;
-}
-
-html.dark ::-webkit-scrollbar-track {
-  background: #111010;
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background-color: #404040;
-  border-radius: 4px;
-}
-
-html.dark *:focus-visible {
-  outline-color: var(--accent-light);
-}
-
-.dark {
-  --background: oklch(0.155 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.19 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.19 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.94 0 0);
-  --primary-foreground: oklch(0.18 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.86 0 0);
-  --accent: oklch(0.29 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 18%);
-  --input: oklch(1 0 0 / 22%);
-  --ring: oklch(0.68 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    @apply border-border outline-ring/60;
   }
   html {
-    @apply font-sans;
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--signal-foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Huge extended-width wordmark used for page titles. */
+  .display {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 820;
+    letter-spacing: -0.045em;
+    line-height: 0.86;
+    text-transform: lowercase;
+  }
+  /* Smaller expanded headings inside pages. */
+  .heading {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  /* Underlined inline link, like a hyperlink in a plain-text document. */
+  .link {
+    text-decoration: underline;
+    text-decoration-color: var(--faint);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+  .link:hover {
+    text-decoration-color: var(--signal);
+    color: var(--foreground);
+  }
+}
+
+/* ---------------------------------------------------------------- dither */
+
+/* Canvas cells are scaled up with no smoothing, then cut into dots by a grid mask. */
+.dot-grid {
+  image-rendering: pixelated;
+  --cell-pitch: 3px;
+  --cell-dot: 2px;
+  mask-image:
+    linear-gradient(to right, #000 var(--cell-dot), transparent var(--cell-dot)),
+    linear-gradient(to bottom, #000 var(--cell-dot), transparent var(--cell-dot));
+  mask-size: var(--cell-pitch) var(--cell-pitch);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+/* A photo printed as halftone: dots in the page colour cover it until hover. */
+.halftone {
+  position: relative;
+  isolation: isolate;
+}
+.halftone > img,
+.halftone > video {
+  filter: grayscale(1) contrast(1.15) brightness(0.95);
+  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.halftone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, transparent 0.9px, var(--background) 1.5px);
+  background-size: 3px 3px;
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+}
+.halftone:hover > img,
+.halftone:hover > video,
+.halftone[data-active] > img,
+.halftone[data-active] > video {
+  filter: none;
+}
+.halftone:hover::after,
+.halftone[data-active]::after {
+  opacity: 0;
+}
+
+/* ---------------------------------------------------------------- ascii image lens */
+
+@property --lr {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+.ascii-image {
+  --lx: 50%;
+  --ly: 50%;
+  transition: --lr 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ascii-image > img {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.ascii-image > canvas {
+  transition: opacity 0.45s ease;
+}
+/* circle: a soft window onto the real photo follows the cursor */
+.ascii-image[data-lens="circle"][data-active] {
+  --lr: 90px;
+}
+.ascii-image[data-lens="circle"] > img {
+  opacity: 1;
+  mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), #000 65%, transparent 100%);
+}
+.ascii-image[data-lens="circle"] > canvas {
+  mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), transparent 55%, #000 100%);
+}
+/* full: the whole image resolves */
+.ascii-image[data-lens="full"][data-active] > img {
+  opacity: 1;
+}
+.ascii-image[data-lens="full"][data-active] > canvas {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }

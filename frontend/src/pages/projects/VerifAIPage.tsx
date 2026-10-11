@@ -14,8 +14,9 @@ import {
 
 export default function VerifAIPage() {
   return (
-    <div className="max-w-[740px] mx-auto pb-24">
+    <div className="pb-12">
       <Hero
+        title="verifai"
         src="/verifai-new.png"
         alt="VerifAI sidepanel showing a fact-check verdict with cited sources"
       />

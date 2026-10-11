@@ -5,13 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anton Florendo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <meta name="description" content="Anton Florendo — data science student at SFU and software developer at SAP, building full-stack products and practical AI tools." />
+    <meta name="theme-color" content="#18171b" />
     <script>
   (function() {
     var stored = localStorage.getItem('theme');
-    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    // Dark is the default; light only when chosen.
+    if (stored !== 'light') {
       document.documentElement.classList.add('dark');
     }
   })();

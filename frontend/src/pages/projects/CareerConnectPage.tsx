@@ -14,8 +14,9 @@ import {
 
 export default function CareerConnectPage() {
   return (
-    <div className="max-w-[740px] mx-auto pb-24">
+    <div className="pb-12">
       <Hero
+        title="careerconnect"
         src="/sfucareer.png"
         alt="SFU CareerConnect dashboard showing ranked internship matches"
       />
