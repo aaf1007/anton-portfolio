@@ -14,8 +14,9 @@ import {
 
 export default function BSCodePage() {
   return (
-    <div className="max-w-[740px] mx-auto pb-24">
+    <div className="pb-12">
       <Hero
+        title="bscode"
         src="/bscode.png"
         alt="BSCode editor with AI chat panel and brain rot video tab"
       />

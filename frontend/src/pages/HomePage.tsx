@@ -1,70 +1,30 @@
-import {
-  hobbies,
-  lifePhotos,
-  projects,
-  skills
-} from "@/data/portfolio";
-import ProjectCard from "@/components/ProjectCard";
-import { EASE_OUT, staggerContainer, useMotionVariants } from "@/lib/motion";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import AsciiImage from "@/components/ascii/AsciiImage";
+import ProjectList from "@/components/ProjectList";
+import { Label, PageTitle, Reveal } from "@/components/Typography";
+import { useTheme } from "@/context/ThemeContext";
+import { digesting, hobbies, learning, projects, skills } from "@/data/portfolio";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const BLUR_FADE_DELAY = 0.04;
+const latestFirst = [...projects].reverse();
+const building = projects.filter((p) => p.inProgress);
 
-const experience = [
-  {
-    company: "SAP",
-    href: "https://www.sap.com/",
-    role: "Software Developer",
-    logo: "/sap-logo.svg",
-    location: "Vancouver, BC",
-    dates: "Sept 2026 - Present",
-  },
-];
-
-const education = [
-  {
-    school: "Simon Fraser University",
-    href: "https://www.sfu.ca/",
-    degree: "Data Science",
-    logo: "/sfu-logo.svg",
-    dates: "2025 - Present",
-  },
-  {
-    school: "Douglas College",
-    href: "https://www.douglascollege.ca/",
-    degree: "Computer Science",
-    logo: "/douglas-college-logo.svg",
-    dates: "2023 - 2025",
-  },
-];
-
-function SectionHeading({ children }: { children: ReactNode }) {
-  return <h2 className="font-bold text-xl tracking-tight">{children}</h2>;
-}
-
-function Badge({ children }: { children: ReactNode }) {
+function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center bg-background shadow-sm px-3 border ring-border/20 border-border rounded-xl ring-2 h-7 font-medium text-foreground text-xs">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="link">
       {children}
-    </span>
+    </a>
   );
 }
 
 export default function HomePage() {
   const { hash } = useLocation();
-  const item = useMotionVariants();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (!hash) return;
     const scrollToHash = () => {
-      document.querySelector(hash)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
     const frame = requestAnimationFrame(scrollToHash);
     const delayed = window.setTimeout(scrollToHash, 400);
@@ -75,292 +35,184 @@ export default function HomePage() {
   }, [hash]);
 
   return (
-    <motion.main
-      className="flex flex-col gap-14 mx-auto pb-28 w-full max-w-2xl min-h-dvh"
-      variants={staggerContainer(0.06)}
-      initial="hidden"
-      animate="show"
-    >
-      <section id="home" className="scroll-mt-20">
-        <motion.div
-          className="flex md:flex-row flex-col md:justify-between md:items-start gap-6"
-          variants={item}
+    <div className="flex flex-col gap-28 sm:gap-36">
+      {/* ---------------------------------------------------------------- hero */}
+      <section
+        id="home"
+        className="grid scroll-mt-10 grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12"
+      >
+        <PageTitle className="md:col-span-2 lg:col-span-2">anton florendo</PageTitle>
+
+        <Reveal
+          delay={0.35}
+          className="md:col-start-2 md:row-span-2 md:row-start-2 lg:col-start-3 lg:row-span-3 lg:row-start-1"
         >
-          <div className="flex flex-col gap-2 order-2 md:order-1">
-            <motion.h1
-              className="font-semibold text-3xl sm:text-4xl lg:text-5xl tracking-tight"
-              initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY }}
-            >
-              Hi, I'm Anton
-            </motion.h1>
-            <motion.p
-              className="max-w-[600px] text-muted-foreground md:text-lg lg:text-xl text-pretty"
-              initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY * 2 }}
-            >
-              Data Science student at SFU. Building full-stack applications,
-              exploring AI/ML engineering, and shaping practical AI workflows.
-            </motion.p>
-          </div>
-          <motion.div
-            className="order-1 md:order-2 bg-muted shadow-lg border rounded-3xl ring-4 ring-muted size-24 md:size-32 overflow-hidden"
-            initial={{ opacity: 0, y: -8, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.42, ease: EASE_OUT, delay: BLUR_FADE_DELAY }}
-          >
-            <img
-              src="/pfp.jpeg"
-              alt="Anton Florendo"
-              className="w-full h-full object-cover"
+          <figure className="mx-auto w-full max-w-[360px] md:ml-auto">
+            <AsciiImage
+              src="/pfp-cutout.webp"
+              alt="Portrait of Anton, drawn in ASCII characters"
+              className="aspect-[560/553] w-full text-foreground"
+              cell={5}
+              ink={theme === "dark" ? "light" : "dark"}
+              fit="contain"
+              minInk={0.12}
             />
-          </motion.div>
-        </motion.div>
+            <figcaption className="mt-3 flex justify-between border-t border-rule pt-2 text-[11px] text-muted-foreground">
+              <span>fig. 01 — me, in plain text</span>
+              <span className="hidden sm:inline">hover to develop</span>
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal delay={0.25} className="md:col-start-1 md:row-start-2">
+          <Label>tldr</Label>
+          <p className="max-w-[46ch]">
+            I&rsquo;m a data science student at SFU and a software developer at SAP. I build
+            full-stack products and practical AI tools — from{" "}
+            <Link to="/projects/verifai" className="link">
+              browser extensions
+            </Link>{" "}
+            and{" "}
+            <Link to="/projects/careerconnect" className="link">
+              matching engines
+            </Link>{" "}
+            to <Ext href="https://syllabyss.tech">study games</Ext> built from your own notes.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.35} className="md:col-start-1 md:row-start-3 lg:col-start-2">
+          <Label>today</Label>
+          <p className="max-w-[46ch]">
+            Software developer at <Ext href="https://www.sap.com/">SAP</Ext> in Vancouver since
+            September 2026, while studying data science at{" "}
+            <Ext href="https://www.sfu.ca/">Simon Fraser University</Ext>. Most of my side work
+            sits where web apps meet LLMs.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.45} className="md:col-start-1 md:row-start-4 lg:col-start-3">
+          <Label>yesterday</Label>
+          <p className="max-w-[46ch]">
+            Before SFU, I studied computer science at{" "}
+            <Ext href="https://www.douglascollege.ca/">Douglas College</Ext> (2023–25). Won SFU
+            Surge SillyHacks 2026 with{" "}
+            <Link to="/projects/bscode" className="link">
+              BSCode
+            </Link>{" "}
+            and shipped Syllabyss at StormHacks 2026.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.55} className="md:col-start-2 md:row-start-4 lg:col-start-1">
+          <Label>in the background</Label>
+          <dl className="grid grid-cols-[6.5rem_1fr] gap-y-2">
+            {building.length > 0 && (
+              <>
+                <dt className="text-muted-foreground">building</dt>
+                <dd>
+                  {building.map((p) => p.title).join(", ")}
+                  <span className="ml-2 inline-block size-1.5 animate-pulse rounded-full bg-signal align-middle" />
+                </dd>
+              </>
+            )}
+            <dt className="text-muted-foreground">learning</dt>
+            <dd>{learning.join(", ")}</dd>
+            <dt className="text-muted-foreground">reading</dt>
+            <dd className="space-y-0.5">
+              {digesting.slice(0, 3).map((d) => (
+                <a key={d.name} href={d.url} target="_blank" rel="noopener noreferrer" className="link block w-fit">
+                  {d.name}
+                </a>
+              ))}
+            </dd>
+            <dt className="text-muted-foreground">off-screen</dt>
+            <dd>{hobbies.join(", ")}</dd>
+          </dl>
+        </Reveal>
       </section>
 
-      {/*
-      <motion.section id="about" className="space-y-4 scroll-mt-24" variants={item}>
-        <SectionHeading>About</SectionHeading>
-        <p className="text-muted-foreground text-pretty leading-relaxed">
-          I'm focused on the overlap between software engineering and applied AI:
-          products that turn messy user context into useful, grounded tools. Lately
-          that has meant building browser extensions, internship matching systems,
-          recipe generation apps, and ML experiments while studying Data Science at
-          Simon Fraser University.
-        </p>
-      </motion.section>
-      */}
+      {/* ---------------------------------------------------------------- work */}
+      <section id="projects" className="scroll-mt-10">
+        <Label
+          right={
+            <Link to="/projects" className="link text-muted-foreground">
+              all {projects.length} projects →
+            </Link>
+          }
+        >
+          selected work
+        </Label>
+        <Reveal>
+          <ProjectList projects={latestFirst.slice(0, 5)} headingLevel="h3" />
+        </Reveal>
+      </section>
 
-      {/* <motion.section id="current" className="space-y-6 scroll-mt-24" variants={item}>
-        <SectionHeading>Currently</SectionHeading>
-        <div className="border-border border-y divide-y divide-border">
-          <div className="sm:items-center gap-2 grid sm:grid-cols-[4rem_1fr] py-4">
-            <span className="font-mono tabular-nums text-muted-foreground text-xs">
-              01
-            </span>
-            <div className="sm:items-center gap-1 grid sm:grid-cols-[8rem_1fr]">
-              <p className="font-semibold leading-snug">Exploring</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                AI Engineering, RAG pipelines, and deep learning.
-              </p>
-            </div>
-          </div>
-          <div className="sm:items-center gap-2 grid sm:grid-cols-[4rem_1fr] py-4">
-            <span className="font-mono tabular-nums text-muted-foreground text-xs">
-              02
-            </span>
-            <div className="sm:items-center gap-1 grid sm:grid-cols-[8rem_1fr]">
-              <p className="font-semibold leading-snug">Learning</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {learning.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="sm:items-center gap-2 grid sm:grid-cols-[4rem_1fr] py-4">
-            <span className="font-mono tabular-nums text-muted-foreground text-xs">
-              03
-            </span>
-            <div className="sm:items-center gap-1 grid sm:grid-cols-[8rem_1fr] min-w-0">
-              <p className="font-semibold leading-snug">Digesting</p>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 min-w-0">
-                {digesting.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground text-sm hover:underline underline-offset-4 leading-relaxed transition-colors"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section> */}
-
-      <motion.section id="experience" className="space-y-6 scroll-mt-24" variants={item}>
-        <SectionHeading>Experience</SectionHeading>
-        <div className="flex flex-col gap-6">
-          {experience.map((item) => (
-            <a
-              key={`${item.company}-${item.role}`}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex justify-between items-center gap-3"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="flex justify-center items-center bg-white shadow-sm p-1.5 border ring-border/30 border-border rounded-xl ring-2 size-11 shrink-0">
-                  <img
-                    src={item.logo}
-                    alt={`${item.company} logo`}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 font-semibold leading-none">
-                    {item.company}
-                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 size-3.5 text-muted-foreground transition-all -translate-x-1 group-hover:translate-x-0 duration-200" />
-                  </div>
-                  <p className="mt-1 text-muted-foreground text-sm">
-                    {item.role}
-                  </p>
-                </div>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="tabular-nums text-muted-foreground text-xs">
-                  {item.dates}
-                </p>
-                <p className="mt-1 text-muted-foreground/70 text-xs">
-                  {item.location}
-                </p>
-              </div>
-            </a>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="education" className="space-y-6 scroll-mt-24" variants={item}>
-        <SectionHeading>Education</SectionHeading>
-        <div className="flex flex-col gap-6">
-          {education.map((item) => (
-            <a
-              key={item.school}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex justify-between items-center gap-3"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="flex justify-center items-center bg-white shadow-sm p-1.5 border ring-border/30 border-border rounded-xl ring-2 size-11 shrink-0">
-                  <img
-                    src={item.logo}
-                    alt={`${item.school} logo`}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 font-semibold leading-none">
-                    {item.school}
-                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 size-3.5 text-muted-foreground transition-all -translate-x-1 group-hover:translate-x-0 duration-200" />
-                  </div>
-                  <p className="mt-1 text-muted-foreground text-sm">
-                    {item.degree}
-                  </p>
-                </div>
-              </div>
-              <p className="tabular-nums text-muted-foreground text-xs text-right shrink-0">
-                {item.dates}
-              </p>
-            </a>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="skills" className="space-y-4 scroll-mt-24" variants={item}>
-        <SectionHeading>Skills</SectionHeading>
-        <div className="flex flex-wrap gap-2">
-          {skills.map(({ name, icon: Icon, color }) => (
-            <Badge key={name}>
-              <Icon className="mr-2 size-4" style={color ? { color } : undefined} />
-              {name}
-            </Badge>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="projects" className="scroll-mt-24" variants={item}>
-        <div className="flex flex-col gap-y-8 min-h-0">
-          <div className="flex flex-col justify-center items-center gap-y-4">
-            <div className="flex items-center w-full">
-              <div className="flex-1 bg-linear-to-r from-5% from-transparent via-95% to-transparent via-border h-px" />
-              <div className="z-10 bg-primary px-4 py-1 border rounded-xl">
-                <span className="font-medium text-primary-foreground text-sm">
-                  My Projects
-                </span>
-              </div>
-              <div className="flex-1 bg-linear-to-l from-5% from-transparent via-95% to-transparent via-border h-px" />
-            </div>
-            <div className="flex flex-col justify-center items-center gap-y-3 text-center">
-              <h2 className="font-bold text-3xl sm:text-4xl tracking-tight">
-                Check out my latest work
-              </h2>
-            </div>
-          </div>
-          <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 mx-auto max-w-[800px]">
-            {[...projects].reverse().map((project, index) => (
-              <ProjectCard key={project.title} index={index} headingLevel="h3" {...project} />
+      {/* ---------------------------------------------------------------- stack */}
+      <section id="skills" className="grid scroll-mt-10 gap-x-12 gap-y-8 lg:grid-cols-3">
+        <Reveal>
+          <Label>toolbox</Label>
+          <p className="max-w-[40ch] text-muted-foreground">
+            What I reach for most. TypeScript and Python daily, Java and Swift when the project
+            asks for it.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="lg:col-span-2">
+          <ul className="grid grid-cols-2 border-t border-l border-rule sm:grid-cols-4 lg:grid-cols-5">
+            {skills.map(({ name, icon: Icon, color }) => (
+              <li
+                key={name}
+                className="group flex items-center gap-2.5 border-r border-b border-rule px-3 py-3 text-[12px] transition-colors hover:bg-muted"
+              >
+                <Icon
+                  aria-hidden
+                  className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-[var(--brand)]"
+                  style={{ "--brand": color ?? "var(--foreground)" } as React.CSSProperties}
+                />
+                {name}
+              </li>
             ))}
-          </div>
-        </div>
-      </motion.section>
+          </ul>
+        </Reveal>
+      </section>
 
-      <motion.section id="life" className="space-y-6 scroll-mt-24" variants={item}>
-        <div className="flex justify-between items-end gap-4">
-          <div>
-            <SectionHeading>Life</SectionHeading>
-            <p className="mt-2 text-muted-foreground text-sm">
-              Outside the editor: {hobbies.join(", ")}.
+      {/* ---------------------------------------------------------------- contact */}
+      <section id="contact" className="scroll-mt-10 pb-10">
+        <Label>contact</Label>
+        <Reveal className="grid gap-10 pt-6 lg:grid-cols-3">
+          <h2 className="display text-[clamp(2.6rem,7vw,6.5rem)] lg:col-span-2">
+            say hi<span className="text-signal">.</span>
+          </h2>
+          <div className="flex flex-col justify-end gap-5">
+            <p className="max-w-[40ch] text-muted-foreground">
+              Building something, hiring for an internship, or want to compare notes on AI tooling?
+              Send me a message.
             </p>
+            <ul className="border-t border-rule">
+              {[
+                { label: "linkedin", value: "/in/antonflorendo", href: "https://www.linkedin.com/in/antonflorendo/" },
+                { label: "github", value: "@aaf1007", href: "https://github.com/aaf1007" },
+                { label: "resume", value: "pdf, one page", href: "/resume" },
+              ].map((c) => (
+                <li key={c.label}>
+                  <Link
+                    to={c.href}
+                    {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group flex items-center justify-between border-b border-rule py-3 transition-colors hover:bg-muted"
+                  >
+                    <span className="pl-1 text-muted-foreground">{c.label}</span>
+                    <span className="flex items-center gap-2 pr-1">
+                      {c.value}
+                      <span className="text-signal transition-transform duration-300 group-hover:translate-x-1">
+                        {c.href.startsWith("http") ? "↗" : "→"}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <Link
-            to="/life"
-            className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground text-sm transition-colors"
-          >
-            View all <ArrowUpRight className="size-3.5" />
-          </Link>
-        </div>
-        <div className="gap-2 grid grid-cols-3">
-          {lifePhotos.slice(0, 6).map((photo) => (
-            <img
-              key={photo}
-              src={photo}
-              alt=""
-              className="shadow-sm border rounded-xl object-cover aspect-square"
-            />
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="contact" className="scroll-mt-24" variants={item}>
-        <div className="relative px-6 sm:px-10 py-8 sm:py-10 border rounded-xl overflow-hidden text-center">
-          <div className="top-0 absolute inset-x-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:18px_18px] opacity-30 h-1/2 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-          <div className="relative flex flex-col items-center gap-3">
-            <span className="font-medium text-muted-foreground text-xs">
-              Contact
-            </span>
-            <h2 className="font-bold text-3xl sm:text-4xl tracking-tight">
-              Get in touch
-            </h2>
-            <p className="mx-auto max-w-lg text-muted-foreground text-sm sm:text-base text-balance leading-relaxed">
-              Want to build something, talk AI workflows, or compare notes on a
-              project? Reach me on{" "}
-              <a
-                href="https://www.linkedin.com/in/antonflorendo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground underline underline-offset-4"
-              >
-                LinkedIn
-              </a>{" "}
-              or{" "}
-              <a
-                href="https://github.com/aaf1007"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground underline underline-offset-4"
-              >
-                GitHub
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </motion.section>
-    </motion.main>
+        </Reveal>
+      </section>
+    </div>
   );
 }

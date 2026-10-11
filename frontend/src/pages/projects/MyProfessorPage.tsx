@@ -14,8 +14,9 @@ import {
 
 export default function MyProfessorPage() {
   return (
-    <div className="max-w-[740px] mx-auto pb-24">
+    <div className="pb-12">
       <Hero
+        title="sfu myprofessor"
         src="/sfu-my-prof.png"
         alt="SFU MySchedule with professor ratings injected next to each course"
       />

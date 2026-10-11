@@ -1,24 +1,27 @@
-import ProjectCard from "@/components/ProjectCard";
+import ProjectList from "@/components/ProjectList";
+import { PageTitle, Reveal } from "@/components/Typography";
 import { projects } from "@/data/portfolio";
+
+const latestFirst = [...projects].reverse();
+const caseStudies = projects.filter((p) => p.caseStudy).length;
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-[800px] pb-28">
-      <div className="mb-10 flex flex-col gap-3 text-center">
-        <p className="text-sm font-medium text-muted-foreground">My Projects</p>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Check out my latest work
-        </h1>
-        <p className="mx-auto max-w-xl text-balance text-muted-foreground">
-          A running collection of apps, extensions, AI experiments, and case
-          studies.
-        </p>
+    <div className="flex flex-col gap-14">
+      <div className="grid gap-8 lg:grid-cols-3 lg:items-end">
+        <PageTitle className="lg:col-span-2" aside={<span className="tabular-nums">({projects.length})</span>}>
+          work
+        </PageTitle>
+        <Reveal delay={0.3}>
+          <p className="max-w-[44ch] text-muted-foreground">
+            Apps, browser extensions, ML experiments and hackathon builds, newest first.{" "}
+            {caseStudies} have a written case study.
+          </p>
+        </Reveal>
       </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {[...projects].reverse().map((project, index) => (
-          <ProjectCard key={project.title} index={index} {...project} />
-        ))}
-      </div>
+      <Reveal delay={0.2}>
+        <ProjectList projects={latestFirst} />
+      </Reveal>
     </div>
   );
 }

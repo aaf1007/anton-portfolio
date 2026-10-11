@@ -1,64 +1,49 @@
-import { staggerContainer, useMotionVariants } from "@/lib/motion";
-import { ArrowUpRight, Download } from "lucide-react";
-import { motion } from "motion/react";
+import { Label, PageTitle, Reveal } from "@/components/Typography";
 
 const RESUME_PDF = "/resume.pdf";
 const RESUME_IMAGE = "/resume.png";
 const DOWNLOAD_NAME = "Anton_Florendo_Resume.pdf";
 
 export default function ResumePage() {
-  const item = useMotionVariants();
-
   return (
-    <motion.main
-      className="flex flex-col gap-6 mx-auto pb-28 w-full max-w-3xl"
-      variants={staggerContainer(0.06)}
-      initial="hidden"
-      animate="show"
-    >
-      <motion.div
-        className="flex sm:flex-row flex-col sm:justify-between sm:items-end gap-4"
-        variants={item}
-      >
-        <div>
-          <h1 className="font-bold text-3xl sm:text-4xl tracking-tight">Resume</h1>
-          <p className="mt-2 text-muted-foreground text-sm">
-            Data Science at SFU, building full-stack and AI/ML projects.
-          </p>
+    <div className="grid gap-x-12 gap-y-12 lg:grid-cols-3">
+      <PageTitle className="lg:col-span-3">resume</PageTitle>
+
+      <Reveal delay={0.25} className="lg:sticky lg:top-12 lg:self-start">
+        <Label>one page</Label>
+        <p className="max-w-[40ch] text-muted-foreground">
+          Data science at SFU, software developer at SAP, and the projects in between.
+        </p>
+        <ul className="mt-6 border-t border-rule">
+          <li>
+            <a
+              href={RESUME_PDF}
+              download={DOWNLOAD_NAME}
+              className="group flex items-center justify-between border-b border-rule py-3 transition-colors hover:bg-muted"
+            >
+              <span className="pl-1">download pdf</span>
+              <span className="pr-1 text-signal transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href={RESUME_PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between border-b border-rule py-3 transition-colors hover:bg-muted"
+            >
+              <span className="pl-1">open in a new tab</span>
+              <span className="pr-1 text-signal transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+            </a>
+          </li>
+        </ul>
+      </Reveal>
+
+      <Reveal delay={0.35} className="lg:col-span-2">
+        <div className="overflow-hidden rounded-[6px] border border-rule bg-white shadow-[0_30px_80px_-40px_rgb(0_0_0/0.7)] dark:brightness-[0.92]">
+          <img src={RESUME_IMAGE} alt="Resume of Anton Florendo" className="h-auto w-full" width={1700} height={2200} />
         </div>
-        <a
-          href={RESUME_PDF}
-          download={DOWNLOAD_NAME}
-          className="inline-flex justify-center items-center gap-2 bg-primary shadow-sm px-4 border ring-border/20 border-border rounded-xl ring-2 h-10 font-medium text-primary-foreground text-sm hover:opacity-90 transition-opacity shrink-0"
-        >
-          <Download className="size-4" />
-          Download PDF
-        </a>
-      </motion.div>
-
-      <motion.div
-        className="bg-white shadow-sm border ring-border/20 border-border rounded-xl ring-2 overflow-hidden"
-        variants={item}
-      >
-        <img
-          src={RESUME_IMAGE}
-          alt="Resume of Anton Florendo"
-          className="w-full h-auto"
-          width={1700}
-          height={2200}
-        />
-      </motion.div>
-
-      <motion.div variants={item}>
-        <a
-          href={RESUME_PDF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground text-sm transition-colors"
-        >
-          Open PDF in a new tab <ArrowUpRight className="size-3.5" />
-        </a>
-      </motion.div>
-    </motion.main>
+      </Reveal>
+    </div>
   );
 }

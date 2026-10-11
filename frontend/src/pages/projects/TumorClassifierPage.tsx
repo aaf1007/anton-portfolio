@@ -14,8 +14,9 @@ import {
 
 export default function TumorClassifierPage() {
   return (
-    <div className="max-w-[740px] mx-auto pb-24">
+    <div className="pb-12">
       <Hero
+        title="tumor classifier"
         src="/cmpt310.jpg"
         alt="Comparative diagnostic system for breast cancer classification"
       />
