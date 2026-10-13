@@ -42,6 +42,35 @@ export type Skill = {
   color?: string;
 };
 
+export type Experience = {
+  role: string;
+  org: string;
+  url?: string;
+  location: string;
+  dates: string;
+  current?: boolean;
+  points: string[];
+  stack: string[];
+};
+
+// newest first; rendered in this order
+export const experience: Experience[] = [
+  {
+    role: "Software Developer Intern",
+    org: "SAP",
+    url: "https://www.sap.com/",
+    location: "Vancouver, BC",
+    dates: "Sept 2026 – now",
+    current: true,
+    points: [
+      "Migrating a monolithic Spring Boot app to microservices, refactoring backend logic into standalone services with their own REST endpoints.",
+      "Building Vue 3 frontend features with Pinia and Vue Router, wired to the newly separated service APIs.",
+      "Taking tickets from requirements through testing and deployment with PMs, DevOps and QA across Agile sprints.",
+    ],
+    stack: ["Spring Boot", "Vue 3", "Pinia", "REST"],
+  },
+];
+
 export const coursework = [
   "Intro to Artificial Intelligence",
   "Intro to Software Engineering",

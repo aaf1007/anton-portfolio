@@ -18,7 +18,7 @@ npm run preview   # preview production build
 Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to Vercel. No backend.
 
 **Routing** — React Router v7 with a single `Layout` shell (`src/Layout.tsx`) wrapping all pages via `<Outlet>`. Routes are declared in `src/App.tsx`:
-- `/` → `HomePage` — wordmark, ASCII portrait, tldr/today/yesterday blocks, selected work, toolbox, `#contact`
+- `/` → `HomePage` — wordmark, ASCII portrait, tldr/today/yesterday blocks, experience, selected work, toolbox, `#contact`
 - `/projects` → `ProjectsPage` ("work" in the nav) — full project index, newest first
 - `/projects/<slug>` → per-project case-study pages in `src/pages/projects/` (verifai, bscode, careerconnect, myprofessor, tumor-classifier)
 - `/life` → `LifePage` — halftone photo grid with a lightbox
@@ -31,7 +31,7 @@ Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to 
 
 **Path alias** — `@/` resolves to `src/` (configured in `vite.config.ts`).
 
-**Content** — All site content lives in `src/data/portfolio.tsx`: `projects`, `skills`, `coursework`, `hobbies`, `learning`, `digesting`, and `lifePhotos`. Pages import from it rather than defining content inline.
+**Content** — All site content lives in `src/data/portfolio.tsx`: `projects`, `experience` (newest first, rendered in order), `skills`, `coursework`, `hobbies`, `learning`, `digesting`, and `lifePhotos`. Pages import from it rather than defining content inline.
 
 **Adding a project** — Add an entry to the `projects` array in `src/data/portfolio.tsx`. `ProjectsPage` reverses the array before mapping, so **append to the end** to have it render first. Images go in `frontend/public/` and are referenced by root-relative path (e.g. `/statify.png`); `image` also accepts a ReactNode for video. Set `inProgress: true` for an "in progress" marker under the title (it also lists the project as "building" on the home page). Links are optional and each renders as a small link only when set: `caseStudy` (a case-study route, see Routing; shown as "case study"), `live` (deployed site or store listing), `github` ("code"). The row title links to the first of `caseStudy` → `live` → `github`; `image` is the hover preview (desktop) and inline thumbnail (mobile). `ProjectList` is shared by `HomePage` (latest five) and `ProjectsPage`.
 

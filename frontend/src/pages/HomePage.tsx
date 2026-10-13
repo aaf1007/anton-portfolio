@@ -2,7 +2,7 @@ import AsciiImage from "@/components/ascii/AsciiImage";
 import ProjectList from "@/components/ProjectList";
 import { Label, PageTitle, Reveal } from "@/components/Typography";
 import { useTheme } from "@/context/ThemeContext";
-import { digesting, hobbies, learning, projects, skills } from "@/data/portfolio";
+import { digesting, experience, hobbies, learning, projects, skills } from "@/data/portfolio";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -128,6 +128,55 @@ export default function HomePage() {
             <dt className="text-muted-foreground">off-screen</dt>
             <dd>{hobbies.join(", ")}</dd>
           </dl>
+        </Reveal>
+      </section>
+
+      {/* ---------------------------------------------------------- experience */}
+      <section id="experience" className="grid scroll-mt-10 gap-x-12 gap-y-8 lg:grid-cols-3">
+        <Reveal>
+          <Label>experience</Label>
+          <p className="max-w-[40ch] text-muted-foreground">
+            Where I&rsquo;ve been shipping outside of side projects. The full version is on my{" "}
+            <Link to="/resume" className="link">
+              resume
+            </Link>
+            .
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="lg:col-span-2">
+          <ol className="border-t border-rule">
+            {experience.map(({ role, org, url, location, dates, current, points, stack }) => (
+              <li
+                key={`${role}-${org}`}
+                className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-3 border-b border-rule px-1 py-5 lg:px-2"
+              >
+                <div className="min-w-0">
+                  <h3 className="heading text-[15px] leading-snug text-foreground lg:text-base">
+                    {role}
+                  </h3>
+                  <p className="mt-1 text-[12.5px] text-muted-foreground">
+                    {url ? <Ext href={url}>{org}</Ext> : org}
+                    <span className="text-faint"> · {location}</span>
+                  </p>
+                </div>
+                <span className="flex items-center gap-2 self-start pt-0.5 text-right text-[11px] text-muted-foreground tabular-nums">
+                  {current && <span className="size-1.5 animate-pulse rounded-full bg-signal" />}
+                  {dates}
+                </span>
+                <ul className="col-span-2 max-w-[68ch] space-y-1.5 text-[12.5px] leading-relaxed text-muted-foreground">
+                  {points.map((point) => (
+                    <li key={point} className="grid grid-cols-[1rem_1fr] text-pretty">
+                      <span aria-hidden className="text-faint">
+                        –
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                <p className="col-span-2 text-[11.5px] text-faint">{stack.join(" / ")}</p>
+              </li>
+            ))}
+          </ol>
         </Reveal>
       </section>
 
