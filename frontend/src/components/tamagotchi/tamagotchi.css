@@ -1,0 +1,625 @@
+/* The tamagotchi on the home page, and its expanded "tank mode" (?tama). */
+
+:root {
+  --hud-k: 1;
+}
+@media (min-width: 2400px) {
+  :root {
+    --hud-k: calc(15 / 11);
+  }
+}
+
+/* ------------------------------------------------------------ the toy */
+.tama {
+  position: relative;
+  width: 270px;
+  flex-shrink: 0;
+  /* the expand chip (key-cursor.tsx draws a growing one over this for fine pointers) */
+  cursor:
+    url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"%3E%3Crect x="1" y="1" width="24" height="24" rx="6" fill="rgba(0,0,0,0.52)"/%3E%3Cpath d="M15 7h4v4M11 19H7v-4M19 7l-5 5M7 19l5-5" stroke="white" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E')
+      13 13,
+    pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.tama:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 10px;
+  border-radius: 28px;
+}
+html.tank-open .tama,
+html.tank-closing .tama {
+  isolation: auto;
+}
+.tama-rot {
+  position: relative;
+  transform: rotate(6deg);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: 47.1% 11.5%;
+}
+@media (hover: hover) {
+  .tama:hover .tama-rot {
+    transform: rotate(0);
+  }
+}
+html.tank-mode .tama-rot,
+html.tank-closing .tama-rot {
+  transform: none;
+}
+.tama-sway {
+  position: relative;
+  transform-origin: 47.1% 11.5%;
+  animation: tamaSway 7.5s ease-in-out infinite;
+}
+@keyframes tamaSway {
+  0% {
+    transform: rotate(0.7deg);
+  }
+  27% {
+    transform: rotate(-0.8deg);
+  }
+  53% {
+    transform: rotate(0.55deg);
+  }
+  78% {
+    transform: rotate(-0.65deg);
+  }
+  to {
+    transform: rotate(0.7deg);
+  }
+}
+html.tank-mode .tama-sway,
+html.tank-closing .tama-sway {
+  animation: none;
+  transform: none;
+}
+
+.tama-frame svg,
+.tama-btn,
+.tank-dev-btn {
+  display: block;
+}
+.tama-frame svg {
+  width: 100%;
+  height: 100%;
+}
+.tama-frame {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1099 / 1504;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(14px 24px 12px rgb(40 50 90 / 0.12)) drop-shadow(2px 3px 3px rgb(40 50 90 / 0.08));
+}
+
+/* the screen slot: the tank shows through the frame's window */
+.tama .card-fish {
+  position: absolute;
+  left: 22.8%;
+  top: 38.7%;
+  width: 53.7%;
+  height: 39.7%;
+  z-index: 2;
+  cursor: inherit;
+}
+html.tank-mode .tama,
+html.tank-mode .tama .card-fish {
+  cursor: default;
+}
+.tank-box {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #b8d8e8;
+}
+.tank-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 5px 12px #1e2d4633,
+    inset 0 1px 3px #1e2d4638;
+}
+.tank-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+html.tank-mode .tank-canvas {
+  image-rendering: pixelated;
+}
+html.tank-open .tank-canvas {
+  cursor: default;
+  touch-action: none;
+}
+
+/* FEED ME, on hover over the card's screen */
+.fish-hud {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+.card-fish:hover .fish-hud {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+html.tank-open .fish-hud {
+  display: none;
+}
+.fish-btn {
+  background: #0000007a;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: calc(11px * var(--hud-k));
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: round(calc(6px * var(--hud-k)), 1px);
+  line-height: 1;
+  transition: transform 0.1s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.fish-btn:hover {
+  background: #00000094;
+}
+.fish-btn:active {
+  transform: scale(0.9);
+  background: #ffffff1a;
+}
+@media (min-width: 2400px) {
+  .fish-btn {
+    padding: 6px 12px;
+  }
+}
+
+/* the keychain hangs plumb outside the tilt */
+.tama-chain,
+.tank-dev-chain,
+.tama-charm,
+.tank-dev-charm {
+  position: absolute;
+  left: 31.7%;
+  top: -17.2%;
+  width: 20%;
+  transform-origin: 77% 97%;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tama-chain,
+.tank-dev-chain {
+  display: block;
+  height: auto;
+  aspect-ratio: 217 / 438;
+  z-index: 3;
+  cursor: default;
+  user-select: none;
+}
+.tama .tama-chain {
+  pointer-events: auto;
+}
+.tank-dev-chain {
+  z-index: 1;
+}
+.tama-charm,
+.tank-dev-charm {
+  aspect-ratio: 217 / 438;
+  z-index: 4;
+  pointer-events: none;
+}
+.charm-hang {
+  position: absolute;
+  display: block;
+  width: 165%;
+  left: 1.25%;
+  top: calc(34% - 165% * 34 / 220 * 217 / 438);
+  transform-origin: 47.7% 7.6%;
+  transform: rotate(-24deg);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.charm-hang svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 220 / 445;
+  transform-origin: 47.7% 7.6%;
+  animation: charmSway 5.3s ease-in-out infinite;
+}
+/* the little laptop-and-matcha charm, on the ring's lower left, swinging the other way */
+.charm-mini {
+  position: absolute;
+  left: 13.5%;
+  top: 21.5%;
+  width: 72%;
+  transform-origin: 37.5% 2%;
+  transform: rotate(14deg);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.charm-mini svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 40 / 34;
+  transform-origin: 37.5% 2%;
+  animation: charmSway 4.6s ease-in-out -1.2s infinite;
+}
+@media (hover: hover) {
+  html:not(.tank-mode) .tama:hover .charm-mini,
+  html.tank-open .tank-dev-chain:hover ~ .tank-dev-charm .charm-mini {
+    transform: rotate(8deg);
+  }
+}
+@keyframes charmSway {
+  0%,
+  to {
+    transform: rotate(0);
+  }
+  38% {
+    transform: rotate(-1deg);
+  }
+  71% {
+    transform: rotate(0.8deg);
+  }
+}
+@media (hover: hover) {
+  html:not(.tank-mode) .tama:hover .tama-chain,
+  html:not(.tank-mode) .tama:hover .tama-charm,
+  html.tank-open .tank-dev-chain:hover,
+  html.tank-open .tank-dev-chain:hover ~ .tank-dev-charm {
+    transform: rotate(-4deg);
+  }
+  html:not(.tank-mode) .tama:hover .charm-hang,
+  html.tank-open .tank-dev-chain:hover ~ .tank-dev-charm .charm-hang {
+    transform: rotate(-31deg);
+  }
+}
+.chain-lean,
+.tank-dev-charm.chain-lean {
+  transform: rotate(-4deg);
+}
+.tank-dev-charm.chain-lean .charm-hang {
+  transform: rotate(-31deg);
+}
+.chain-snap,
+.chain-snap .charm-hang {
+  transition: none !important;
+}
+
+/* the three buttons: layers to press, and round hit areas over them */
+.tama-btn,
+.tank-dev-btn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1099 / 1504;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.07s ease, filter 0.07s ease;
+}
+.tama-btn--1,
+.tank-dev-btn--1 {
+  transform-origin: 34.5% 88%;
+}
+.tama-btn--2,
+.tank-dev-btn--2 {
+  transform-origin: 50% 90.5%;
+}
+.tama-btn--3,
+.tank-dev-btn--3 {
+  transform-origin: 65.3% 88.1%;
+}
+.dome-down {
+  transform: translateY(0.12%) scale(0.96);
+  filter: brightness(0.93);
+}
+.dome-pressed {
+  animation: domePress 0.28s ease;
+}
+@keyframes domePress {
+  0%,
+  to {
+    transform: none;
+    filter: none;
+  }
+  30%,
+  60% {
+    transform: translateY(0.12%) scale(0.96);
+    filter: brightness(0.93);
+  }
+}
+.tama-key,
+.tank-dev-key {
+  position: absolute;
+  z-index: 3;
+  height: 8.5%;
+  width: 12%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.tama-key--1,
+.tank-dev-key--1 {
+  left: 28.6%;
+  top: 83.8%;
+}
+.tama-key--2,
+.tank-dev-key--2 {
+  left: 44.1%;
+  top: 86.3%;
+}
+.tama-key--3,
+.tank-dev-key--3 {
+  left: 59.4%;
+  top: 83.8%;
+}
+.tank-dev-key {
+  cursor: pointer;
+}
+.tank-dev-key:focus:not(:focus-visible) {
+  outline: none;
+}
+.tank-dev-key:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+html.tank-open .tank-dev .tank-dev-key {
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------- the expanded toy */
+.tank-dev {
+  position: fixed;
+  left: var(--dev-left, 50%);
+  top: var(--dev-top, 10vh);
+  width: var(--dev-w, 320px);
+  z-index: 64;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+html.tank-open .tank-dev,
+html.tank-closing .tank-dev {
+  opacity: 1;
+  visibility: visible;
+}
+.tank-dev .tank-dev-frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1099 / 1504;
+  pointer-events: none;
+  filter: drop-shadow(0 24px 32px rgb(40 50 90 / 0.15));
+}
+html.tank-open .tank-dev .tank-dev-chain {
+  pointer-events: auto;
+}
+.tank-dev .tank-dev-btn {
+  z-index: auto;
+}
+
+/* the tank glides out of the card into the expanded toy's window */
+html.tank-visited .tank-box {
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.tank-open .card-fish {
+  cursor: default;
+}
+html.tank-open .tank-box {
+  transform: translate(var(--tank-fish-x, 0px), var(--tank-fish-y, 0px)) scale(var(--tank-fish-scale, 4));
+  border-radius: calc(var(--radius-card) / var(--tank-fish-scale, 4));
+  z-index: 60;
+}
+html.tank-instant .tank-box {
+  transition: none !important;
+}
+
+#tank-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+html.tank-open #tank-overlay {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease 0.55s, visibility 0s;
+}
+#tank-overlay button {
+  pointer-events: auto;
+}
+.tank-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.tank-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+html.tank-mode,
+html.tank-mode body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+/* ------------------------------------------------- the grow-in cursor chip */
+.key-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+  will-change: transform;
+}
+.key-cursor-chip {
+  --k: var(--hud-k);
+  display: block;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  padding: 0 round(calc(8px * var(--k)), 1px) 0 round(calc(9px * var(--k)), 1px);
+  height: round(calc(24px * var(--k)), 1px);
+  line-height: round(calc(24px * var(--k)), 1px);
+  border-radius: round(calc(6px * var(--k)), 1px);
+  background: #00000085;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: calc(11px * var(--k));
+  font-weight: 500;
+  letter-spacing: calc(1px * var(--k));
+  white-space: nowrap;
+  transition: transform 0.12s ease-in, opacity 0.12s ease-in;
+}
+.key-cursor.is-on .key-cursor-chip {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: transform 0.2s cubic-bezier(0.3, 1.15, 0.5, 1), opacity 0.12s ease-out;
+}
+.key-cursor--icon .key-cursor-chip {
+  width: round(calc(24px * var(--k)), 1px);
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.key-cursor-chip svg {
+  display: block;
+  width: round(calc(16px * var(--k)), 1px);
+  height: round(calc(16px * var(--k)), 1px);
+}
+html.key-cursor-live .tank-dev-key {
+  cursor: none;
+}
+html.key-cursor-live.tank-play-back .tank-dev-key,
+html.key-cursor-live.tank-playing .tank-dev-key--2 {
+  cursor: default;
+}
+html.key-cursor-live:not(.tank-mode) .tama {
+  cursor: none;
+}
+html.key-cursor-live:not(.tank-mode) .tama .tama-chain {
+  cursor: default;
+}
+html.key-cursor-live:not(.tank-mode) .tama .fish-btn {
+  cursor: pointer;
+}
+
+/* --------------------------------- the page steps back while the tank is out */
+html.tank-visited .tama,
+html.tank-visited .tama-frame,
+html.tank-visited .tama-btn,
+html.tank-visited .tama-chain,
+html.tank-visited .tama-charm,
+html.tank-visited .top-nav,
+html.tank-visited .folder-nav,
+html.tank-visited .mobile-dock,
+html.tank-visited .colophon,
+html.tank-visited .poster-hello,
+html.tank-visited .poster-big,
+html.tank-visited .poster-sub,
+html.tank-visited .poster-left,
+html.tank-visited .poster-right {
+  animation: none !important;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+html.tank-visited .tama-frame,
+html.tank-visited .tama-btn,
+html.tank-visited .tama-chain,
+html.tank-visited .tama-charm {
+  transition: none;
+}
+html.tank-visited .tama-chain,
+html.tank-visited .tama-charm {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.tank-visited .tama-rot,
+html.tank-mode .tama-rot,
+html.tank-closing .tama-rot {
+  animation: none;
+}
+html.tank-mode .tama-frame,
+html.tank-mode .tama-btn,
+html.tank-mode .tama-chain,
+html.tank-mode .tama-charm,
+html.tank-mode .top-nav,
+html.tank-mode .folder-nav,
+html.tank-mode .mobile-dock,
+html.tank-mode .colophon,
+html.tank-mode .poster-hello,
+html.tank-mode .poster-big,
+html.tank-mode .poster-sub,
+html.tank-mode .poster-left,
+html.tank-mode .poster-right {
+  animation: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+html.tank-mode .top-nav,
+html.tank-mode .folder-nav,
+html.tank-mode .mobile-dock,
+html.tank-mode .colophon,
+html.tank-mode .poster-hello,
+html.tank-mode .poster-big,
+html.tank-mode .poster-sub,
+html.tank-mode .poster-left,
+html.tank-mode .poster-right {
+  transition: opacity 0.15s ease-out;
+}
+html.tank-mode .tama {
+  animation: none !important;
+  opacity: 1;
+}
+html.tank-closing .tama-frame,
+html.tank-closing .tama-btn,
+html.tank-closing .tama-chain,
+html.tank-closing .tama-charm {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tama-sway,
+  .charm-hang svg,
+  .charm-mini svg {
+    animation: none;
+  }
+  .key-cursor-chip,
+  .key-cursor.is-on .key-cursor-chip {
+    transition: opacity 0.12s ease;
+  }
+}

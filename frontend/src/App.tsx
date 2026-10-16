@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@/context/ThemeContext";
 import { useEffect } from "react";
 import {
   BrowserRouter,
@@ -9,8 +8,10 @@ import {
 } from "react-router-dom";
 import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
-import LifePage from "./pages/LifePage";
+import ProfilePage from "./pages/ProfilePage";
 import ProjectsPage from "./pages/ProjectsPage";
+import PhotosPage from "./pages/PhotosPage";
+import QuestsPage from "./pages/QuestsPage";
 import ResumePage from "./pages/ResumePage";
 import BSCodePage from "./pages/projects/BSCodePage";
 import CareerConnectPage from "./pages/projects/CareerConnectPage";
@@ -28,26 +29,28 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="projects" element={<ProjectsPage />} />
-            <Route path="projects/verifai" element={<VerifAIPage />} />
-            <Route path="projects/bscode" element={<BSCodePage />} />
-            <Route path="projects/careerconnect" element={<CareerConnectPage />} />
-            <Route path="projects/myprofessor" element={<MyProfessorPage />} />
-            <Route path="projects/tumor-classifier" element={<TumorClassifierPage />} />
-            <Route path="life" element={<LifePage />} />
-            <Route path="resume" element={<ResumePage />} />
-            <Route path="contact" element={<Navigate to="/#contact" replace />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/verifai" element={<VerifAIPage />} />
+          <Route path="projects/bscode" element={<BSCodePage />} />
+          <Route path="projects/careerconnect" element={<CareerConnectPage />} />
+          <Route path="projects/myprofessor" element={<MyProfessorPage />} />
+          <Route path="projects/tumor-classifier" element={<TumorClassifierPage />} />
+          <Route path="quests" element={<QuestsPage />} />
+          <Route path="photos" element={<PhotosPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="life" element={<Navigate to="/quests" replace />} />
+          <Route path="about" element={<Navigate to="/profile" replace />} />
+          <Route path="resume" element={<ResumePage />} />
+          <Route path="contact" element={<Navigate to="/profile" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

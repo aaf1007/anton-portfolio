@@ -1,6 +1,7 @@
 import {
     BackLink,
     Beat,
+    CaseStudy,
     Bridge,
     Card,
     Feature,
@@ -14,7 +15,7 @@ import {
 
 export default function BSCodePage() {
   return (
-    <div className="pb-12">
+    <CaseStudy>
       <Hero
         title="bscode"
         src="/bscode.png"
@@ -50,7 +51,7 @@ export default function BSCodePage() {
             href="https://bscode-alpha.vercel.app/"
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="ulink"
           >
             live →
           </a>
@@ -61,7 +62,7 @@ export default function BSCodePage() {
         eyebrow="THE PREMISE"
         heading="What if the editor took your attention seriously?"
       >
-        <div className="space-y-10">
+        <div className="cs-iter-list">
           <Beat
             title="The rot is already happening"
             body="Most of us already context-switch between code and TikTok every 90 seconds. Pretending we don't is the lie. We wanted an editor that admitted it — and turned the dopamine pipeline into a feature instead of a leak."
@@ -74,7 +75,7 @@ export default function BSCodePage() {
       </Section>
 
       <Section eyebrow="FIRST 6 HOURS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="cs-iter-list">
           <Card title="V0: Monaco + iframe">
             <p>
               We dropped Monaco into a Next.js page and embedded a YouTube
@@ -126,7 +127,7 @@ export default function BSCodePage() {
       </Section>
 
       <Section eyebrow="REFLECTIONS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="cs-learnings">
           <Reflection title="Commit harder than feels reasonable">
             The pitch we almost made was 'a fun coding environment.' The pitch
             that won was 'the editor for people who can't focus.' Halfway-funny
@@ -141,7 +142,7 @@ export default function BSCodePage() {
       </Section>
 
       <Section eyebrow="WHAT'S NEXT">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div className="cs-learnings">
           <Reflection title="Real file persistence">
             Files currently live in localStorage. Adding GitHub gist sync would
             make BSCode usable for actual scratchpad work, not just demos.
@@ -175,6 +176,6 @@ export default function BSCodePage() {
       </Section>
 
       <BackLink />
-    </div>
+    </CaseStudy>
   );
 }

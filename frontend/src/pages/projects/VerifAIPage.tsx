@@ -1,5 +1,6 @@
 import {
   BackLink,
+  CaseStudy,
   Beat,
   Bridge,
   Card,
@@ -14,7 +15,7 @@ import {
 
 export default function VerifAIPage() {
   return (
-    <div className="pb-12">
+    <CaseStudy>
       <Hero
         title="verifai"
         src="/verifai-new.png"
@@ -50,7 +51,7 @@ export default function VerifAIPage() {
             href="https://github.com/aaf1007/verifai"
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="ulink"
           >
             See it on GitHub →
           </a>
@@ -61,7 +62,7 @@ export default function VerifAIPage() {
         eyebrow="THE USER JOURNEY"
         heading="Why does fact-checking feel like a chore?"
       >
-        <div className="space-y-10">
+        <div className="cs-iter-list">
           <Beat
             title="Context-switching tax"
             body="Every time I saw a dubious claim — a stat in a tweet, a confident sentence in a blog post — verifying it meant opening three tabs, copying text, and skimming sources. By the time I had an answer, I'd usually lost the thread of what I was reading."
@@ -74,7 +75,7 @@ export default function VerifAIPage() {
       </Section>
 
       <Section eyebrow="FIRST SOLUTION">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="cs-iter-list">
           <Card title="A bookmarklet">
             <p>
               I started with a one-line bookmarklet that POSTed selected text
@@ -130,7 +131,7 @@ export default function VerifAIPage() {
       </Section>
 
       <Section eyebrow="REFLECTIONS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="cs-learnings">
           <Reflection title="Streaming changes the feel of trust">
             Showing tokens as they arrive — instead of a 6-second spinner —
             made the verdict feel investigated rather than declared. The
@@ -145,7 +146,7 @@ export default function VerifAIPage() {
       </Section>
 
       <Section eyebrow="NEXT STEPS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div className="cs-learnings">
           <Reflection title="Per-domain trust scores">
             Aggregate verdict outcomes by source domain so users can see, over
             time, which sites tend to hold up under verification and which
@@ -180,6 +181,6 @@ export default function VerifAIPage() {
       </Section>
 
       <BackLink />
-    </div>
+    </CaseStudy>
   );
 }

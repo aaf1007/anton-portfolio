@@ -1,0 +1,516 @@
+/* The quests page's last window: a sticker sheet, a to-do on lined paper and a photo on the desk.
+   Stickers peel off the sheet and stick anywhere from the board to the page's end. */
+
+.sq-board {
+  position: relative;
+  width: 100%;
+  margin-top: 24px;
+}
+/* where stickers stick: sized by the script to the page's width and down to its end */
+.sq-board-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+.sq-board-grid {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sq-board-desk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  padding: 0 5.4% 0 2.6%;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------------ paper */
+.sq-board-paper {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44%;
+  margin-left: 7%;
+  margin-right: -3%;
+  z-index: 2;
+  transform: rotate(-3deg);
+  container-type: inline-size;
+  pointer-events: none;
+  user-select: none;
+}
+.sq-board-paper-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 726 / 357;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.12)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.06));
+}
+.sq-board-note {
+  pointer-events: auto;
+  position: absolute;
+  left: 5.6cqw;
+  right: 5cqw;
+  top: 2.14cqw;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 3.4cqw;
+  line-height: 8.264cqw;
+  letter-spacing: 0.005em;
+  color: var(--color-muted);
+}
+.sq-board-note-head {
+  margin: 0;
+}
+.sq-board-todo {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sq-board-todo li {
+  position: relative;
+  padding-left: 1.6em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* the hand-drawn box */
+.sq-board-todo li::before {
+  content: "";
+  position: absolute;
+  left: 0.09em;
+  top: 2.19cqw;
+  width: 0.77em;
+  height: 0.77em;
+  box-sizing: border-box;
+  border: 0.073em solid var(--color-muted);
+  border-radius: 0.11em;
+  opacity: 0.85;
+}
+.sq-board-todo li:hover::before,
+.sq-board-todo li:focus-visible::before {
+  opacity: 1;
+}
+.sq-board-todo li:focus-visible {
+  outline: none;
+}
+/* the tick, drawn like a pen stroke */
+.sq-board-tick {
+  position: absolute;
+  left: calc(0.09em - 0.257em + 0.09em);
+  top: calc(2.19cqw - 0.347em);
+  width: 1.284em;
+  height: 1.284em;
+  overflow: visible;
+  transform: rotate(-4deg);
+  opacity: 0.92;
+  pointer-events: none;
+}
+.sq-board-tick path {
+  fill: none;
+  stroke: var(--color-muted);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.12s ease-in;
+}
+.sq-board-todo li.is-done .sq-board-tick path {
+  stroke-dashoffset: 0;
+}
+.sq-board-todo li.is-done .sq-board-tick-a {
+  transition: stroke-dashoffset 0.12s ease-in;
+}
+.sq-board-todo li.is-done .sq-board-tick-b {
+  transition: stroke-dashoffset 0.22s cubic-bezier(0.3, 0, 0.6, 1) 0.1s;
+}
+/* and the line run through it */
+.sq-board-strike {
+  position: relative;
+}
+.sq-board-strike::after {
+  content: "";
+  position: absolute;
+  left: -0.4em;
+  right: -0.48em;
+  top: 0.36em;
+  height: 0.5em;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.12s ease-in;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M2 11.2c40-1.4 80-2.2 120-1.6 30 0.4 55 0.8 76 1.6' fill='none' stroke='%235a5248' stroke-width='1.7' stroke-linecap='round' opacity='0.92' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
+    0 0 / 100% 100% no-repeat;
+}
+.sq-board-todo li.is-done .sq-board-strike::after {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.28s cubic-bezier(0.3, 0, 0.5, 1) 0.26s;
+}
+
+/* ------------------------------------------------------------------ photo */
+.sq-board-photo {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 22%;
+  margin: 0;
+  transform: rotate(7deg);
+  pointer-events: none;
+  user-select: none;
+}
+.sq-board-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 982 / 1200;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0.5px 1px #00000038, 0 1.5px 3px #00000024, 0 4px 8px -2px #0000001f;
+}
+
+/* ------------------------------------------------------------------ sheet */
+.sq-board-sheet {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: 27%;
+  box-sizing: border-box;
+  container-type: inline-size;
+  padding: 0;
+  background: #f9f9f7;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 1.5px #0000001f, 0 1px 3px #0000000f, 0 3px 12px #0000000d;
+}
+/* a sheen across the gloss */
+.sq-board-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, #fff0 0% 16%, #fff3 36%, #ffffff8c 47%, #fff9 50%, #ffffff26 54%, #fff0 59% 62%, #ffffff2e 66%, #fff0 71% 100%);
+}
+.sq-board-sheet-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4cqw;
+  box-sizing: border-box;
+  padding: 7cqw;
+  justify-items: center;
+  align-items: center;
+}
+.sq-board-pack {
+  width: 82%;
+  aspect-ratio: 1;
+  height: auto;
+  justify-self: center;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.7;
+}
+.sq-board-choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: grab;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}
+/* the peel: the depression left on the sheet, the art still stuck down,
+   and the flap (its white back, mirrored across the fold) */
+.sq-peel {
+  position: relative;
+  width: calc(74% * var(--k, 1));
+  height: calc(74% * var(--k, 1));
+  transition: opacity 0.35s ease;
+}
+.sq-board-choice.is-tall .sq-peel {
+  width: 100%;
+  height: 100%;
+}
+.sq-peel-front,
+.sq-peel-flap {
+  transition: opacity 0.35s ease;
+}
+.sq-board-choice.is-peeled .sq-peel-front,
+.sq-board-choice.is-peeled .sq-peel-flap {
+  opacity: 0;
+  transition: none;
+}
+.sq-peel img,
+.sq-peel-front,
+.sq-peel-flap-shade,
+.sq-peel-flap,
+.sq-peel-flap-lift {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.sq-peel img {
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  image-rendering: pixelated;
+}
+.sq-peel-front-img {
+  filter: url(#sticker-outline);
+}
+.sq-board-choice.is-baked .sq-peel-front-img,
+.sq-board-choice.is-baked .sq-peel-back,
+.sq-board-choice.is-baked .sq-peel-depression {
+  filter: none;
+  left: -20%;
+  top: -20%;
+  width: 140%;
+  height: 140%;
+}
+.sq-board-choice.is-baked .sq-peel-back {
+  transform-origin: 14.2857% 14.2857%;
+}
+.sq-peel-depression {
+  filter: url(#sticker-outline) brightness(0) invert(1) brightness(0.9);
+  opacity: 0.9;
+}
+.sq-peel-flap-shade {
+  left: -150%;
+  top: -150%;
+  width: 400%;
+  height: 400%;
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0 0.5px 1px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+}
+.sq-peel-flap {
+  visibility: hidden;
+}
+.sq-peel-flap-lift {
+  left: 37.5%;
+  top: 37.5%;
+  width: 25%;
+  height: 25%;
+}
+.sq-peel-back {
+  filter: url(#sticker-outline) brightness(0) invert(1) brightness(0.97) url(#sticker-hairline);
+  transform-origin: 0 0;
+}
+.sq-board-choice.is-baked .sq-peel-back {
+  filter: url(#sticker-hairline);
+}
+.sq-peel-fold {
+  position: absolute;
+  left: -20%;
+  top: -20%;
+  width: 140%;
+  height: 140%;
+  transform-origin: 14.2857% 14.2857%;
+  pointer-events: none;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.sq-board-choice:not(.is-baked) .sq-peel-fold {
+  display: none;
+}
+.sq-board-choice.is-peeling {
+  z-index: 3;
+}
+.sq-board-choice:active {
+  cursor: grabbing;
+}
+.sq-board-choice:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+.sq-board-reset {
+  align-self: center;
+  justify-self: center;
+  padding: 6px 8px;
+  transform: translateY(-7px);
+  background: none;
+  border: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  cursor: pointer;
+  opacity: 0.45;
+}
+.sq-board-reset.is-live {
+  opacity: 0.75;
+}
+.sq-board-reset:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+/* the baked art overhangs its box by 20% each side (Tailwind's preflight would squeeze it) */
+.sq-board img {
+  max-width: none;
+}
+.sq-board-ghost img {
+  max-width: none;
+}
+
+/* ------------------------------------------------------- placed stickers */
+.sq-board-sticker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  pointer-events: auto;
+  user-select: none;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  filter: drop-shadow(0 0.5px 1px rgba(0, 0, 0, 0.1));
+}
+.sq-board-sticker:active {
+  cursor: grabbing;
+}
+.sq-board-sticker.is-lifted {
+  z-index: 5;
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.24)) drop-shadow(0 0.5px 1px rgba(0, 0, 0, 0.14));
+}
+.sq-board-sticker img {
+  width: calc(var(--sticker-size, 76px) * var(--k, 1));
+  height: calc(var(--sticker-size, 76px) * var(--k, 1));
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  image-rendering: pixelated;
+  filter: url(#sticker-outline);
+}
+.sq-board-sticker.is-tall img {
+  width: var(--sticker-size-tall, 104px);
+  height: var(--sticker-size-tall, 104px);
+}
+/* the one in your hand: it flips over as it comes off the sheet */
+.sq-board-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.24)) drop-shadow(0 0.5px 1px rgba(0, 0, 0, 0.14));
+}
+.sq-board-ghost-flip {
+  display: block;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.sq-board-ghost img {
+  width: calc(var(--sticker-size, 76px) * var(--k, 1));
+  height: calc(var(--sticker-size, 76px) * var(--k, 1));
+  object-fit: contain;
+  display: block;
+  image-rendering: pixelated;
+  filter: url(#sticker-outline);
+  backface-visibility: hidden;
+}
+.sq-board-ghost img.sq-board-ghost-back {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(-1px);
+  filter: url(#sticker-outline) brightness(0) invert(1) brightness(0.97) url(#sticker-hairline);
+  backface-visibility: visible;
+}
+.sq-board-ghost.is-tall img {
+  width: var(--sticker-size-tall, 104px);
+  height: var(--sticker-size-tall, 104px);
+}
+.sq-board-sticker.is-baked img,
+.sq-board-ghost.is-baked img {
+  filter: none;
+  width: calc(var(--sticker-size, 76px) * var(--k, 1) * 1.4);
+  height: calc(var(--sticker-size, 76px) * var(--k, 1) * 1.4);
+  margin: calc(var(--sticker-size, 76px) * var(--k, 1) * -0.2);
+}
+.sq-board-sticker.is-baked.is-tall img,
+.sq-board-ghost.is-baked.is-tall img {
+  width: calc(var(--sticker-size-tall, 104px) * 1.4);
+  height: calc(var(--sticker-size-tall, 104px) * 1.4);
+  margin: calc(var(--sticker-size-tall, 104px) * -0.2);
+}
+.sq-board-ghost.is-baked img.sq-board-ghost-back {
+  filter: url(#sticker-hairline);
+}
+.sq-board-ghost.is-baked .sq-board-ghost-flip {
+  display: flow-root;
+}
+
+@media (max-width: 900px) {
+  .sq-board-grid {
+    min-height: 0;
+    padding: 72px 0 88px;
+  }
+  .sq-board-desk {
+    flex-direction: column;
+    gap: 28px;
+    padding: 0;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+  .sq-board-paper {
+    order: -2;
+    width: 84%;
+    margin: 0;
+  }
+  .sq-board-photo {
+    order: -1;
+    width: 44%;
+    margin-top: -40px;
+    margin-bottom: 16px;
+  }
+  .sq-board-sheet {
+    width: 70%;
+  }
+}
+@media (max-width: 480px) {
+  .sq-board-sheet {
+    width: 80%;
+  }
+  .sq-board-photo {
+    width: 52%;
+  }
+}
+@media (min-width: 1920px) {
+  .sq-board-grid {
+    min-height: 520px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sq-peel,
+  .sq-board-tick path,
+  .sq-board-strike::after,
+  .sq-board-todo li.is-done .sq-board-tick-a,
+  .sq-board-todo li.is-done .sq-board-tick-b,
+  .sq-board-todo li.is-done .sq-board-strike::after {
+    transition: none;
+  }
+}

@@ -1,5 +1,6 @@
 import {
   BackLink,
+  CaseStudy,
   Beat,
   Bridge,
   Card,
@@ -14,7 +15,7 @@ import {
 
 export default function CareerConnectPage() {
   return (
-    <div className="pb-12">
+    <CaseStudy>
       <Hero
         title="careerconnect"
         src="/sfucareer.png"
@@ -50,7 +51,7 @@ export default function CareerConnectPage() {
             href="https://sfu-careerconnect.vercel.app"
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="ulink"
           >
             live →
           </a>
@@ -61,7 +62,7 @@ export default function CareerConnectPage() {
         eyebrow="THE USER JOURNEY"
         heading="Why does every internship feel like a long shot?"
       >
-        <div className="space-y-10">
+        <div className="cs-iter-list">
           <Beat
             title="The 200-application year"
             body="Friends were sending out hundreds of applications and getting single-digit responses. The signal-to-noise ratio on LinkedIn job filters is low — keyword matches don't know that CMPT 225 means data structures, or that 'built a full-stack app' covers a real chunk of the requirements."
@@ -74,7 +75,7 @@ export default function CareerConnectPage() {
       </Section>
 
       <Section eyebrow="FIRST SOLUTION">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="cs-iter-list">
           <Card title="Single-shot ranking">
             <p>
               The first version stuffed the resume, course list, and 50 job
@@ -128,7 +129,7 @@ export default function CareerConnectPage() {
       </Section>
 
       <Section eyebrow="REFLECTIONS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="cs-learnings">
           <Reflection title="Pipelines beat prompts">
             The instinct with LLMs is to make the prompt smarter. The bigger
             unlock was making the prompt simpler and chaining several together.
@@ -144,7 +145,7 @@ export default function CareerConnectPage() {
       </Section>
 
       <Section eyebrow="NEXT STEPS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div className="cs-learnings">
           <Reflection title="Resume-aware cover letters">
             Generate a starter cover letter per job that references both the
             posting and the user's strongest matching project — turning the
@@ -180,6 +181,6 @@ export default function CareerConnectPage() {
       </Section>
 
       <BackLink />
-    </div>
+    </CaseStudy>
   );
 }
