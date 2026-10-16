@@ -1,5 +1,6 @@
 import {
   BackLink,
+  CaseStudy,
   Beat,
   Bridge,
   Card,
@@ -14,7 +15,7 @@ import {
 
 export default function TumorClassifierPage() {
   return (
-    <div className="pb-12">
+    <CaseStudy>
       <Hero
         title="tumor classifier"
         src="/cmpt310.jpg"
@@ -51,7 +52,7 @@ export default function TumorClassifierPage() {
             href="https://github.com/kunaljoshi2/Tumor-Classifier"
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="ulink"
           >
             GitHub →
           </a>
@@ -62,7 +63,7 @@ export default function TumorClassifierPage() {
         eyebrow="THE PROBLEM"
         heading="Why accuracy is the wrong metric here"
       >
-        <div className="space-y-10">
+        <div className="cs-iter-list">
           <Beat
             title="False negatives kill"
             body="A model that misses a malignant tumor sends a sick person home with a clean bill of health. A model that flags a benign tumor sends a healthy person to a follow-up biopsy. These are not symmetric errors — and any metric that treats them as such is the wrong metric."
@@ -75,7 +76,7 @@ export default function TumorClassifierPage() {
       </Section>
 
       <Section eyebrow="FIRST PASS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="cs-iter-list">
           <Card title="Default scikit-learn">
             <p>
               We started with out-of-the-box logistic regression, KNN, and a
@@ -135,7 +136,7 @@ export default function TumorClassifierPage() {
       </Section>
 
       <Section eyebrow="REFLECTIONS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="cs-learnings">
           <Reflection title="The metric is the model">
             Choosing F2 over accuracy or F1 wasn't a tweak — it was the actual
             design decision. Once we picked the right loss to optimize against,
@@ -152,7 +153,7 @@ export default function TumorClassifierPage() {
       </Section>
 
       <Section eyebrow="WHAT'S NEXT">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div className="cs-learnings">
           <Reflection title="Calibrated probabilities">
             Right now the threshold is tuned, but the underlying probabilities
             aren't calibrated. Platt scaling or isotonic regression would let
@@ -190,6 +191,6 @@ export default function TumorClassifierPage() {
       </Section>
 
       <BackLink />
-    </div>
+    </CaseStudy>
   );
 }

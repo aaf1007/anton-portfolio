@@ -2,20 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anton Florendo</title>
+    <title>Anton Florendo | Software Developer</title>
     <meta name="description" content="Anton Florendo — data science student at SFU and software developer at SAP, building full-stack products and practical AI tools." />
-    <meta name="theme-color" content="#18171b" />
+    <meta name="theme-color" content="#e4e4e0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
     <script>
-  (function() {
-    var stored = localStorage.getItem('theme');
-    // Dark is the default; light only when chosen.
-    if (stored !== 'light') {
-      document.documentElement.classList.add('dark');
-    }
-  })();
-</script>
+      // ?tama opens the tamagotchi expanded from the first paint (the tank classes must land before it)
+      if (/[?&]tama\b/.test(location.search) && location.pathname === "/")
+        document.documentElement.classList.add("tank-visited", "tank-mode", "tank-open", "tank-instant");
+    </script>
   </head>
   <body>
     <div id="root"></div>

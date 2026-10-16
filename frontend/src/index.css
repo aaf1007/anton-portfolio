@@ -1,251 +1,305 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/archivo/standard.css";
-@import "@fontsource/commit-mono/400.css";
-@import "@fontsource/commit-mono/700.css";
-@custom-variant dark (&:where(.dark, .dark *));
 
-/* Light: warm paper and ink. */
+/* Fonts load from Google Fonts in index.html: DM Sans, DM Mono, Inter, and
+   Newsreader (italic, display optical size) standing in for Editorial New. */
+
 :root {
-  --radius: 0.5rem;
-  --background: #e8e6e0;
-  --foreground: #19181c;
-  --muted-foreground: #6b6870;
-  --faint: #8c8990;
-  --rule: rgb(25 24 28 / 0.14);
-  --panel: rgb(255 255 255 / 0.45);
-  --signal: #2459e8;
-  --signal-foreground: #f4f6ff;
-  /* rgb triplet the dither canvases draw with */
-  --dot: 25 24 28;
-  --dot-max: 0.2;
+  /* the palette, named as on the page it is modelled on */
+  --color-bg: #f7f7f5;
+  --color-label: #2d2d2d;
+  --color-text: #404040;
+  --color-ink: #1e1a15;
+  --color-muted: #5a5248;
+  --color-grey-text: #666666;
+  --color-grey-light: #8a8a8a;
+  --color-outline: #e9e9e9;
+  --color-shadow: #dedede;
+  --color-shadow-strong: #d5d5d5;
+  --color-blue-card: #c8d9f0;
+  --color-accent: #0066cc;
+  --color-blue-select: #0081f2;
+  --color-handle: #6080b0;
+  --color-sand-border: rgb(30 26 21 / 0.08);
+  --color-status-green: #22c55e;
+  --radius-card: 12px;
 
-  --card: var(--panel);
-  --card-foreground: var(--foreground);
-  --popover: var(--background);
-  --popover-foreground: var(--foreground);
-  --primary: var(--foreground);
-  --primary-foreground: var(--background);
-  --secondary: var(--panel);
-  --secondary-foreground: var(--foreground);
-  --muted: rgb(25 24 28 / 0.06);
-  --accent: rgb(25 24 28 / 0.06);
-  --accent-foreground: var(--foreground);
-  --destructive: #d23b2e;
-  --border: var(--rule);
-  --input: var(--rule);
-  --ring: var(--signal);
+  /* the ground: a grey sheet under two blurred near-white ones */
+  --ombre-from: #e4e4e0;
+  --ombre-halo: #f0f0ee;
+  --grid-color: #efefec;
+
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", "Courier New", monospace;
+  --font-ui: Inter, "DM Sans", system-ui, sans-serif;
+
+  /* older names still used by a few components */
+  --ink: var(--color-ink);
+  --ink-display: var(--color-label);
+  --ink-body: var(--color-text);
+  --ink-soft: var(--color-grey-text);
+  --ink-faint: var(--color-grey-light);
+  --paper: var(--ombre-from);
+  --card: #ffffff;
+  --blue: var(--color-blue-select);
+  --link: var(--color-handle);
+  --line: rgb(30 26 21 / 0.09);
+  color-scheme: light;
 }
 
-/* Dark: the default. Charcoal with a violet cast. */
-html.dark {
-  --background: #18171b;
-  --foreground: #ebeae6;
-  --muted-foreground: #8e8b94;
-  --faint: #706d78;
-  --rule: rgb(235 234 230 / 0.12);
-  --panel: rgb(255 255 255 / 0.03);
-  --signal: #3a6df0;
-  --signal-foreground: #f4f6ff;
-  --dot: 235 234 230;
-  --dot-max: 0.22;
-  --muted: rgb(255 255 255 / 0.06);
-  --accent: rgb(255 255 255 / 0.06);
-  --destructive: #f0645a;
+@media (min-width: 1920px) {
+  :root {
+    --radius-card: 14px;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-faint: var(--faint);
-  --color-rule: var(--rule);
-  --color-panel: var(--panel);
-  --color-signal: var(--signal);
-  --color-signal-foreground: var(--signal-foreground);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-display: var(--ink-display);
+  --color-ink-body: var(--ink-body);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-link: var(--link);
+  --color-line: var(--line);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --font-sans: "Commit Mono", ui-monospace, Menlo, monospace;
-  --font-mono: "Commit Mono", ui-monospace, Menlo, monospace;
-  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --color-blue: var(--blue);
+  --color-accent: var(--color-accent);
+  --color-muted: var(--color-muted);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  --font-ui: var(--font-ui);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/60;
-  }
-  html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color-scheme: light;
-  }
-  html.dark {
-    color-scheme: dark;
-  }
-  body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  ::selection {
-    background: var(--signal);
-    color: var(--signal-foreground);
-  }
-  :focus-visible {
-    outline: 2px solid var(--signal);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-}
-
-@layer components {
-  /* Huge extended-width wordmark used for page titles. */
-  .display {
-    font-family: var(--font-display);
-    font-stretch: 125%;
-    font-weight: 820;
-    letter-spacing: -0.045em;
-    line-height: 0.86;
-    text-transform: lowercase;
-  }
-  /* Smaller expanded headings inside pages. */
-  .heading {
-    font-family: var(--font-display);
-    font-stretch: 112%;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  /* Underlined inline link, like a hyperlink in a plain-text document. */
-  .link {
-    text-decoration: underline;
-    text-decoration-color: var(--faint);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
-    transition: text-decoration-color 0.2s ease, color 0.2s ease;
-  }
-  .link:hover {
-    text-decoration-color: var(--signal);
-    color: var(--foreground);
-  }
-}
-
-/* ---------------------------------------------------------------- dither */
-
-/* Canvas cells are scaled up with no smoothing, then cut into dots by a grid mask. */
-.dot-grid {
-  image-rendering: pixelated;
-  --cell-pitch: 3px;
-  --cell-dot: 2px;
-  mask-image:
-    linear-gradient(to right, #000 var(--cell-dot), transparent var(--cell-dot)),
-    linear-gradient(to bottom, #000 var(--cell-dot), transparent var(--cell-dot));
-  mask-size: var(--cell-pitch) var(--cell-pitch);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-}
-
-/* A photo printed as halftone: dots in the page colour cover it until hover. */
-.halftone {
-  position: relative;
-  isolation: isolate;
-}
-.halftone > img,
-.halftone > video {
-  filter: grayscale(1) contrast(1.15) brightness(0.95);
-  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.halftone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle at center, transparent 0.9px, var(--background) 1.5px);
-  background-size: 3px 3px;
-  opacity: 0.85;
-  transition: opacity 0.5s ease;
-}
-.halftone:hover > img,
-.halftone:hover > video,
-.halftone[data-active] > img,
-.halftone[data-active] > video {
-  filter: none;
-}
-.halftone:hover::after,
-.halftone[data-active]::after {
-  opacity: 0;
-}
-
-/* ---------------------------------------------------------------- ascii image lens */
-
-@property --lr {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-.ascii-image {
-  --lx: 50%;
-  --ly: 50%;
-  transition: --lr 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.ascii-image > img {
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-.ascii-image > canvas {
-  transition: opacity 0.45s ease;
-}
-/* circle: a soft window onto the real photo follows the cursor */
-.ascii-image[data-lens="circle"][data-active] {
-  --lr: 90px;
-}
-.ascii-image[data-lens="circle"] > img {
-  opacity: 1;
-  mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), #000 65%, transparent 100%);
-}
-.ascii-image[data-lens="circle"] > canvas {
-  mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), transparent 55%, #000 100%);
-}
-/* full: the whole image resolves */
-.ascii-image[data-lens="full"][data-active] > img {
-  opacity: 1;
-}
-.ascii-image[data-lens="full"][data-active] > canvas {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-color: var(--line);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    line-height: normal;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--ombre-from);
+    min-height: 100dvh;
+  }
+  /* two blurred sheets over the grey ground: a halo 60px past every edge, then the paper */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    z-index: -5;
+    pointer-events: none;
+  }
+  body::before {
+    inset: -60px;
+    border-radius: 60px;
+    background: var(--ombre-halo);
+    filter: blur(90px);
+  }
+  body::after {
+    inset: 0;
+    background: var(--color-bg);
+    filter: blur(60px);
+  }
+  /* case studies sit on the plain paper colour */
+  html.reading body {
+    background: var(--color-bg);
+  }
+  html.reading body::before,
+  html.reading body::after {
+    display: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+  }
+  img,
+  video {
+    -webkit-user-drag: none;
+  }
+  ::selection {
+    background: var(--color-blue-select);
+    color: white;
+  }
+}
+
+/* --------------------------------------------------------------- the ground */
+.ground-grid,
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+/* film under the grid (grid over grain) */
+.film-grain {
+  z-index: -3;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+  image-rendering: pixelated;
+}
+.ground-grid {
+  z-index: -2;
+}
+@media (pointer: coarse) {
+  .film-grain {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------ shared bits */
+.handle {
+  color: var(--color-handle);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.handle:hover,
+.handle:focus-visible {
+  color: var(--color-accent);
+}
+.handle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* status badges: shipped / building / live / award */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  line-height: 1.4;
+  white-space: nowrap;
+  border-radius: 100px;
+  border: 0.5px solid var(--color-outline);
+  background: rgb(255 255 255 / 0.85);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  color: var(--color-muted);
+}
+.badge--award {
+  position: relative;
+  overflow: hidden;
+  gap: 6px;
+}
+.badge--award::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 20%, rgb(255 215 0 / 0.08) 38%, rgb(255 255 255 / 0.3) 50%, rgb(255 215 0 / 0.08) 62%, transparent 80%);
+  animation: badge-shimmer 9s ease-in-out infinite;
+}
+@keyframes badge-shimmer {
+  0% {
+    left: -100%;
+  }
+  30%,
+  to {
+    left: 120%;
+  }
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-status-green);
+  animation: shipped-pulse 2.2s ease-in-out infinite;
+}
+.status-dot--building {
+  background: #fbbf24;
+  animation-name: building-pulse;
+}
+@keyframes shipped-pulse {
+  0%,
+  to {
+    box-shadow: 0 0 4px #22c55e, 0 0 7px #22c55e8c, 0 0 12px #22c55e40;
+  }
+  50% {
+    box-shadow: 0 0 6px #22c55e, 0 0 13px #22c55ee6, 0 0 21px #22c55e80;
+  }
+}
+@keyframes building-pulse {
+  0%,
+  to {
+    box-shadow: 0 0 3px #fbbf24, 0 0 5px #fbbf2466, 0 0 9px #fbbf242e;
+  }
+  50% {
+    box-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24a6, 0 0 16px #fbbf2459;
+  }
+}
+
+/* a .txt card: the bio facts on profile */
+.txt-card {
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.07);
+  border-radius: var(--radius-card);
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.txt-card:hover {
+  border-color: #a8b8d8;
+}
+
+/* pixel-raster headings (see lib/raster.ts): the canvas sits over transparent text */
+.raster-host {
+  position: relative;
+}
+.is-rastered,
+.is-rastered * {
+  color: transparent !important;
+}
+.raster-canvas {
+  position: absolute;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  /* none, not translateY(0): a held transform would trap position: fixed children */
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

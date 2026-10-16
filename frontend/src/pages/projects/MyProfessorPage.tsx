@@ -1,5 +1,6 @@
 import {
   BackLink,
+  CaseStudy,
   Beat,
   Bridge,
   Card,
@@ -14,7 +15,7 @@ import {
 
 export default function MyProfessorPage() {
   return (
-    <div className="pb-12">
+    <CaseStudy>
       <Hero
         title="sfu myprofessor"
         src="/sfu-my-prof.png"
@@ -50,7 +51,7 @@ export default function MyProfessorPage() {
             href="https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp?utm_source=item-share-cb"
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="ulink"
           >
             Chrome Web Store →
           </a>
@@ -61,7 +62,7 @@ export default function MyProfessorPage() {
         eyebrow="THE USER JOURNEY"
         heading="Why does enrollment feel like a research project?"
       >
-        <div className="space-y-10">
+        <div className="cs-iter-list">
           <Beat
             title="Three tabs, one decision"
             body="Picking a section meant juggling SFU MySchedule, Rate My Professor, and a spreadsheet — typing each professor's name into a search bar, copying the number back. Multiply by five courses and the friction starts to make people pick by time slot instead of teaching quality."
@@ -74,7 +75,7 @@ export default function MyProfessorPage() {
       </Section>
 
       <Section eyebrow="FIRST ATTEMPT">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="cs-iter-list">
           <Card title="Naive name lookup">
             <p>
               The first prototype scraped the professor name and hit RMP's
@@ -128,7 +129,7 @@ export default function MyProfessorPage() {
       </Section>
 
       <Section eyebrow="REFLECTIONS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="cs-learnings">
           <Reflection title="Small extensions are good design exercises">
             There's no room to hide behind features. The whole product is one
             interaction — name in, rating out — and every decision (badge
@@ -145,7 +146,7 @@ export default function MyProfessorPage() {
       </Section>
 
       <Section eyebrow="NEXT STEPS">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div className="cs-learnings">
           <Reflection title="Comment summaries">
             Run RMP's free-text reviews through a small LLM to surface a
             one-line summary per professor — so students get tone, not just a
@@ -180,6 +181,6 @@ export default function MyProfessorPage() {
       </Section>
 
       <BackLink />
-    </div>
+    </CaseStudy>
   );
 }

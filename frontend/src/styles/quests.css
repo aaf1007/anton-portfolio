@@ -1,0 +1,403 @@
+/* quests: a masonry of little windows, a sticky note, then the sticker board */
+
+.quests {
+  width: 100%;
+  padding: clamp(8px, 2vh, 20px) 0 clamp(150px, 20vh, 220px);
+}
+/* the snapped column (works.css) — the gallery's own widths below 1200 */
+.sq-gallery {
+  width: 100%;
+  max-width: 1120px;
+  padding: 0;
+}
+@media (min-width: 1201px) {
+  .sq-gallery {
+    width: var(--snap-w, 100%);
+    max-width: var(--snap-w, 1280px);
+  }
+}
+.sq-gallery-title {
+  margin: 0 0 12px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1.1;
+  color: var(--color-label);
+  -webkit-font-smoothing: antialiased;
+}
+.sq-gallery-dots i {
+  font-style: inherit;
+  opacity: 0;
+  animation: 2.4s steps(1, end) infinite;
+}
+.sq-gallery-dots i:nth-child(1) {
+  animation-name: sq-dot-1;
+}
+.sq-gallery-dots i:nth-child(2) {
+  animation-name: sq-dot-2;
+}
+.sq-gallery-dots i:nth-child(3) {
+  animation-name: sq-dot-3;
+}
+@keyframes sq-dot-1 {
+  0% {
+    opacity: 0;
+  }
+  21%,
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sq-dot-2 {
+  0% {
+    opacity: 0;
+  }
+  42%,
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sq-dot-3 {
+  0% {
+    opacity: 0;
+  }
+  63%,
+  to {
+    opacity: 1;
+  }
+}
+.sq-gallery-sub {
+  margin: 0 0 28px;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.sq-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1px;
+  grid-auto-flow: dense;
+  align-items: start;
+  column-gap: 16px;
+  row-gap: 0;
+}
+.sq-gallery-grid > * {
+  margin-bottom: 16px;
+}
+.is-wide {
+  grid-column: span 2;
+}
+.is-cols-12 {
+  grid-column: 1 / span 2;
+}
+.is-col-1 {
+  grid-column: 1;
+}
+.is-col-2 {
+  grid-column: 2;
+}
+.is-col-3 {
+  grid-column: 3;
+}
+
+/* a window */
+.sq-tile {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  container-type: inline-size;
+  text-align: left;
+  background: #fafafa;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow:
+    0 1px #fffc inset,
+    0 6px 18px #1e1a1514,
+    0 1px 3px #0000000f;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.sq-tile:hover {
+  border-color: #00000024;
+  box-shadow:
+    0 1px #ffffffe6 inset,
+    0 8px 22px #1e1a151a,
+    0 1px 3px #00000012;
+}
+.sq-tile:hover .sq-tile-bar {
+  background: linear-gradient(to bottom, #fff, #fafafa 30%, #f2f2f2 55%, #eee 75%, #f0f0f0);
+}
+.sq-tile:hover .sq-tile-name {
+  opacity: 1;
+}
+.sq-tile.has-preview:hover .sq-tile-dot--red {
+  background: #ff5f5773;
+}
+.sq-tile:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.sq-tile--cube {
+  cursor: default;
+}
+.sq-tile-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px;
+  background: linear-gradient(to bottom, #ffffff 0%, #f7f7f7 30%, #ececec 55%, #e6e6e6 75%, var(--color-outline) 100%);
+  border-bottom: 1px solid var(--color-shadow-strong);
+  box-shadow: inset 0 1px #fff;
+  transition: background 0.2s ease;
+}
+.sq-tile-dots {
+  display: inline-flex;
+  gap: 5px;
+}
+.sq-tile-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00000014;
+  box-shadow: inset 0 0 0 0.5px #00000026;
+  transition: background 0.2s ease;
+}
+.sq-tile-name {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  opacity: 0.8;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.sq-tile-media {
+  display: block;
+  background: #eeeeec;
+  min-height: 96px;
+}
+.sq-tile-media img,
+.sq-tile-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar, auto);
+  object-fit: cover;
+}
+/* a recording on a light mat */
+.sq-tile-media--matted {
+  padding: 22px 22px 18px;
+  background: #f9f9f9;
+}
+/* a phone screen: narrow and rounded on the mat */
+.sq-tile-media--phone {
+  padding: 44px 0 40px;
+  background: #f9f9f9;
+}
+.sq-tile-media--phone img,
+.sq-tile-media--phone video {
+  width: 62%;
+  margin: 0 auto;
+  border-radius: 6.5cqw;
+}
+.sq-tile-media--outline img,
+.sq-tile-media--outline video {
+  box-shadow: 0 0 0 1px #0000001a;
+}
+/* the cube: a toy on a soft studio sweep */
+.sq-tile-media--cube {
+  position: relative;
+  aspect-ratio: var(--ar);
+  background: linear-gradient(#d9dadc, #eef0f2 70%, #e6e7e9);
+}
+.sq-cube-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sq-cube {
+  /* the cube and its controls fit the 16:9 window at any width */
+  width: min(52%, 330px, calc(56.25cqw - 52px));
+}
+
+/* the sticky note */
+.sq-note {
+  position: relative;
+  background: #fdfbef;
+  border-radius: 2px;
+  box-shadow:
+    0 4px 12px #0000000d,
+    0 1px 2px #00000008,
+    inset 0 1px #fff6;
+  z-index: 5;
+  overflow: hidden;
+  align-self: start;
+}
+.sq-note-bar {
+  height: 14px;
+  background: #c8b43214;
+  border-bottom: 1px solid rgb(0 0 0 / 0.06);
+}
+.sq-note-body {
+  padding: 18px 20px 24px;
+}
+.sq-note-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-label);
+  margin: 0 0 10px;
+  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+}
+.sq-note-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sq-note-text p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #606060;
+  margin: 0 0 10px;
+}
+.sq-note-text p:last-child {
+  margin-bottom: 0;
+}
+.sq-note-text em {
+  font-style: italic;
+  color: #000000bf;
+}
+.sq-note-drawing {
+  display: block;
+  width: 36%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------- breakpoints */
+@media (max-width: 1200px) {
+  .quests {
+    padding: 16px 0 120px;
+  }
+}
+@media (max-width: 1100px) {
+  .sq-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .is-col-1,
+  .is-col-2,
+  .is-col-3 {
+    grid-column: auto;
+  }
+  .is-cols-12 {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 768px) {
+  .sq-gallery-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .sq-gallery-sub {
+    margin-bottom: 20px;
+  }
+  .sq-gallery {
+    padding-inline: 15%;
+  }
+  .sq-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+  .is-wide,
+  .is-col-1,
+  .is-col-2,
+  .is-col-3,
+  .is-cols-12 {
+    grid-column: auto;
+  }
+  .sq-gallery-grid > .is-cols-12 {
+    order: 1;
+  }
+  .sq-tile-note {
+    order: 2;
+  }
+}
+@media (min-width: 481px) and (max-width: 680px) {
+  .sq-gallery {
+    padding-inline: 5%;
+  }
+}
+@media (max-width: 480px) {
+  .quests {
+    padding: 16px 0 180px;
+  }
+  .sq-gallery {
+    padding-inline: clamp(20px, 4vw, 48px);
+  }
+}
+@media (min-width: 1920px) {
+  .sq-gallery-title {
+    font-size: 48px;
+    margin-bottom: 14px;
+  }
+  .sq-gallery-sub {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+  .sq-note-title {
+    font-size: 37px;
+    margin-bottom: 14px;
+  }
+  .sq-note-text p {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .sq-note-drawing {
+    width: 44%;
+  }
+  .sq-tile-media--phone {
+    padding: 54px 0 49px;
+  }
+  .is-cols-12 .sq-tile-media img,
+  .is-cols-12 .sq-tile-media video {
+    aspect-ratio: 1280 / 620;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sq-tile,
+  .sq-tile-bar,
+  .sq-tile-dot,
+  .sq-tile-name {
+    transition: none;
+  }
+  .sq-gallery-dots i {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* the mark on the note: a sticker, slapped on a little crooked */
+.sq-note-mark {
+  width: 44%;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 0.12)) drop-shadow(0 1px 3px rgb(0 0 0 / 0.06));
+}

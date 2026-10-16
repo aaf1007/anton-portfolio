@@ -1,0 +1,735 @@
+/* The shell around every page: top nav, main column, dock, colophon, page transitions. */
+
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+/* home is one screen: nav, hero, dock */
+.shell--home {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-80px);
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 14px;
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ top nav */
+.top-nav {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px clamp(28px, 5vw, 48px);
+  position: relative;
+  z-index: 20;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+/* the laptop-and-matcha sticker at a whole 2px per art pixel (40×22 art px); it overhangs
+   the 40px slot by 2px top and bottom so the nav keeps its 76px */
+.nav-logo {
+  flex-shrink: 0;
+  width: 80px;
+  height: 44px;
+  margin-block: -2px;
+  opacity: 0.74;
+  transform-origin: 50% 70%;
+  transition: transform 0.4s ease;
+}
+/* hover: the sticker lifts a corner, like one being peeled */
+.nav-left:hover .nav-logo {
+  transform: rotate(-6deg) translateY(-2px);
+}
+.nav-identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+.nav-name {
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+.nav-icon:hover,
+.nav-icon:focus-visible {
+  color: var(--color-accent);
+}
+/* case studies: just the mark, pinned */
+.shell--reading .top-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  pointer-events: none;
+}
+.shell--reading .nav-left {
+  gap: 10px;
+  pointer-events: auto;
+}
+.shell--reading .nav-logo {
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------- main column */
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --main-pad: clamp(28px, 5vw, 48px);
+  padding: 0 var(--main-pad);
+  position: relative;
+  z-index: 10;
+}
+.shell--reading .main {
+  display: block;
+  padding: 0;
+}
+.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease backwards; /* no fill afterwards: a held transform would trap position: fixed children */
+}
+.shell--reading .page {
+  display: block;
+}
+.page--home {
+  flex: 1;
+  min-height: 0;
+  animation: none;
+}
+/* home → works: the hero flicks up and off */
+.page--home.leaving {
+  animation: welcomeScrollUpFlick 0.4s cubic-bezier(0.55, 0, 0.85, 0.4) forwards;
+}
+@keyframes welcomeScrollUpFlick {
+  to {
+    transform: translateY(-105vh);
+  }
+}
+/* works → home: home scrolls back down into place */
+html.home-arriving .page--home {
+  animation: welcomeScrollDown 0.55s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes welcomeScrollDown {
+  0% {
+    transform: translateY(-105vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+html.home-arriving .shell--home,
+.shell--home:has(.page--home.leaving) {
+  overflow: visible;
+}
+
+/* the column snaps to the background grid on wide screens (Layout's snapToGrid) */
+.snap-col {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+}
+@media (min-width: 1201px) {
+  .snap-col {
+    width: var(--snap-w, 100%);
+    max-width: var(--snap-w, 1120px);
+    align-self: flex-start;
+    margin-left: calc(var(--snap-left, 0px) - var(--main-pad));
+    margin-right: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ colophon */
+.colophon {
+  position: fixed;
+  bottom: 18px;
+  right: 24px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: #b5b5b5;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+  z-index: 10;
+}
+.colophon-kao {
+  display: inline-block;
+}
+/* on the pages that scroll it is the very end of the page */
+.colophon--static {
+  position: static;
+  align-self: flex-end;
+  flex-shrink: 0;
+  margin: auto calc(24px - clamp(28px, 5vw, 48px)) 0 0; /* as the reference: the 1440 inset, at every width */
+  padding: 0 0 18px;
+}
+.colophon-credit {
+  position: static;
+  display: block;
+  align-self: flex-start;
+  text-align: left;
+  padding: 0;
+  margin: auto 0 -1.5em calc(24px - clamp(28px, 5vw, 48px));
+}
+.colophon-credit + .colophon--static {
+  margin-top: 0;
+}
+@media (max-width: 1200px) {
+  html[data-route="profile"] .colophon {
+    position: static;
+  }
+}
+@media (max-width: 768px) {
+  .colophon {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------- dock */
+.folder-nav {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 0 clamp(56px, 7vh, 84px);
+  position: relative;
+  z-index: 1;
+}
+/* while the works cards fall away (z 20), the dock stays on top */
+html.home-arriving .folder-nav {
+  z-index: 30;
+}
+.folder-nav--fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+.folder-nav-inner {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 8px 16px 7px;
+  position: relative;
+  isolation: isolate;
+  background: rgb(255 255 255 / 0.42);
+  backdrop-filter: blur(26px) saturate(170%);
+  -webkit-backdrop-filter: blur(26px) saturate(170%);
+  border-radius: 22px;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  box-shadow:
+    inset 1px 1px #ffffffd9,
+    inset -1px -1px #ffffff40,
+    inset 0 12px 20px -14px #ffffffe6,
+    inset 0 -12px 20px -14px #28467838,
+    0 10px 30px #28467824;
+  transform: translate(var(--works-grid-shift, 0px));
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    box-shadow 0.3s ease;
+}
+@supports (backdrop-filter: url(#liquid-lens)) {
+  .folder-nav-inner {
+    backdrop-filter: blur(26px) saturate(170%) url(#liquid-lens);
+  }
+}
+.folder-nav-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(120px 70px at var(--mx, 50%) var(--my, 0%), rgb(255 255 255 / 0.55), rgb(255 255 255 / 0) 70%),
+    linear-gradient(115deg, #ffffff59, #ffffff0d 40%, #fff0 60%, #ffffff2e);
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+.folder-nav-inner:hover {
+  box-shadow:
+    inset 1px 1px #fffffff2,
+    inset -1px -1px #ffffff4d,
+    inset 0 12px 20px -14px #fff,
+    inset 0 -12px 20px -14px #28467842,
+    0 14px 36px #2846782e;
+}
+.folder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.folder-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.16s ease,
+    filter 0.16s ease;
+}
+.folder-item:hover .folder-icon {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 4px 6px rgb(40 70 120 / 0.18));
+}
+@keyframes folder-bounce {
+  0%,
+  to {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-14px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+}
+.folder-item.bouncing .folder-icon {
+  animation: folder-bounce 2.2s ease-out;
+}
+.folder-icon--img {
+  display: block;
+  width: clamp(40px, 6.8vw, 50px);
+  height: auto;
+}
+.folder-icon--quests,
+.folder-icon--photos,
+.folder-icon--profile {
+  width: clamp(37px, 6.2vw, 45px);
+  height: clamp(37px, 6.2vw, 45px);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.folder-icon--quests {
+  background: linear-gradient(to bottom, #fff6f9, #ffe3ed);
+  box-shadow: 0 0 0 0.5px #e28aab29;
+}
+.folder-icon--photos {
+  background: linear-gradient(to bottom, #fffaf0, #ffecc9);
+  box-shadow: 0 0 0 0.5px #e0a35a33;
+}
+.folder-quests-img {
+  width: 75%;
+  height: 75%;
+}
+.folder-icon--profile {
+  background: var(--color-blue-card);
+  box-shadow: 0 0 0 0.5px #7a9ccc24;
+}
+.folder-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  transform: translateY(3px) scale(1.3);
+}
+.folder-label {
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 4px;
+  color: var(--color-ink);
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -0.18px;
+}
+.folder-item.active .folder-label {
+  background: var(--color-blue-select);
+  color: #fff;
+  line-height: 19px;
+}
+.folder-item:focus-visible {
+  outline: none;
+}
+.folder-item:focus-visible .folder-label {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* the mobile dock: bigger icons, fixed to the bottom */
+.mobile-dock {
+  display: none;
+}
+
+/* first paint: the chrome waits for the fonts, then the dock and colophon rise in */
+html:not(.fonts-ready) .top-nav,
+html:not(.fonts-ready) .folder-nav,
+html:not(.fonts-ready) .mobile-dock,
+html:not(.fonts-ready) .colophon {
+  opacity: 0;
+}
+html.fonts-ready .folder-nav,
+html.fonts-ready .mobile-dock {
+  animation: fadeIn 0.3s ease 0.1s backwards;
+}
+html.fonts-ready .colophon {
+  animation: fadeIn 0.3s ease 0.15s both;
+}
+
+@media (max-width: 1200px) {
+  .folder-label {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .folder-nav {
+    display: none;
+  }
+  .mobile-dock {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    left: 0;
+    right: 0;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .dock-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 28px 12px;
+    position: relative;
+    isolation: isolate;
+    background: rgb(255 255 255 / 0.42);
+    backdrop-filter: blur(26px) saturate(170%);
+    -webkit-backdrop-filter: blur(26px) saturate(170%);
+    border-radius: 22px;
+    border: 1px solid rgb(255 255 255 / 0.55);
+    box-shadow:
+      inset 1px 1px #ffffffd9,
+      inset -1px -1px #ffffff40,
+      inset 0 12px 20px -14px #ffffffe6,
+      inset 0 -12px 20px -14px #28467838,
+      0 10px 30px #28467824;
+    pointer-events: auto;
+  }
+  .dock-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(120px 70px at 50% 0%, #ffffff8c, #fff0 70%),
+      linear-gradient(115deg, #ffffff59, #ffffff0d 40%, #fff0 60%, #ffffff2e);
+    opacity: 0.9;
+  }
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    min-width: 56px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dock-icon--img {
+    width: 52px;
+    height: 52px;
+    filter: drop-shadow(1px 2px 3px rgb(0 0 0 / 0.12));
+    transition: transform 0.2s ease;
+  }
+  .dock-icon--sq,
+  .dock-icon--photos,
+  .dock-icon--profile,
+  .dock-icon--links {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+  .dock-icon--sq {
+    background: linear-gradient(to bottom, #fff8fa, #ffeff4);
+    box-shadow: 1px 2px 3px #0000001f, 0 0 0 0.5px #e28aab29;
+  }
+  .dock-icon--photos {
+    background: linear-gradient(to bottom, #fffbf3, #fff1d6);
+    box-shadow: 1px 2px 3px #0000001f, 0 0 0 0.5px #e0a35a33;
+  }
+  .dock-sq-img {
+    width: 75%;
+    height: 75%;
+  }
+  .dock-icon--profile {
+    background: var(--color-blue-card);
+    box-shadow: 1px 2px 3px #0000001f, 0 0 0 0.5px #7a9ccc24;
+  }
+  .dock-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    transform: translateY(3px) scale(1.3);
+  }
+  .dock-item:active .dock-icon--img,
+  .dock-item:active .dock-icon--sq,
+  .dock-item:active .dock-icon--photos,
+  .dock-item:active .dock-icon--profile,
+  .dock-item:active .dock-icon--links {
+    transform: scale(0.93);
+  }
+  .dock-label {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.1px;
+    padding: 0 4px;
+    line-height: 16px;
+    margin: -2px 0;
+    border-radius: 4px;
+  }
+  .dock-item.active .dock-label {
+    background: var(--color-blue-select);
+    color: #fff;
+  }
+  .dock-links-wrap {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav {
+    padding: 16px clamp(20px, 4vw, 48px);
+  }
+  .nav-logo {
+    width: 60px;
+    height: 33px;
+    margin-block: 0;
+  }
+  .nav-left {
+    gap: 8px;
+  }
+  .nav-left:hover .nav-logo {
+    transform: none;
+  }
+  .nav-name {
+    font-size: 14px;
+  }
+  .nav-right {
+    gap: 14px;
+  }
+  .nav-icon {
+    display: none;
+  }
+  .dock-links-wrap {
+    display: block;
+    position: relative;
+  }
+  .dock-bar {
+    gap: 8px;
+    padding-inline: 16px;
+  }
+  .dock-item {
+    min-width: 54px;
+  }
+  .dock-icon--links {
+    background: #fffc;
+    box-shadow: 1px 2px 3px #0000001f, 0 0 0 0.5px #7a9ccc24;
+  }
+  .dock-icon--links svg {
+    opacity: 0.6;
+  }
+  .dock-links-popup {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    border-radius: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .dock-links-popup.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .dock-links-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: #a0a0a0f2;
+    border-radius: 12px;
+    border: 0.5px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 2px 8px #0000001f;
+    color: #fff;
+    transform: translateY(8px);
+    transition:
+      transform 0.25s ease,
+      background 0.15s ease;
+  }
+  .dock-links-popup.is-open .dock-links-item {
+    transform: translateY(0);
+  }
+  .dock-links-item:active {
+    background: #dcdcdccc;
+  }
+  .dock-links-item svg {
+    width: 22px;
+    height: 22px;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .nav-left:hover .nav-logo {
+    transform: none;
+  }
+}
+
+@media (min-width: 1920px) {
+  .top-nav {
+    padding: 22px 72px;
+  }
+  .main {
+    --main-pad: 72px;
+  }
+  .folder-nav {
+    padding-bottom: clamp(96px, 9vh, 120px);
+  }
+}
+
+@media (min-width: 2400px) {
+  .top-nav {
+    padding: 28px 60px;
+  }
+  .nav-logo {
+    width: 96px;
+    height: 52.8px;
+  }
+  .nav-left {
+    gap: 16px;
+  }
+  .nav-name {
+    font-size: 18px;
+  }
+  .nav-icon {
+    font-size: 16px;
+  }
+  .nav-right {
+    gap: 30px;
+  }
+  .main {
+    --main-pad: 60px;
+  }
+  .folder-nav-inner {
+    gap: 18px;
+    padding: 10px 20px 9px;
+    border-radius: 26px;
+  }
+  .folder-icon--img {
+    width: 58px;
+  }
+  .folder-icon--quests,
+  .folder-icon--photos,
+  .folder-icon--profile {
+    width: 54px;
+    height: 54px;
+  }
+  .folder-label {
+    font-size: 16px;
+  }
+  .colophon {
+    font-size: 13px;
+    right: 40px;
+    bottom: 24px;
+  }
+}
+
+/* Safari: no SVG backdrop lens; plain box shadows on the dock tiles */
+@supports (background: -webkit-named-image(i)) {
+  .folder-nav-inner,
+  .dock-bar {
+    backdrop-filter: blur(26px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(170%) !important;
+  }
+  .folder-icon,
+  .folder-item:hover .folder-icon {
+    filter: none;
+  }
+}

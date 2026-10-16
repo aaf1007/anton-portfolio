@@ -26,14 +26,25 @@ import {
 export type Project = {
   title: string;
   description: ReactNode;
-  shortDescription: ReactNode;
-  image?: string | ReactNode;
+  shortDescription: string;
+  /** card / hero image (root-relative path) */
+  image?: string;
+  /** a screen recording: plays over the image while the card is hovered */
+  video?: string;
   stack: string[];
   live?: string;
   github?: string;
   caseStudy?: string;
   inProgress: boolean;
   dates: string;
+  /** where it was made: a course, a hackathon, a client */
+  context: string;
+  /** small icon shown before the context */
+  contextIcon?: string;
+  /** a win worth flagging on the card */
+  award?: string;
+  /** background of the card's image well */
+  tint: string;
 };
 
 export type Skill = {
@@ -51,6 +62,11 @@ export type Experience = {
   current?: boolean;
   points: string[];
   stack: string[];
+};
+
+export const links = {
+  linkedin: "https://www.linkedin.com/in/antonflorendo/",
+  github: "https://github.com/aaf1007",
 };
 
 // newest first; rendered in this order
@@ -146,11 +162,13 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/statify.png",
+    image: "/thumbs/statify.webp",
     stack: ["React", "Next.js", "Tailwind CSS", "Javascript", "Spotify API"],
     github: "https://github.com/aaf1007/statify",
     inProgress: false,
     dates: "2025",
+    context: "Personal",
+    tint: "#ebeaf2",
   },
   {
     title: "Rubik's Cube Solver",
@@ -185,6 +203,8 @@ export const projects: Project[] = [
     github: "https://github.com/aaf1007/rubiks-cube-solver-working-kociemba",
     inProgress: false,
     dates: "Dec 2025",
+    context: "CMPT 225",
+    tint: "#e4e3df",
   },
   {
     title: "SFU CareerConnect",
@@ -201,7 +221,8 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/sfucareer.png",
+    image: "/thumbs/sfucareer.webp",
+    video: "/careerconnect.mp4",
     stack: [
       "React",
       "Next.js",
@@ -217,6 +238,9 @@ export const projects: Project[] = [
     caseStudy: "/projects/careerconnect",
     inProgress: false,
     dates: "Jan 2026",
+    context: "Personal",
+    contextIcon: "/sfu-logo.svg",
+    tint: "#f4e3e1",
   },
   {
     title: "PantryPal",
@@ -232,21 +256,14 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: (
-      <video
-        src="https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-full object-cover"
-      />
-    ),
+    video: "https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4",
     stack: ["React", "Spring Boot", "TypeScript", "Java"],
     live: "https://pantry-pal-umber.vercel.app",
     github: "https://github.com/aaf1007/PantryPal",
     inProgress: false,
     dates: "Feb 2026",
+    context: "Personal",
+    tint: "#f8eedf",
   },
   {
     title: "Stock Market Predictor",
@@ -281,6 +298,8 @@ export const projects: Project[] = [
     github: "https://github.com/aaf1007/stock-market-predictor",
     inProgress: false,
     dates: "February 2026",
+    context: "Personal",
+    tint: "#dfe6f2",
   },
   {
     title: "SFU MyProfessor",
@@ -297,13 +316,16 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/sfu-my-prof.png",
+    image: "/thumbs/sfu-my-prof.webp",
     stack: ["Javascript", "TypeScript", "Tailwind CSS"],
     live: "https://chromewebstore.google.com/detail/agcnjhkelnjokbchcjkldkphdkdclonp",
     github: "https://github.com/aaf1007/SFU-MyProfessor",
     caseStudy: "/projects/myprofessor",
     inProgress: false,
     dates: "Mar 2026",
+    context: "Chrome Web Store",
+    contextIcon: "/sfu-logo.svg",
+    tint: "#f6e5e5",
   },
   {
     title: "VerifAI",
@@ -319,7 +341,7 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/verifai-new.png",
+    image: "/thumbs/verifai-new.webp",
     stack: [
       "TypeScript",
       "React",
@@ -334,6 +356,8 @@ export const projects: Project[] = [
     caseStudy: "/projects/verifai",
     inProgress: false,
     dates: "Mar 2026",
+    context: "Personal",
+    tint: "#e4eaf6",
   },
   {
     title: "Comparative Diagnostic System for Breast Cancer Classification",
@@ -349,12 +373,14 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/cmpt310.jpg",
+    image: "/thumbs/cmpt310.webp",
     stack: ["Python", "scikit-learn", "NumPy", "pandas", "Matplotlib", "Jupyter"],
     github: "https://github.com/kunaljoshi2/Tumor-Classifier",
     caseStudy: "/projects/tumor-classifier",
     inProgress: false,
     dates: "Jan 2026 - April 2026",
+    context: "CMPT 310",
+    tint: "#f7e4ea",
   },
   {
     title: "BSCode",
@@ -373,13 +399,16 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/bscode.png",
+    image: "/thumbs/bscode.webp",
     stack: ["Next.js", "React", "Monaco Editor", "Tailwind CSS", "Google Gemini"],
     github: "https://github.com/ChakornK/bscode",
     live: "https://bscode-alpha.vercel.app/",
     caseStudy: "/projects/bscode",
     inProgress: false,
     dates: "April 2026",
+    context: "SFU Surge SillyHacks 2026",
+    award: "Winner",
+    tint: "#e6e8ee",
   },
   {
     title: "Solar Calculator and Recommendation System",
@@ -400,7 +429,7 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/xantrex-calculator.png",
+    image: "/thumbs/xantrex-calculator.webp",
     stack: [
       "Java",
       "Spring Boot",
@@ -412,18 +441,12 @@ export const projects: Project[] = [
     github: "https://github.com/aaf1007/xantrex-calculator",
     inProgress: false,
     dates: "Jan 2026 - May 2026",
+    context: "Client · Xantrex",
+    tint: "#e2e9f1",
   },
   {
     title: "Chewws",
-    shortDescription: (
-      <span className="flex flex-col items-start gap-2.5">
-        Native iOS, AI-powered food journal and nutrition app.
-        <span className="inline-flex items-center gap-1.5 px-2 border border-border rounded-md h-6 font-medium text-[11px] text-foreground">
-          <span className="bg-emerald-500 rounded-full size-1.5" />
-          Coming soon to the App Store
-        </span>
-      </span>
-    ),
+    shortDescription: "Native iOS, AI-powered food journal and nutrition app.",
     description: (
       <ul className="space-y-1 pl-5 list-disc">
         <li>
@@ -444,7 +467,7 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/chewws.png",
+    image: "/thumbs/chewws.webp",
     stack: [
       "Swift",
       "SwiftUI",
@@ -458,23 +481,13 @@ export const projects: Project[] = [
     ],
     inProgress: true,
     dates: "June 2026 - Present",
+    context: "iOS · coming soon to the App Store",
+    tint: "#f9eedd",
   },
   {
     title: "Syllabyss",
-    shortDescription: (
-      <span className="flex flex-col items-start gap-2.5">
-        Turns your own course notes into pixel-art study games &mdash; rarer
-        answers sink deeper.
-        <span className="inline-flex items-center gap-1.5 px-2 border border-border rounded-md h-6 font-medium text-[11px] text-foreground">
-          <img
-            src="/stormhacks.webp"
-            alt=""
-            className="rounded-sm size-3.5"
-          />
-          Built at StormHacks 2026
-        </span>
-      </span>
-    ),
+    shortDescription:
+      "Turns your own course notes into pixel-art study games — rarer answers sink deeper.",
     description: (
       <ul className="space-y-1 pl-5 list-disc">
         <li>
@@ -501,7 +514,7 @@ export const projects: Project[] = [
         </li>
       </ul>
     ),
-    image: "/syllabyss.png",
+    image: "/thumbs/syllabyss.webp",
     stack: [
       "TypeScript",
       "Next.js",
@@ -519,21 +532,188 @@ export const projects: Project[] = [
     github: "https://github.com/aaf1007/Syllabyss",
     inProgress: false,
     dates: "Oct 2026",
+    context: "StormHacks 2026",
+    contextIcon: "/stormhacks.webp",
+    tint: "#dce4f3",
   },
 ];
 
-// Most recent pics add to top
-export const lifePhotos = [
-  "/pics/june-4-2026-2.jpg",
-  "/pics/june-4-2026.jpeg",
-  "/pics/3B40A54A-DBEA-44C6-BB94-64CA5724EE93.png",
-  "/pics/40C923ED-CE8B-45A1-87B3-BE7340F0C3DF_1_105_c.jpeg",
-  "/pics/36870A61-B809-4586-8344-B1FC97061EC0_1_105_c.jpeg",
-  "/pics/5F2E464C-5C42-471F-BC5A-6D975A5489A2_1_105_c.jpeg",
-  "/pics/CE6AF28C-C289-46D7-9B0F-A2ED5C044787_1_105_c.jpeg",
-  "/pics/5C821F67-8063-40E8-B669-C140862B3E88_1_105_c.jpeg",
-  "/pics/045253D8-EFEA-4267-8B96-18CC2C75D6C6_1_105_c.jpeg",
-  "/pics/0EF88007-1299-4AE3-AB79-4DFEDA5C6E5B_1_105_c.jpeg",
-  "/pics/A6731119-E06D-41A8-8496-4922D9E9544B_4_5005_c.jpeg",
-  "/pics/A278DBBD-0FC0-4514-A803-CD4DEB3914A0_4_5005_c.jpeg",
+// Most recent pics add to top. `name` is the photo's window title on the quests page.
+export const lifePhotos: { src: string; name: string }[] = [
+  { src: "/pics/june-4-2026-2.jpg", name: "late-night.jpg" },
+  { src: "/pics/june-4-2026.jpeg", name: "udon.jpg" },
+  { src: "/pics/3B40A54A-DBEA-44C6-BB94-64CA5724EE93.png", name: "desk.jpg" },
+  { src: "/pics/40C923ED-CE8B-45A1-87B3-BE7340F0C3DF_1_105_c.jpeg", name: "matcha.jpg" },
+  { src: "/pics/36870A61-B809-4586-8344-B1FC97061EC0_1_105_c.jpeg", name: "courts.jpg" },
+  { src: "/pics/5F2E464C-5C42-471F-BC5A-6D975A5489A2_1_105_c.jpeg", name: "sushi.jpg" },
+  { src: "/pics/CE6AF28C-C289-46D7-9B0F-A2ED5C044787_1_105_c.jpeg", name: "terminal.jpg" },
+  { src: "/pics/5C821F67-8063-40E8-B669-C140862B3E88_1_105_c.jpeg", name: "study-spot.jpg" },
+  { src: "/pics/045253D8-EFEA-4267-8B96-18CC2C75D6C6_1_105_c.jpeg", name: "feast.jpg" },
+  { src: "/pics/0EF88007-1299-4AE3-AB79-4DFEDA5C6E5B_1_105_c.jpeg", name: "snow-day.jpg" },
+  { src: "/pics/A6731119-E06D-41A8-8496-4922D9E9544B_4_5005_c.jpeg", name: "lights.jpg" },
+  { src: "/pics/A278DBBD-0FC0-4514-A803-CD4DEB3914A0_4_5005_c.jpeg", name: "pizza.jpg" },
+];
+
+/**
+ * Captions for the photos page, keyed by the file's name in src/assets/gallery/.
+ * Optional: a photo with no entry just has no caption.
+ */
+export const photoCaptions: Record<string, string> = {
+  "2026-06-04-late-night.jpg": "Late night, mid-build",
+  "2026-06-04-udon.jpg": "Udon run",
+};
+
+/**
+ * The quests gallery, in order. Each tile is a little window; `place` pins it
+ * to a column of the three-column masonry ("wide" and "cols-12" span two).
+ * `ar` is the media's width / height. Clicking a tile opens it bigger with
+ * `name`, `tools` and `desc` alongside; `gallery` adds photos to flick through.
+ * Every life photo appears in some tile or gallery.
+ */
+export type QuestTile = {
+  file: string;
+  name: string;
+  tools: string;
+  desc: string;
+  kind: "image" | "video" | "cube";
+  src: string;
+  ar: string;
+  place: "wide" | "col-1" | "col-2" | "col-3" | "cols-12";
+  /** media runs edge to edge (no grey mat around a video) */
+  bleed?: boolean;
+  /** shown as a phone screen: narrow, rounded, on a light mat */
+  phone?: boolean;
+  /** a hairline round a phone screen whose edges are pale */
+  outline?: boolean;
+  /** a video that fills its window without the mat */
+  flush?: boolean;
+  gallery?: string[];
+};
+
+const pic = (name: string) => lifePhotos.find((p) => p.name === name)!.src;
+
+export const quests: QuestTile[] = [
+  {
+    file: "cube.3d",
+    name: "Rubik's cube",
+    tools: "CSS 3D, React",
+    desc: "Drag to spin it, tap a face to twist it, scramble it, solve it.",
+    kind: "cube",
+    src: "",
+    ar: "1280 / 720",
+    place: "wide",
+    bleed: true,
+  },
+  {
+    file: "late-night.jpg",
+    name: "Late nights",
+    tools: "Camera roll",
+    desc: "Where most of these projects actually get built.",
+    kind: "image",
+    src: pic("late-night.jpg"),
+    ar: "698 / 1520",
+    place: "col-3",
+    phone: true,
+    outline: true,
+    gallery: [pic("late-night.jpg"), pic("study-spot.jpg")],
+  },
+  {
+    file: "udon.jpg",
+    name: "Udon run",
+    tools: "Camera roll",
+    desc: "Eating my way through the city, one bowl at a time.",
+    kind: "image",
+    src: pic("udon.jpg"),
+    ar: "1 / 1",
+    place: "col-1",
+    gallery: [pic("udon.jpg"), pic("pizza.jpg")],
+  },
+  {
+    file: "matcha.jpg",
+    name: "Matcha break",
+    tools: "Camera roll",
+    desc: "The usual order.",
+    kind: "image",
+    src: pic("matcha.jpg"),
+    ar: "710 / 1538",
+    place: "col-2",
+    phone: true,
+  },
+  {
+    file: "courts.jpg",
+    name: "Courts at dusk",
+    tools: "Camera roll",
+    desc: "Evenings outside, when the screen can wait.",
+    kind: "image",
+    src: pic("courts.jpg"),
+    ar: "800 / 1181",
+    place: "col-1",
+    bleed: true,
+    gallery: [pic("courts.jpg"), pic("snow-day.jpg"), pic("lights.jpg")],
+  },
+  {
+    file: "pantrypal.mp4",
+    name: "PantryPal",
+    tools: "React, Spring Boot",
+    desc: "AI-powered recipe generation that turns the ingredients you already have into structured meal suggestions.",
+    kind: "video",
+    src: "https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4",
+    ar: "1012 / 720",
+    place: "col-2",
+    flush: true,
+  },
+  {
+    file: "terminal.jpg",
+    name: "Terminal",
+    tools: "Camera roll",
+    desc: "Mid-build.",
+    kind: "image",
+    src: pic("terminal.jpg"),
+    ar: "556 / 1204",
+    place: "col-3",
+    phone: true,
+  },
+  {
+    file: "careerconnect.mp4",
+    name: "SFU CareerConnect",
+    tools: "Next.js, Gemini",
+    desc: "AI-powered internship matching that ranks live postings against your SFU coursework and resume.",
+    kind: "video",
+    src: "/careerconnect.mp4",
+    ar: "920 / 720",
+    place: "col-1",
+    flush: true,
+  },
+  {
+    file: "sushi.jpg",
+    name: "Sushi night",
+    tools: "Camera roll",
+    desc: "Worth every piece.",
+    kind: "image",
+    src: pic("sushi.jpg"),
+    ar: "1 / 1",
+    place: "col-2",
+    gallery: [pic("sushi.jpg"), pic("feast.jpg")],
+  },
+  {
+    file: "desk.jpg",
+    name: "The desk",
+    tools: "Camera roll",
+    desc: "Home base.",
+    kind: "image",
+    src: pic("desk.jpg"),
+    ar: "1700 / 2200",
+    place: "col-3",
+  },
+  {
+    file: "syllabyss.app",
+    name: "Syllabyss",
+    tools: "Next.js, three.js, LangGraph",
+    desc: "Turns your own course notes into pixel-art study games, where rarer answers sink deeper. Built at StormHacks 2026.",
+    kind: "image",
+    src: "/thumbs/syllabyss.webp",
+    ar: "1280 / 634",
+    place: "cols-12",
+    bleed: true,
+  },
 ];
