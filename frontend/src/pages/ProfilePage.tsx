@@ -1,4 +1,4 @@
-import { hobbies, learning } from "@/data/portfolio";
+import { experience, hobbies, learning, type Experience } from "@/data/portfolio";
 import { go } from "@/lib/go";
 import { useRaster } from "@/lib/raster";
 import { play } from "@/lib/sfx";
@@ -130,9 +130,49 @@ function Fact({ file, children }: { file: string; children: ReactNode }) {
   );
 }
 
+function Role({ job }: { job: Experience }) {
+  return (
+    <article className="txt-card role-card">
+      <header className="role-head">
+        <h3 className="role-title">
+          {job.role}{" "}
+          <span className="role-at">
+            at{" "}
+            {job.url ? (
+              <a href={job.url} {...ext}>
+                {job.org}
+              </a>
+            ) : (
+              job.org
+            )}
+          </span>
+        </h3>
+        <p className="role-meta">
+          {job.current && <span className="status-dot" aria-hidden />}
+          <span>{job.dates}</span>
+          <span aria-hidden>·</span>
+          <span>{job.location}</span>
+        </p>
+      </header>
+      <ul className="role-points">
+        {job.points.map((p) => (
+          <li key={p}>{p}</li>
+        ))}
+      </ul>
+      <ul className="role-stack" aria-label="Stack">
+        {job.stack.map((t) => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
 export default function ProfilePage() {
   const heading = useRef<HTMLHeadingElement>(null);
+  const workHeading = useRef<HTMLHeadingElement>(null);
   useRaster(heading);
+  useRaster(workHeading);
   const internal = (to: string) => ({
     href: to,
     onClick: (e: React.MouseEvent) => {
@@ -178,6 +218,18 @@ export default function ProfilePage() {
               </Fact>
             </div>
           </section>
+          {experience.length > 0 && (
+            <section className="profile-section">
+              <h2 ref={workHeading} className="profile-heading profile-heading--sub">
+                Experience
+              </h2>
+              <div className="role-list">
+                {experience.map((job) => (
+                  <Role key={`${job.org}-${job.dates}`} job={job} />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

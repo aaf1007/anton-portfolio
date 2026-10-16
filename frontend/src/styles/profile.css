@@ -213,6 +213,94 @@
   color: var(--color-grey-text);
   padding: 1px 4px;
 }
+
+/* experience: one card per role, newest first */
+.profile-heading--sub {
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+.role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.role-card {
+  padding: 16px 22px 18px;
+}
+.role-title {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-label);
+}
+.role-at {
+  color: var(--color-grey-text);
+  font-weight: 300;
+}
+.role-at a {
+  color: var(--color-text);
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: var(--color-sand-border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+.role-at a:hover {
+  text-decoration-color: var(--color-text);
+}
+.role-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-grey-light);
+}
+.role-meta .status-dot {
+  margin-right: 2px;
+}
+.role-points {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+}
+.role-points li {
+  position: relative;
+  padding-left: 16px;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-grey-text);
+}
+.role-points li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--color-grey-light);
+}
+.role-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+  list-style: none;
+}
+.role-stack li {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  padding: 2px 9px;
+  border-radius: 100px;
+  border: 0.5px solid var(--color-outline);
+  background: var(--color-bg);
+}
+
 .fact-wave-word {
   display: inline-block;
   white-space: nowrap;
@@ -255,6 +343,9 @@
   .profile-heading {
     font-size: 36px;
   }
+  .profile-heading--sub {
+    font-size: 28px;
+  }
 }
 @media (max-width: 480px) {
   .profile {
@@ -273,6 +364,16 @@
   }
   .profile-heading {
     font-size: 48px;
+  }
+  .profile-heading--sub {
+    font-size: 36px;
+  }
+  .role-card {
+    padding: 20px 24px 22px;
+  }
+  .role-title,
+  .role-points li {
+    font-size: 17px;
   }
   .fact-card {
     padding: 18px 20px 16px;
