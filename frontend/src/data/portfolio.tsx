@@ -93,6 +93,8 @@ export const profile: {
   short: "Anton",
   roles: ["Software Developer", "Data Science @ SFU", "Hackathon Winner"],
   location: "Vancouver, BC",
+  banner: "/banner.jpg",
+  avatar: "/about-me.jpg",
 };
 
 /** The home page's About bullets. */

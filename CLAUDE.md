@@ -19,7 +19,7 @@ Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to 
 
 **Routing** — React Router v7, two layout shells declared in `src/App.tsx`:
 - `Layout` (`src/Layout.tsx`): the site shell — sticky nav (Home / Projects / Experience / Photos + light/dark toggle), one 800px column between dashed rails, footer.
-  - `/` → `HomePage` — banner + avatar + name (roles cycle under it, `RoleCycle`), then About, Contact, the 4 newest Projects, Tech Stack (filter tabs), GitHub Activity
+  - `/` → `HomePage` — banner + avatar + name (roles cycle under it, `RoleCycle`), then About, Contact, Experience in brief (`HomeExperience`: work + education, one line each), the 4 newest Projects, the 6 newest Photos (`HomePhotos`, opens the lightbox), Tech Stack (filter tabs), GitHub Activity
   - `/projects` → `ProjectsPage` — every project card, newest first
   - `/experience` → `ExperiencePage` — Work (`experience`), Education (`education`), Hackathons (projects whose `context` mentions "hack"); rows expand to details
   - `/photos` → `PhotosPage` — masonry of everything in `src/assets/gallery/`; click opens `Lightbox` (←/→, swipe, Esc). See **How to add photos**
@@ -35,7 +35,7 @@ Single-page React app (React 19, TypeScript, Vite, Tailwind CSS v4) deployed to 
 
 **Content** — All site content lives in `src/data/portfolio.tsx`: `links`, `profile` (name, cycling `roles`, location, `banner`/`avatar` — unset shows a placeholder), `about` (home bullets), `education`, `experience` (newest first), `skills` (each with a `category` for the Tech Stack filter), `projects` and `photoCaptions`. Pages import from it rather than defining content inline.
 
-**Banner and avatar** — put the files in `frontend/public/` and set `profile.banner` (wide, about 1600 × 420) and `profile.avatar` (square) to their root-relative paths.
+**Banner and avatar** — `profile.banner` is `/banner.jpg` and `profile.avatar` is `/about-me.jpg`, both in `frontend/public/`. The banner shows in a wide strip (about 3.75 : 1, cropped from the centre); while its file is missing the placeholder shows instead.
 
 **Adding a project** — Add an entry to the `projects` array in `src/data/portfolio.tsx`. `ProjectsPage` reverses the array before mapping, so **append to the end** to have it render first. Card images go in `frontend/public/` (web-sized copies live in `public/thumbs/`) and are referenced by root-relative path in `image`; an optional `video` (screen recording) plays over it while the card is hovered (without an `image`, the video's first frame stands in). Required card fields: `context` (shown under the title — "Personal", a course, a hackathon), `shortDescription` (the card's paragraph), `stack` (first four show as tags) and `tint` (ground behind the image); optional `contextIcon`, `award` (corner ribbon). Status is derived: `inProgress` → Building, `live` → Live, else Shipped. Links are optional: `caseStudy`, `live`, `github`; the card links to the first of `caseStudy` → `live` → `github`.
 

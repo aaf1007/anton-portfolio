@@ -1,4 +1,6 @@
 import GitHubActivity from "@/components/site/GitHubActivity";
+import HomeExperience from "@/components/site/HomeExperience";
+import HomePhotos from "@/components/site/HomePhotos";
 import { ProjectGrid } from "@/components/site/ProjectCard";
 import RoleCycle from "@/components/site/RoleCycle";
 import { Gap, Section } from "@/components/site/Section";
@@ -6,7 +8,7 @@ import { delay } from "@/lib/stagger";
 import TechStack from "@/components/site/TechStack";
 import { about, links, profile, projects } from "@/data/portfolio";
 import { ArrowUpRight, Paperclip } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -19,15 +21,21 @@ const initials = profile.name
   .map((w) => w[0])
   .join("");
 
+function Banner() {
+  // until the file is in public/, the placeholder holds its place
+  const [missing, setMissing] = useState(!profile.banner);
+  return missing ? (
+    <div className="s-banner-media s-placeholder">banner image · 1600 × 420</div>
+  ) : (
+    <img className="s-banner-media" src={profile.banner} alt="" onError={() => setMissing(true)} />
+  );
+}
+
 function Identity() {
   return (
     <>
       <div className="s-banner s-rule-b s-in">
-        {profile.banner ? (
-          <img className="s-banner-media" src={profile.banner} alt="" />
-        ) : (
-          <div className="s-banner-media s-placeholder">banner image · 1600 × 420</div>
-        )}
+        <Banner />
       </div>
       <div className="s-id s-rule-b s-in" style={delay(1)}>
         <div className="s-avatar">
@@ -104,8 +112,21 @@ export default function HomePage() {
       </Section>
       <Gap />
       <Section
-        title="Projects"
+        title="Experience"
         order={4}
+        bodyClass=""
+        aside={
+          <Link to="/experience" className="s-more">
+            View all <ArrowUpRight size={14} strokeWidth={1.8} />
+          </Link>
+        }
+      >
+        <HomeExperience />
+      </Section>
+      <Gap />
+      <Section
+        title="Projects"
+        order={5}
         bodyClass=""
         aside={
           <Link to="/projects" className="s-more">
@@ -116,9 +137,22 @@ export default function HomePage() {
         <ProjectGrid projects={latest} />
       </Section>
       <Gap />
-      <TechStack order={5} />
+      <Section
+        title="Photos"
+        order={6}
+        bodyClass=""
+        aside={
+          <Link to="/photos" className="s-more">
+            View all <ArrowUpRight size={14} strokeWidth={1.8} />
+          </Link>
+        }
+      >
+        <HomePhotos />
+      </Section>
       <Gap />
-      <Section title="GitHub Activity" order={6}>
+      <TechStack order={7} />
+      <Gap />
+      <Section title="GitHub Activity" order={8}>
         <GitHubActivity user={ghUser} />
       </Section>
     </>
