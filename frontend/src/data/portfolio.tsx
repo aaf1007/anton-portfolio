@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import type { IconType } from "react-icons";
 import { FaJava } from "react-icons/fa";
 import {
@@ -47,14 +48,18 @@ export type Project = {
   tint: string;
 };
 
+export type SkillCategory = "Languages" | "Frontend" | "Backend" | "AI / ML" | "Tools";
+
 export type Skill = {
   name: string;
   icon: IconType;
   color?: string;
+  category: SkillCategory;
 };
 
 export type Experience = {
   role: string;
+  logo?: string;
   org: string;
   url?: string;
   location: string;
@@ -67,13 +72,79 @@ export type Experience = {
 export const links = {
   linkedin: "https://www.linkedin.com/in/antonflorendo/",
   github: "https://github.com/aaf1007",
+  resume: "/resume",
 };
+
+/**
+ * The home page's header card. `banner` (a wide strip, about 1600 × 420) and
+ * `avatar` (square) are root-relative paths in public/; leave either unset and
+ * a placeholder shows in its place.
+ */
+export const profile: {
+  name: string;
+  short: string;
+  /** cycles under the name */
+  roles: string[];
+  location: string;
+  banner?: string;
+  avatar?: string;
+} = {
+  name: "Anton Florendo",
+  short: "Anton",
+  roles: ["Software Developer", "Data Science @ SFU", "Hackathon Winner"],
+  location: "Vancouver, BC",
+};
+
+/** The home page's About bullets. */
+export const about: ReactNode[] = [
+  <>
+    I&rsquo;m a <strong>software developer</strong> drawn to the spot where web apps meet LLMs: practical AI tools you can
+    actually use, from <Link to="/projects/verifai">browser extensions</Link> and{" "}
+    <Link to="/projects/careerconnect">matching engines</Link> to study games built from your own notes.
+  </>,
+  <>
+    I build with <strong>React, TypeScript, Python and Spring Boot</strong>, and I&rsquo;m now shipping as a software
+    developer intern at <strong>SAP</strong>.
+  </>,
+  <>
+    I study <strong>data science at Simon Fraser University</strong> after two years of computer science at Douglas
+    College. I won SFU Surge SillyHacks 2026 with <Link to="/projects/bscode">BSCode</Link> and shipped Syllabyss at
+    StormHacks 2026.
+  </>,
+];
+
+export type Education = {
+  school: string;
+  program: string;
+  url?: string;
+  logo?: string;
+  note?: string;
+};
+
+// newest first
+export const education: Education[] = [
+  {
+    school: "Simon Fraser University",
+    program: "Data Science",
+    url: "https://www.sfu.ca/",
+    logo: "/sfu-logo.svg",
+    note: "Current",
+  },
+  {
+    school: "Douglas College",
+    program: "Computer Science",
+    url: "https://www.douglascollege.ca/",
+    logo: "/douglas-college-logo.svg",
+    note: "Two years",
+  },
+];
 
 // newest first; rendered in this order
 export const experience: Experience[] = [
   {
     role: "Software Developer Intern",
     org: "SAP",
+    logo: "/sap-logo.svg",
     url: "https://www.sap.com/",
     location: "Vancouver, BC",
     dates: "Sept 2026 – now",
@@ -87,64 +158,27 @@ export const experience: Experience[] = [
   },
 ];
 
-export const coursework = [
-  "Intro to Artificial Intelligence",
-  "Intro to Software Engineering",
-  "Linear Algebra",
-  "Business Statistics",
-];
-
-export const hobbies = ["gym", "cooking", "eating", "coding"];
-
-export const learning = ["FastAPI", "PyTorch", "Claude Code"];
-
-export const digesting = [
-  {
-    name: "PyTorch Fundamentals",
-    url: "https://www.learnpytorch.io/00_pytorch_fundamentals/",
-  },
-  {
-    name: "RAG Made Simple",
-    url: "https://www.amazon.ca/dp/B0D76734SZ?ref=ppx_yo2ov_dt_b_fed_digi_asin_title_351",
-    image: "https://m.media-amazon.com/images/I/71zKbtDCWyL._SL1500_.jpg",
-  },
-  {
-    name: "The Pragmatic Programmer",
-    url: "https://www.amazon.ca/Pragmatic-Programmer-journey-mastery-Anniversary/dp/0135957052/ref=pd_lpo_d_sccl_1/132-1954098-3434648?pd_rd_w=TsM1m&content-id=amzn1.sym.d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_p=d3f44101-6e04-446e-916c-a6ec5616982b&pf_rd_r=JAWBGHBEZN6TJZS2N3GX&pd_rd_wg=N04GB&pd_rd_r=7838ce9c-ea90-441b-9162-4b5a2dc0666c&pd_rd_i=0135957052&psc=1",
-    image: "https://m.media-amazon.com/images/I/71f1jieYHNL.jpg",
-  },
-  {
-    name: "AI Engineering by Chip Huyen",
-    url: "https://www.amazon.ca/AI-Engineering-Building-Applications-Foundation/dp/1098166302",
-    image: "https://learning.oreilly.com/library/cover/9781098166298/250w/",
-  },
-  {
-    name: "Stanford Lecture on AI Engineering",
-    url: "https://x.com/RohOnChain/status/2043014662883786812?s=20",
-  },
-];
-
 export const skills: Skill[] = [
-  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-  { name: "Python", icon: SiPython, color: "#3776AB" },
-  { name: "Java", icon: FaJava, color: "#E76F00" },
-  { name: "React", icon: SiReact, color: "#61DAFB" },
-  { name: "Swift", icon: SiSwift, color: "#F05138" },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
-  { name: "Vite", icon: SiVite, color: "#646CFF" },
-  { name: "FastAPI", icon: SiFastapi, color: "#009688" },
-  { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E" },
-  { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F" },
-  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
-  { name: "Scikit", icon: SiScikitlearn, color: "#F7931E" },
-  { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
-  { name: "LangGraph", icon: SiLanggraph, color: "#7FC8FF" },
-  { name: "Gemini", icon: SiGooglegemini, color: "#4796E3" },
-  { name: "Claude", icon: SiClaude, color: "#D97757" },
-  { name: "Git", icon: SiGit, color: "#F05032" },
-  { name: "Docker", icon: SiDocker, color: "#2496ED" },
-  { name: "Vercel", icon: SiVercel },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", category: "Languages" },
+  { name: "Python", icon: SiPython, color: "#3776AB", category: "Languages" },
+  { name: "Java", icon: FaJava, color: "#E76F00", category: "Languages" },
+  { name: "React", icon: SiReact, color: "#61DAFB", category: "Frontend" },
+  { name: "Swift", icon: SiSwift, color: "#F05138", category: "Languages" },
+  { name: "Next.js", icon: SiNextdotjs, category: "Frontend" },
+  { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4", category: "Frontend" },
+  { name: "Vite", icon: SiVite, color: "#646CFF", category: "Frontend" },
+  { name: "FastAPI", icon: SiFastapi, color: "#009688", category: "Backend" },
+  { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E", category: "Backend" },
+  { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F", category: "Backend" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", category: "Backend" },
+  { name: "Scikit", icon: SiScikitlearn, color: "#F7931E", category: "AI / ML" },
+  { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C", category: "AI / ML" },
+  { name: "LangGraph", icon: SiLanggraph, color: "#7FC8FF", category: "AI / ML" },
+  { name: "Gemini", icon: SiGooglegemini, color: "#4796E3", category: "AI / ML" },
+  { name: "Claude", icon: SiClaude, color: "#D97757", category: "AI / ML" },
+  { name: "Git", icon: SiGit, color: "#F05032", category: "Tools" },
+  { name: "Docker", icon: SiDocker, color: "#2496ED", category: "Tools" },
+  { name: "Vercel", icon: SiVercel, category: "Tools" },
 ];
 
 export const projects: Project[] = [
@@ -538,22 +572,6 @@ export const projects: Project[] = [
   },
 ];
 
-// Most recent pics add to top. `name` is the photo's window title on the quests page.
-export const lifePhotos: { src: string; name: string }[] = [
-  { src: "/pics/june-4-2026-2.jpg", name: "late-night.jpg" },
-  { src: "/pics/june-4-2026.jpeg", name: "udon.jpg" },
-  { src: "/pics/3B40A54A-DBEA-44C6-BB94-64CA5724EE93.png", name: "desk.jpg" },
-  { src: "/pics/40C923ED-CE8B-45A1-87B3-BE7340F0C3DF_1_105_c.jpeg", name: "matcha.jpg" },
-  { src: "/pics/36870A61-B809-4586-8344-B1FC97061EC0_1_105_c.jpeg", name: "courts.jpg" },
-  { src: "/pics/5F2E464C-5C42-471F-BC5A-6D975A5489A2_1_105_c.jpeg", name: "sushi.jpg" },
-  { src: "/pics/CE6AF28C-C289-46D7-9B0F-A2ED5C044787_1_105_c.jpeg", name: "terminal.jpg" },
-  { src: "/pics/5C821F67-8063-40E8-B669-C140862B3E88_1_105_c.jpeg", name: "study-spot.jpg" },
-  { src: "/pics/045253D8-EFEA-4267-8B96-18CC2C75D6C6_1_105_c.jpeg", name: "feast.jpg" },
-  { src: "/pics/0EF88007-1299-4AE3-AB79-4DFEDA5C6E5B_1_105_c.jpeg", name: "snow-day.jpg" },
-  { src: "/pics/A6731119-E06D-41A8-8496-4922D9E9544B_4_5005_c.jpeg", name: "lights.jpg" },
-  { src: "/pics/A278DBBD-0FC0-4514-A803-CD4DEB3914A0_4_5005_c.jpeg", name: "pizza.jpg" },
-];
-
 /**
  * Captions for the photos page, keyed by the file's name in src/assets/gallery/.
  * Optional: a photo with no entry just has no caption.
@@ -562,158 +580,3 @@ export const photoCaptions: Record<string, string> = {
   "2026-06-04-late-night.jpg": "Late night, mid-build",
   "2026-06-04-udon.jpg": "Udon run",
 };
-
-/**
- * The quests gallery, in order. Each tile is a little window; `place` pins it
- * to a column of the three-column masonry ("wide" and "cols-12" span two).
- * `ar` is the media's width / height. Clicking a tile opens it bigger with
- * `name`, `tools` and `desc` alongside; `gallery` adds photos to flick through.
- * Every life photo appears in some tile or gallery.
- */
-export type QuestTile = {
-  file: string;
-  name: string;
-  tools: string;
-  desc: string;
-  kind: "image" | "video" | "cube";
-  src: string;
-  ar: string;
-  place: "wide" | "col-1" | "col-2" | "col-3" | "cols-12";
-  /** media runs edge to edge (no grey mat around a video) */
-  bleed?: boolean;
-  /** shown as a phone screen: narrow, rounded, on a light mat */
-  phone?: boolean;
-  /** a hairline round a phone screen whose edges are pale */
-  outline?: boolean;
-  /** a video that fills its window without the mat */
-  flush?: boolean;
-  gallery?: string[];
-};
-
-const pic = (name: string) => lifePhotos.find((p) => p.name === name)!.src;
-
-export const quests: QuestTile[] = [
-  {
-    file: "cube.3d",
-    name: "Rubik's cube",
-    tools: "CSS 3D, React",
-    desc: "Drag to spin it, tap a face to twist it, scramble it, solve it.",
-    kind: "cube",
-    src: "",
-    ar: "1280 / 720",
-    place: "wide",
-    bleed: true,
-  },
-  {
-    file: "late-night.jpg",
-    name: "Late nights",
-    tools: "Camera roll",
-    desc: "Where most of these projects actually get built.",
-    kind: "image",
-    src: pic("late-night.jpg"),
-    ar: "698 / 1520",
-    place: "col-3",
-    phone: true,
-    outline: true,
-    gallery: [pic("late-night.jpg"), pic("study-spot.jpg")],
-  },
-  {
-    file: "udon.jpg",
-    name: "Udon run",
-    tools: "Camera roll",
-    desc: "Eating my way through the city, one bowl at a time.",
-    kind: "image",
-    src: pic("udon.jpg"),
-    ar: "1 / 1",
-    place: "col-1",
-    gallery: [pic("udon.jpg"), pic("pizza.jpg")],
-  },
-  {
-    file: "matcha.jpg",
-    name: "Matcha break",
-    tools: "Camera roll",
-    desc: "The usual order.",
-    kind: "image",
-    src: pic("matcha.jpg"),
-    ar: "710 / 1538",
-    place: "col-2",
-    phone: true,
-  },
-  {
-    file: "courts.jpg",
-    name: "Courts at dusk",
-    tools: "Camera roll",
-    desc: "Evenings outside, when the screen can wait.",
-    kind: "image",
-    src: pic("courts.jpg"),
-    ar: "800 / 1181",
-    place: "col-1",
-    bleed: true,
-    gallery: [pic("courts.jpg"), pic("snow-day.jpg"), pic("lights.jpg")],
-  },
-  {
-    file: "pantrypal.mp4",
-    name: "PantryPal",
-    tools: "React, Spring Boot",
-    desc: "AI-powered recipe generation that turns the ingredients you already have into structured meal suggestions.",
-    kind: "video",
-    src: "https://res.cloudinary.com/dkmpatozu/video/upload/v1773298485/Loom_Cropping_-_11_March_2026_ictqqs.mp4",
-    ar: "1012 / 720",
-    place: "col-2",
-    flush: true,
-  },
-  {
-    file: "terminal.jpg",
-    name: "Terminal",
-    tools: "Camera roll",
-    desc: "Mid-build.",
-    kind: "image",
-    src: pic("terminal.jpg"),
-    ar: "556 / 1204",
-    place: "col-3",
-    phone: true,
-  },
-  {
-    file: "careerconnect.mp4",
-    name: "SFU CareerConnect",
-    tools: "Next.js, Gemini",
-    desc: "AI-powered internship matching that ranks live postings against your SFU coursework and resume.",
-    kind: "video",
-    src: "/careerconnect.mp4",
-    ar: "920 / 720",
-    place: "col-1",
-    flush: true,
-  },
-  {
-    file: "sushi.jpg",
-    name: "Sushi night",
-    tools: "Camera roll",
-    desc: "Worth every piece.",
-    kind: "image",
-    src: pic("sushi.jpg"),
-    ar: "1 / 1",
-    place: "col-2",
-    gallery: [pic("sushi.jpg"), pic("feast.jpg")],
-  },
-  {
-    file: "desk.jpg",
-    name: "The desk",
-    tools: "Camera roll",
-    desc: "Home base.",
-    kind: "image",
-    src: pic("desk.jpg"),
-    ar: "1700 / 2200",
-    place: "col-3",
-  },
-  {
-    file: "syllabyss.app",
-    name: "Syllabyss",
-    tools: "Next.js, three.js, LangGraph",
-    desc: "Turns your own course notes into pixel-art study games, where rarer answers sink deeper. Built at StormHacks 2026.",
-    kind: "image",
-    src: "/thumbs/syllabyss.webp",
-    ar: "1280 / 634",
-    place: "cols-12",
-    bleed: true,
-  },
-];

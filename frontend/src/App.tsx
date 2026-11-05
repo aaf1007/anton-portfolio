@@ -1,17 +1,11 @@
 import { useEffect } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout";
+import ReadingLayout from "./ReadingLayout";
+import ExperiencePage from "./pages/ExperiencePage";
 import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
-import ProjectsPage from "./pages/ProjectsPage";
 import PhotosPage from "./pages/PhotosPage";
-import QuestsPage from "./pages/QuestsPage";
+import ProjectsPage from "./pages/ProjectsPage";
 import ResumePage from "./pages/ResumePage";
 import BSCodePage from "./pages/projects/BSCodePage";
 import CareerConnectPage from "./pages/projects/CareerConnectPage";
@@ -35,19 +29,23 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="projects" element={<ProjectsPage />} />
-          <Route path="projects/verifai" element={<VerifAIPage />} />
-          <Route path="projects/bscode" element={<BSCodePage />} />
-          <Route path="projects/careerconnect" element={<CareerConnectPage />} />
-          <Route path="projects/myprofessor" element={<MyProfessorPage />} />
-          <Route path="projects/tumor-classifier" element={<TumorClassifierPage />} />
-          <Route path="quests" element={<QuestsPage />} />
+          <Route path="experience" element={<ExperiencePage />} />
           <Route path="photos" element={<PhotosPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="life" element={<Navigate to="/quests" replace />} />
-          <Route path="about" element={<Navigate to="/profile" replace />} />
           <Route path="resume" element={<ResumePage />} />
-          <Route path="contact" element={<Navigate to="/profile" replace />} />
+          {/* old addresses */}
+          <Route path="profile" element={<Navigate to="/experience" replace />} />
+          <Route path="about" element={<Navigate to="/experience" replace />} />
+          <Route path="contact" element={<Navigate to="/" replace />} />
+          <Route path="quests" element={<Navigate to="/photos" replace />} />
+          <Route path="life" element={<Navigate to="/photos" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+        <Route path="/projects" element={<ReadingLayout />}>
+          <Route path="verifai" element={<VerifAIPage />} />
+          <Route path="bscode" element={<BSCodePage />} />
+          <Route path="careerconnect" element={<CareerConnectPage />} />
+          <Route path="myprofessor" element={<MyProfessorPage />} />
+          <Route path="tumor-classifier" element={<TumorClassifierPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
