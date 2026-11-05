@@ -1,10 +1,15 @@
+import { ProjectGrid } from "@/components/site/ProjectCard";
+import { Gap } from "@/components/site/Section";
 import { projects, type Project } from "@/data/portfolio";
-import { CircleAlert, CircleCheck, CircleX, Lightbulb, Wrench, type LucideIcon } from "lucide-react";
+import { delay } from "@/lib/stagger";
+import { ArrowLeft, CircleAlert, CircleCheck, CircleX, Globe, Lightbulb, Wrench, type LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { FaGithub } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "./case-study.css";
 
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 function useProject() {
@@ -12,37 +17,29 @@ function useProject() {
   return projects.find((p) => p.caseStudy === pathname);
 }
 
-const Icon = ({ icon: I, size = 20 }: { icon: LucideIcon; size?: number }) => (
+const Icon = ({ icon: I, size = 18 }: { icon: LucideIcon; size?: number }) => (
   <I className="cs-icon" size={size} strokeWidth={1.75} aria-hidden />
 );
 
-/** The status pill: building, an award, live, or shipped. */
-function Status({ project, as: Tag = "span" }: { project: Project; as?: "span" | "li" }) {
-  if (project.inProgress)
-    return (
-      <Tag className="badge">
-        <span className="status-dot status-dot--building" aria-hidden />
-        Building
-      </Tag>
-    );
-  if (project.award)
-    return (
-      <Tag className="badge badge--award">
-        <span aria-hidden>🏆</span>
-        {project.award}
-      </Tag>
-    );
+/** Live, Building or Shipped, as on the project cards; an award as a gold chip. */
+function Status({ project }: { project: Project }) {
   return (
-    <Tag className="badge">
-      <span className="status-dot" aria-hidden />
-      {project.live ? "Live" : "Shipped"}
-    </Tag>
+    <>
+      {project.award && <li className="cs-award">🏆 {project.award}</li>}
+      {project.inProgress ? (
+        <li className="s-status s-status--building">Building</li>
+      ) : project.live ? (
+        <li className="s-status">Live</li>
+      ) : (
+        <li className="s-status s-status--shipped">Shipped</li>
+      )}
+    </>
   );
 }
 
 /**
- * The page: one column whose body scrolls up over the fixed hero image.
- * Images marked .cs-expandable open in a lightbox.
+ * The page, inside the site shell: back link, hero image, header, then each
+ * section ruled off from the next. Images marked .cs-expandable open big.
  */
 export function CaseStudy({ children }: { children: ReactNode }) {
   const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null);
@@ -60,14 +57,14 @@ export function CaseStudy({ children }: { children: ReactNode }) {
   }, [zoom]);
 
   return (
-    <div
+    <article
       className="cs"
       onClick={(e) => {
         const img = (e.target as HTMLElement).closest<HTMLImageElement>("img.cs-expandable");
         if (img) setZoom({ src: img.currentSrc || img.src, alt: img.alt });
       }}
     >
-      <div className="cs-scroll-body">{children}</div>
+      {children}
       {zoom &&
         createPortal(
           <div
@@ -81,11 +78,11 @@ export function CaseStudy({ children }: { children: ReactNode }) {
           </div>,
           document.body,
         )}
-    </div>
+    </article>
   );
 }
 
-/** Fixed left rail: back, then the page's sections; the one being read is lit. */
+/** On wide screens, the page's sections in the left margin; the one being read is lit. */
 function Rail() {
   const [items, setItems] = useState<{ id: string; label: string }[]>([]);
   const [active, setActive] = useState("");
@@ -141,19 +138,14 @@ function Rail() {
   };
 
   return (
-    <aside className="cs-sidenav" aria-label="Case study sections">
-      <Link to="/projects" className="cs-back">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-        Back
-      </Link>
-      <nav className="cs-side-nav">
+    <aside className="site cs-rail" aria-label="Case study sections">
+      <p className="cs-rail-title">On this page</p>
+      <nav className="cs-rail-nav">
         {items.map((it) => (
           <a
             key={it.id}
             href={`#${it.id}`}
-            className={`cs-side-link${active === it.id ? " is-active" : ""}`}
+            className={`cs-rail-link${active === it.id ? " is-active" : ""}`}
             onClick={(e) => {
               e.preventDefault();
               jump(it.id);
@@ -167,37 +159,72 @@ function Rail() {
   );
 }
 
-/** The fixed hero image, the rail, and the header: where it was made, the title, its tags. */
+/** ← Projects, the hero image, then where it was made, the title, its status, tags and links. */
 export function Hero({ src, alt, title }: { src: string; alt: string; title: string }) {
   const project = useProject();
-  const tags = project?.stack.slice(0, 2) ?? [];
 
   return (
     <>
-      {createPortal(
-        <>
-          <div className="cs-hero-visual" aria-hidden>
-            <img className="cs-hero-bg" src={src} alt={alt} />
-          </div>
-          <Rail />
-        </>,
-        document.body,
-      )}
-      <header className="cs-hero">
+      {createPortal(<Rail />, document.body)}
+      <div className="s-back s-rule-b s-in">
+        <Link to="/projects">
+          <ArrowLeft size={13} strokeWidth={2} />
+          Projects
+        </Link>
+      </div>
+      <Gap />
+      <div className="cs-hero-media s-rule-b s-in" style={delay(1)}>
+        <img src={src} alt={alt} className="cs-expandable" style={{ backgroundColor: project?.tint }} />
+      </div>
+      <header className="cs-head s-rule-b s-in" style={delay(2)}>
         {project && (
-          <p className="cs-company">
-            {project.contextIcon && <img src={project.contextIcon} alt="" className="cs-company-icon" />}
+          <p className="cs-context">
+            {project.contextIcon && <img src={project.contextIcon} alt="" aria-hidden />}
             {project.context}
+            {project.dates && <span className="cs-dates">{project.dates}</span>}
           </p>
         )}
-        <h1 className="cs-h1">{project?.title ?? title}</h1>
-        <ul className="cs-tags">
-          {project && <Status project={project} as="li" />}
-          {tags.map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
+        <h1 className="s-h1">{project?.title ?? title}</h1>
+        {project && (
+          <div className="cs-head-row">
+            <ul className="cs-badges">
+              <Status project={project} />
+              {project.stack.slice(0, 4).map((t) => (
+                <li key={t} className="s-tag">
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="s-card-links">
+              {project.live && (
+                <a href={project.live} {...ext} className="s-icon-btn" aria-label={`${project.title} live site`} title="Live site">
+                  <Globe size={16} strokeWidth={1.8} />
+                </a>
+              )}
+              {project.github && (
+                <a href={project.github} {...ext} className="s-icon-btn" aria-label={`${project.title} on GitHub`} title="GitHub">
+                  <FaGithub size={16} />
+                </a>
+              )}
+            </div>
+          </div>
+        )}
       </header>
+    </>
+  );
+}
+
+/** A chapter: a serif heading row (also its entry in the rail), ruled off, then its body. */
+function Chapter({ id, label, children, order = 3 }: { id: string; label: string; children: ReactNode; order?: number }) {
+  return (
+    <>
+      <Gap />
+      <section id={id} data-toc={label} className="cs-section s-in" style={delay(order)}>
+        <div className="s-head s-rule-b">
+          <h2 className="s-h2">{label}</h2>
+        </div>
+        <div className="cs-body-wrap">{children}</div>
+      </section>
     </>
   );
 }
@@ -205,8 +232,7 @@ export function Hero({ src, alt, title }: { src: string; alt: string; title: str
 /** TL;DR: the pitch, then the key facts. */
 export function Intro({ meta, children }: { meta: { label: string; value: string }[]; children: ReactNode }) {
   return (
-    <section id="tldr" data-toc="TL;DR" className="cs-section">
-      <p className="cs-section-label">TL;DR</p>
+    <Chapter id="tldr" label="TL;DR">
       <div className="cs-prose">{children}</div>
       <dl className="cs-meta">
         {meta.map((m) => (
@@ -216,30 +242,29 @@ export function Intro({ meta, children }: { meta: { label: string; value: string
           </div>
         ))}
       </dl>
-    </section>
+    </Chapter>
   );
 }
 
 export function Lede({ children }: { children: ReactNode }) {
-  return <p className="cs-body">{children}</p>;
+  return <p className="cs-lede">{children}</p>;
 }
 
-/** A chapter: its label (also its entry in the rail) and an optional heading. */
+/** A chapter with an optional question-style heading under its label. */
 export function Section({ eyebrow, heading, children }: { eyebrow: string; heading?: string; children: ReactNode }) {
   const label = eyebrow.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
   return (
-    <section id={slug(eyebrow)} data-toc={label} className="cs-section">
-      <p className="cs-section-label">{label}</p>
-      {heading && <h2 className="cs-h2">{heading}</h2>}
+    <Chapter id={slug(eyebrow)} label={label} order={4}>
+      {heading && <h3 className="cs-h2">{heading}</h3>}
       {children}
-    </section>
+    </Chapter>
   );
 }
 
 /** A pain point, as a card. */
 export function Beat({ title, body }: { title: string; body: ReactNode; glyph?: string }) {
   return (
-    <div className="cs-iter-item">
+    <div className="cs-card">
       <p className="cs-card-label">
         <Icon icon={CircleAlert} />
         {title}
@@ -252,7 +277,7 @@ export function Beat({ title, body }: { title: string; body: ReactNode; glyph?: 
 /** A first attempt (or, muted, what was wrong with it), as a card. */
 export function Card({ title, tone = "default", children }: { title: string; tone?: "default" | "muted"; children: ReactNode }) {
   return (
-    <div className="cs-iter-item">
+    <div className={tone === "muted" ? "cs-card cs-card--muted" : "cs-card"}>
       <p className="cs-card-label">
         <Icon icon={tone === "muted" ? CircleX : Wrench} />
         {title}
@@ -281,8 +306,8 @@ export function Feature({
     <div className="cs-step">
       <span className="cs-step-num">{String(number).padStart(2, "0")}</span>
       <div className="cs-step-body">
-        <h3 className="cs-h3">{title}</h3>
-        <p className="cs-body">{body}</p>
+        <h4 className="cs-h3">{title}</h4>
+        <p className="cs-text">{body}</p>
         <img src={image} alt={alt} loading="lazy" className="cs-image cs-expandable" />
       </div>
     </div>
@@ -294,54 +319,33 @@ export function Bridge({ children }: { children: ReactNode }) {
   return <p className="cs-bridge">{children}</p>;
 }
 
-/** A lesson or a next step: icon above, title beside its body. */
+/** A lesson or a next step: its title beside its body. */
 export function Reflection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="cs-learning">
-      <Icon icon={Lightbulb} />
-      <h3 className="cs-h3">{title}</h3>
-      <p className="cs-body">{children}</p>
+      <h4 className="cs-h3">
+        <Icon icon={Lightbulb} />
+        {title}
+      </h4>
+      <p className="cs-text">{children}</p>
     </div>
   );
 }
 
 export function ImpactList({ items }: { items: string[] }) {
   return (
-    <div className="cs-considerations">
-      <ul className="cs-consideration-list">
-        {items.map((item) => (
-          <li key={item}>
-            <Icon icon={CircleCheck} size={22} />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="cs-impact">
+      {items.map((item) => (
+        <li key={item}>
+          <Icon icon={CircleCheck} />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function NextCard({ project }: { project: Project }) {
-  const { image, video } = project;
-  return (
-    <Link to={project.caseStudy!} className="cs-next-card">
-      <div className="cs-next-preview" style={{ backgroundColor: project.tint, backgroundImage: image ? `url("${image}")` : undefined }}>
-        {!image && video && <video src={video} muted playsInline preload="metadata" className="cs-next-video" />}
-      </div>
-      <div className="cs-next-meta">
-        <div className="cs-next-meta-row">
-          <p className="cs-next-company">
-            {project.contextIcon && <img src={project.contextIcon} alt="" className="cs-next-company-icon" />}
-            {project.context}
-          </p>
-          <Status project={project} />
-        </div>
-        <p className="cs-next-title">{project.title}</p>
-      </div>
-    </Link>
-  );
-}
-
-/** The sign-off, then the next two case studies. */
+/** The sign-off, then the next two case studies as project cards. */
 export function BackLink() {
   const project = useProject();
   const studies = projects.filter((p) => p.caseStudy).reverse();
@@ -350,18 +354,23 @@ export function BackLink() {
 
   return (
     <>
-      <p className="cs-thanks">
-        thanks for reading <span className="cs-thanks-kao">(•‿•)ノ</span>
-      </p>
+      <Gap />
+      <p className="cs-thanks s-rule-b">Thanks for reading.</p>
       {next.length > 0 && (
-        <div className="cs-next">
-          <p className="cs-section-label cs-section-label--grey">Up next</p>
-          <div className="cs-next-grid">
-            {next.map((p) => (
-              <NextCard key={p.title} project={p} />
-            ))}
-          </div>
-        </div>
+        <>
+          <Gap />
+          <section aria-labelledby="up-next">
+            <div className="s-head s-rule-b">
+              <h2 id="up-next" className="s-h2">
+                Up next
+              </h2>
+              <Link to="/projects" className="s-more">
+                All projects
+              </Link>
+            </div>
+            <ProjectGrid projects={next} />
+          </section>
+        </>
       )}
     </>
   );

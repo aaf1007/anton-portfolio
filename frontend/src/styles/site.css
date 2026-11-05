@@ -1,7 +1,7 @@
 /* The site shell: one 800px column between dashed rails, full-width dashed
    rules between its sections, Instrument Serif headings over Inter. Dark by
-   default; html[data-theme="light"] flips it. Case studies don't use this
-   (they keep their own paper look, see ReadingLayout). */
+   default; html[data-theme="light"] flips it. Case studies build on this too
+   (components/case-study/case-study.css). */
 
 :root {
   --s-bg: #0f0e0e;
@@ -63,18 +63,18 @@
   --gh-4: #16a34a;
 }
 
-:root:not(.reading) {
+:root {
   color-scheme: dark;
 }
-:root[data-theme="light"]:not(.reading) {
+:root[data-theme="light"] {
   color-scheme: light;
 }
-html:not(.reading) body {
+html body {
   background: var(--s-bg);
   overflow-x: clip;
 }
-html:not(.reading) body::before,
-html:not(.reading) body::after {
+html body::before,
+html body::after {
   display: none;
 }
 
