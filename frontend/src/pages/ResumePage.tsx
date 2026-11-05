@@ -1,34 +1,29 @@
-import { useRaster } from "@/lib/raster";
-import "@/styles/resume.css";
-import { useRef } from "react";
+import { Gap, PageHead } from "@/components/site/Section";
+import { delay } from "@/lib/stagger";
+import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 
 const RESUME_PDF = "/resume.pdf";
 const RESUME_IMAGE = "/resume.png";
 const DOWNLOAD_NAME = "Anton_Florendo_Resume.pdf";
 
-/** The resume as a page on the desk, with the PDF one click away. Not on the reference site (hers links out to a PDF). */
+/** The resume as an image on the page, with the PDF one click away. */
 export default function ResumePage() {
-  const heading = useRef<HTMLHeadingElement>(null);
-  useRaster(heading);
   return (
-    <div className="resume">
-      <header className="resume-head">
-        <h1 ref={heading} className="resume-title">
-          Resume
-        </h1>
-        <p className="resume-sub">Data science at SFU, software developer at SAP, and the projects in between. One page.</p>
-        <div className="resume-actions">
-          <a href={RESUME_PDF} download={DOWNLOAD_NAME} className="badge resume-btn">
-            Download PDF ↓
+    <>
+      <PageHead title="Resume" lede="Data science at SFU, software developer at SAP, and the projects in between. One page.">
+        <div className="s-btns">
+          <a href={RESUME_PDF} download={DOWNLOAD_NAME} className="s-btn s-btn--solid">
+            <ArrowDownToLine size={15} strokeWidth={2} /> Download PDF
           </a>
-          <a href={RESUME_PDF} target="_blank" rel="noopener noreferrer" className="badge resume-btn">
-            Open in a new tab ↗
+          <a href={RESUME_PDF} target="_blank" rel="noopener noreferrer" className="s-btn">
+            Open in a new tab <ArrowUpRight size={15} strokeWidth={2} />
           </a>
         </div>
-      </header>
-      <div className="resume-sheet">
+      </PageHead>
+      <Gap />
+      <div className="s-sheet s-in" style={delay(2)}>
         <img src={RESUME_IMAGE} alt="Resume of Anton Florendo" width={1700} height={2200} />
       </div>
-    </div>
+    </>
   );
 }

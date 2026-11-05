@@ -415,7 +415,6 @@ html.home-arriving .folder-nav {
 }
 
 /* first paint: the chrome waits for the fonts, then the dock and colophon rise in */
-html:not(.fonts-ready) .top-nav,
 html:not(.fonts-ready) .folder-nav,
 html:not(.fonts-ready) .mobile-dock,
 html:not(.fonts-ready) .colophon {
