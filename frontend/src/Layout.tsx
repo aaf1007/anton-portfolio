@@ -5,14 +5,13 @@ import { useLayoutEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 /**
- * The site shell: a sticky nav, one dashed-rail column for the page, and the
- * footer. Case studies use ReadingLayout instead.
+ * The site shell: a sticky nav, one dashed-rail column for the page (case
+ * studies included), and the footer.
  */
 export default function Layout() {
   const { pathname } = useLocation();
 
   useLayoutEffect(() => {
-    document.documentElement.classList.remove("reading");
     document.documentElement.dataset.route = pathname === "/" ? "home" : pathname.slice(1).split("/")[0];
   }, [pathname]);
 

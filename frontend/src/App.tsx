@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout";
-import ReadingLayout from "./ReadingLayout";
 import ExperiencePage from "./pages/ExperiencePage";
 import HomePage from "./pages/HomePage";
 import PhotosPage from "./pages/PhotosPage";
@@ -29,6 +28,11 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/verifai" element={<VerifAIPage />} />
+          <Route path="projects/bscode" element={<BSCodePage />} />
+          <Route path="projects/careerconnect" element={<CareerConnectPage />} />
+          <Route path="projects/myprofessor" element={<MyProfessorPage />} />
+          <Route path="projects/tumor-classifier" element={<TumorClassifierPage />} />
           <Route path="experience" element={<ExperiencePage />} />
           <Route path="photos" element={<PhotosPage />} />
           <Route path="resume" element={<ResumePage />} />
@@ -39,13 +43,6 @@ function App() {
           <Route path="quests" element={<Navigate to="/photos" replace />} />
           <Route path="life" element={<Navigate to="/photos" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-        <Route path="/projects" element={<ReadingLayout />}>
-          <Route path="verifai" element={<VerifAIPage />} />
-          <Route path="bscode" element={<BSCodePage />} />
-          <Route path="careerconnect" element={<CareerConnectPage />} />
-          <Route path="myprofessor" element={<MyProfessorPage />} />
-          <Route path="tumor-classifier" element={<TumorClassifierPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

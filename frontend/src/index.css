@@ -114,14 +114,6 @@
     background: var(--color-bg);
     filter: blur(60px);
   }
-  /* case studies sit on the plain paper colour */
-  html.reading body {
-    background: var(--color-bg);
-  }
-  html.reading body::before,
-  html.reading body::after {
-    display: none;
-  }
   a {
     color: inherit;
     text-decoration: none;
