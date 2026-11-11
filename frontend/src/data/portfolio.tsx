@@ -91,7 +91,7 @@ export const profile: {
 } = {
   name: "Anton Florendo",
   short: "Anton",
-  roles: ["Software Developer", "Data Science @ SFU", "Hackathon Winner"],
+  roles: ["Software Engineer", "Data Science @ SFU", "Hackathon Winner"],
   location: "Vancouver, BC",
   banner: "/banner.jpg",
   avatar: "/about-me.jpg",
@@ -100,13 +100,13 @@ export const profile: {
 /** The home page's About bullets. */
 export const about: ReactNode[] = [
   <>
-    I&rsquo;m a <strong>software developer</strong> drawn to the spot where web apps meet LLMs: practical AI tools you can
+    I&rsquo;m a <strong>software engineer</strong> drawn to the spot where web apps meet LLMs: practical AI tools you can
     actually use, from <Link to="/projects/verifai">browser extensions</Link> and{" "}
     <Link to="/projects/careerconnect">matching engines</Link> to study games built from your own notes.
   </>,
   <>
     I build with <strong>React, TypeScript, Python and Spring Boot</strong>, and I&rsquo;m now shipping as a software
-    developer intern at <strong>SAP</strong>.
+    engineer intern at <strong>SAP</strong>.
   </>,
   <>
     I study <strong>data science at Simon Fraser University</strong> after two years of computer science at Douglas
@@ -144,7 +144,7 @@ export const education: Education[] = [
 // newest first; rendered in this order
 export const experience: Experience[] = [
   {
-    role: "Software Developer Intern",
+    role: "Software Engineer Intern",
     org: "SAP",
     logo: "/sap-logo.svg",
     url: "https://www.sap.com/",
@@ -152,11 +152,12 @@ export const experience: Experience[] = [
     dates: "Sept 2026 – now",
     current: true,
     points: [
-      "Migrating a monolithic Spring Boot app to microservices, refactoring backend logic into standalone services with their own REST endpoints.",
-      "Building Vue 3 frontend features with Pinia and Vue Router, wired to the newly separated service APIs.",
-      "Taking tickets from requirements through testing and deployment with PMs, DevOps and QA across Agile sprints.",
+      "Helped launch an AI documentation workspace that served 20,000 API requests on day one by shipping 30 Vue 3 features and fixes in 2 months, 25 of them backed by regression tests.",
+      "Designed a pure event reducer for AI agent runs (ordering, duplicate suppression, concurrent tool and sub-agent state, replay from history), backed by 22 new tests, after reading the Python (LangChain) and Java proxy source to pin down the event schema.",
+      "Eliminated list corruption in documentation search, verified by 47 unit tests, by replacing a regex over raw HTML with a TreeWalker and Range algorithm that splits matches at block boundaries.",
+      "Designing a backend service for admin-managed portal categories and page layout, defining the workflows, API contract and data model ahead of implementation in Java (Spring Boot).",
     ],
-    stack: ["Spring Boot", "Vue 3", "Pinia", "REST"],
+    stack: ["Vue 3", "TypeScript", "Java", "Spring Boot"],
   },
 ];
 
@@ -573,6 +574,9 @@ export const projects: Project[] = [
     tint: "#dce4f3",
   },
 ];
+
+/** The home page's Projects section: these titles, in this order. */
+export const featured = ["Syllabyss", "Solar Calculator and Recommendation System", "BSCode", "SFU CareerConnect"];
 
 /**
  * Captions for the photos page, keyed by the file's name in src/assets/gallery/.
