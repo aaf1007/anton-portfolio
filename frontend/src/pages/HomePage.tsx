@@ -6,14 +6,14 @@ import RoleCycle from "@/components/site/RoleCycle";
 import { Gap, Section } from "@/components/site/Section";
 import { delay } from "@/lib/stagger";
 import TechStack from "@/components/site/TechStack";
-import { about, links, profile, projects } from "@/data/portfolio";
+import { about, featured, links, profile, projects } from "@/data/portfolio";
 import { ArrowUpRight, Paperclip } from "lucide-react";
 import { useState, type CSSProperties, type ReactNode } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
-const latest = [...projects].reverse().slice(0, 4);
+const latest = featured.flatMap((title) => projects.filter((p) => p.title === title));
 const ghUser = links.github.replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
 
 const initials = profile.name

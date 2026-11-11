@@ -10,7 +10,7 @@ const DOWNLOAD_NAME = "Anton_Florendo_Resume.pdf";
 export default function ResumePage() {
   return (
     <>
-      <PageHead title="Resume" lede="Data science at SFU, software developer at SAP, and the projects in between. One page.">
+      <PageHead title="Resume" lede="Data science at SFU, software engineer at SAP, and the projects in between. One page.">
         <div className="s-btns">
           <a href={RESUME_PDF} download={DOWNLOAD_NAME} className="s-btn s-btn--solid">
             <ArrowDownToLine size={15} strokeWidth={2} /> Download PDF
